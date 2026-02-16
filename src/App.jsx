@@ -45,7 +45,7 @@ function FadeIn({ children, className = '' }) {
 
 // ─── NodeBB Config ───────────────────────────────────────────────────
 
-const NODEBB_URL = import.meta.env.VITE_NODEBB_URL || 'https://community.finance-forge.ai'
+const NODEBB_URL = import.meta.env.VITE_NODEBB_URL || 'https://financeforge.nodebb.com'
 
 // ─── NodeBB API Hook ─────────────────────────────────────────────────
 
@@ -1284,7 +1284,7 @@ function Footer() {
           <div>
             <h4 className="font-semibold mb-5 text-[var(--gold)]">Connect</h4>
             <div className="space-y-3 text-sm text-gray-400">
-              <a href={NODEBB_URL} target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-white transition-colors no-underline">community.finance-forge.ai</a>
+              <a href={NODEBB_URL} target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-white transition-colors no-underline">financeforge.nodebb.com</a>
               <p>hello@finance-forge.ai</p>
             </div>
           </div>

@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid email address' })
   }
 
-  const NODEBB_URL = process.env.VITE_NODEBB_URL || 'https://community.finance-forge.ai'
+  const NODEBB_URL = process.env.VITE_NODEBB_URL || 'https://financeforge.nodebb.com'
   const API_TOKEN = process.env.NODEBB_API_TOKEN
   const CATEGORY_ID = process.env.NODEBB_QUESTIONS_CATEGORY_ID || '7'
 
