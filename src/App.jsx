@@ -8,6 +8,7 @@ import {
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts'
+import { BLOG_POSTS } from 'virtual:blog-posts'
 
 // ─── Custom Hook: Fade-in on scroll ─────────────────────────────────
 function useFadeInOnScroll() {
@@ -125,63 +126,6 @@ const NAV_LINKS = [
   { label: 'Blog', href: '#blog' },
   { label: 'Community', href: '#community' },
   { label: 'Resources', href: '#resources' },
-]
-
-const BLOG_POSTS = [
-  {
-    id: 1,
-    title: 'TFSA vs RRSP: Which Should You Prioritize in 2025?',
-    category: 'Education',
-    date: 'Jan 15, 2025',
-    excerpt: 'Understanding the key differences between TFSAs and RRSPs can save you thousands in taxes over your lifetime.',
-    content: 'The decision between contributing to a TFSA or RRSP depends on several factors including your current marginal tax rate, expected retirement income, and financial goals. If your current tax rate is higher than your expected retirement tax rate, RRSPs generally provide more benefit. For those in lower tax brackets or saving for medium-term goals, TFSAs offer more flexibility. In 2025, the TFSA contribution limit is $7,000, while RRSP contributions are capped at 18% of previous year\'s earned income up to $32,490. Consider a balanced approach: maximize your RRSP to bring your taxable income to a lower bracket, then direct remaining savings to your TFSA.',
-    readTime: '5 min read',
-  },
-  {
-    id: 2,
-    title: 'Bank of Canada Rate Decision: What It Means for Your Mortgage',
-    category: 'News',
-    date: 'Jan 22, 2025',
-    excerpt: 'The latest rate announcement impacts variable-rate mortgages and upcoming renewals across the country.',
-    content: 'The Bank of Canada\'s recent rate decision has significant implications for Canadian homeowners. Variable-rate mortgage holders will see immediate changes to their payments, while those with fixed rates approaching renewal should start planning now. With the overnight rate currently at 3.25%, borrowers renewing from the ultra-low rates of 2020-2021 may face payment increases of 30-50%. Consider stress-testing your budget at a higher rate and exploring options like extending your amortization period or making lump-sum payments before renewal to reduce the principal.',
-    readTime: '4 min read',
-  },
-  {
-    id: 3,
-    title: 'The Hidden Costs of Homeownership in Ontario',
-    category: 'Education',
-    date: 'Feb 5, 2025',
-    excerpt: 'Beyond the mortgage payment, Ontario homeowners face property taxes, insurance, maintenance, and land transfer taxes.',
-    content: 'First-time homebuyers in Ontario often focus solely on the purchase price and mortgage payments, but the true cost of homeownership extends much further. Land transfer tax in Ontario ranges from 0.5% to 2.5% of the purchase price, and Toronto residents pay an additional municipal land transfer tax. Annual property taxes average 1-1.5% of assessed value. Home insurance typically runs $1,200-$2,500 annually. Budget 1-3% of your home\'s value yearly for maintenance and repairs. Don\'t forget utility costs, which can add $300-500 monthly. A $600,000 home could easily cost $3,500-4,500 monthly when all expenses are factored in.',
-    readTime: '6 min read',
-  },
-  {
-    id: 4,
-    title: 'Why I Think Canadian REITs Are Undervalued Right Now',
-    category: 'Opinion',
-    date: 'Feb 10, 2025',
-    excerpt: 'With interest rates stabilizing, Canadian real estate investment trusts present a compelling opportunity.',
-    content: 'Canadian REITs have been beaten down over the past two years due to rising interest rates, but the tide may be turning. Many quality REITs are trading at significant discounts to their net asset value (NAV), offering distribution yields of 5-8%. As the Bank of Canada continues its easing cycle, REITs stand to benefit from both lower borrowing costs and potential NAV appreciation. Industrial and residential REITs look particularly attractive given strong fundamentals in those sectors. However, office REITs remain risky due to the work-from-home trend. Always diversify across REIT types and consider holding them in registered accounts to shelter the income from taxes.',
-    readTime: '5 min read',
-  },
-  {
-    id: 5,
-    title: 'Canada Carbon Rebate: How to Maximize Your Payment',
-    category: 'News',
-    date: 'Feb 18, 2025',
-    excerpt: 'Most Canadians receive more from the Canada Carbon Rebate than they pay in carbon taxes — here\'s how to ensure you get the full amount.',
-    content: 'The Canada Carbon Rebate (formerly Climate Action Incentive) provides quarterly payments to offset the federal carbon tax. For 2025, a family of four in Ontario receives approximately $1,120 annually. To maximize your rebate: file your tax return on time (even if you have no income), ensure your marital status is up to date with the CRA, claim all eligible dependents, and if you live in a rural area, check the box on your return for the 20% rural supplement. Single individuals and couples should ensure only one person claims shared dependents. Payments are issued in April, July, October, and January.',
-    readTime: '4 min read',
-  },
-  {
-    id: 6,
-    title: 'Stop Paying High MERs: A Guide to Low-Cost Index Investing in Canada',
-    category: 'Education',
-    date: 'Mar 1, 2025',
-    excerpt: 'The average Canadian mutual fund charges 2%+ in fees. Switching to index ETFs could save you tens of thousands over your career.',
-    content: 'Canadian investors collectively pay some of the highest investment fees in the world, with average mutual fund MERs exceeding 2%. On a $500,000 portfolio over 25 years, the difference between a 2.2% MER mutual fund and a 0.2% MER index ETF could exceed $300,000. Getting started with low-cost investing is simpler than ever: all-in-one ETFs like VBAL, VGRO, or XGRO provide globally diversified portfolios in a single ticker with MERs around 0.20-0.25%. Open a self-directed account at a discount brokerage, set up automatic contributions, and invest in one of these ETFs. No stock picking, no market timing — just consistent, low-cost investing over time.',
-    readTime: '7 min read',
-  },
 ]
 
 const CATEGORY_COLORS = {
@@ -701,9 +645,10 @@ function BlogSection() {
                   <p className="text-sm text-[var(--gray-500)] mb-5 leading-relaxed flex-1">{post.excerpt}</p>
 
                   {expandedPost === post.id && (
-                    <div className="text-sm text-[var(--gray-600)] mb-5 leading-relaxed border-t border-[var(--gray-200)] pt-5">
-                      {post.content}
-                    </div>
+                    <div
+                      className="text-sm text-[var(--gray-600)] mb-5 leading-relaxed border-t border-[var(--gray-200)] pt-5 prose prose-sm max-w-none"
+                      dangerouslySetInnerHTML={{ __html: post.content }}
+                    />
                   )}
 
                   <div className="flex items-center justify-between pt-4 border-t border-[var(--gray-100)]">
