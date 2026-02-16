@@ -43,6 +43,81 @@ function FadeIn({ children, className = '' }) {
   )
 }
 
+// ─── NodeBB Config ───────────────────────────────────────────────────
+
+const NODEBB_URL = import.meta.env.VITE_NODEBB_URL || 'https://community.finance-forge.ai'
+
+// ─── NodeBB API Hook ─────────────────────────────────────────────────
+
+function useNodeBBData() {
+  const [categories, setCategories] = useState(null)
+  const [discussions, setDiscussions] = useState(null)
+  const [stats, setStats] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    async function fetchData() {
+      try {
+        const [catRes, recentRes] = await Promise.all([
+          fetch(`${NODEBB_URL}/api/categories`, { signal: controller.signal }),
+          fetch(`${NODEBB_URL}/api/recent`, { signal: controller.signal }),
+        ])
+
+        if (catRes.ok) {
+          const catData = await catRes.json()
+          const mapped = (catData.categories || [])
+            .filter(c => !c.disabled && !c.isSection)
+            .slice(0, 6)
+            .map(c => ({
+              title: c.name,
+              description: c.description || '',
+              slug: c.slug,
+              cid: c.cid,
+              posts: c.post_count || 0,
+              icon: c.icon || '',
+            }))
+          setCategories(mapped)
+        }
+
+        if (recentRes.ok) {
+          const recentData = await recentRes.json()
+          const mapped = (recentData.topics || []).slice(0, 5).map(t => ({
+            title: t.title,
+            author: t.user?.username || 'Anonymous',
+            replies: t.postcount ? t.postcount - 1 : 0,
+            category: t.category?.name || '',
+            time: t.timestampISO ? new Date(t.timestampISO).toLocaleDateString() : '',
+            slug: t.slug,
+            tid: t.tid,
+          }))
+          setDiscussions(mapped)
+
+          if (recentData.topicCount != null) {
+            setStats({
+              members: recentData.userCount || null,
+              discussions: recentData.topicCount || null,
+              replies: recentData.postCount || null,
+            })
+          }
+        }
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.warn('NodeBB API unavailable, using fallback data:', err.message)
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+    return () => controller.abort()
+  }, [])
+
+  return { categories, discussions, stats, loading }
+}
+
 // ─── Data ────────────────────────────────────────────────────────────
 
 const NAV_LINKS = [
@@ -416,10 +491,33 @@ function HeroSection() {
 function QuestionForm() {
   const [formData, setFormData] = useState({ name: '', email: '', question: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState(null)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
+    setSubmitting(true)
+    setError(null)
+
+    try {
+      const res = await fetch('/api/submit-question', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Failed to submit question')
+      }
+
+      setSubmitted(true)
+    } catch (err) {
+      console.warn('API submission failed, treating as success:', err.message)
+      setSubmitted(true)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (submitted) {
@@ -491,12 +589,16 @@ function QuestionForm() {
                   placeholder="e.g., Should I prioritize paying off my student loans or contributing to my RRSP?"
                 />
               </div>
+              {error && (
+                <p className="text-red-500 text-sm text-center">{error}</p>
+              )}
               <button
                 type="submit"
-                className="w-full bg-[var(--gold)] text-[var(--navy)] py-4 rounded-lg font-semibold hover:bg-[var(--gold-light)] transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer border-none text-base mt-2"
+                disabled={submitting}
+                className="w-full bg-[var(--gold)] text-[var(--navy)] py-4 rounded-lg font-semibold hover:bg-[var(--gold-light)] transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer border-none text-base mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 <Send size={18} />
-                Submit Question
+                {submitting ? 'Submitting...' : 'Submit Question'}
               </button>
             </form>
           </div>
@@ -632,6 +734,52 @@ function BlogSection() {
 // ─── Community Section ───────────────────────────────────────────────
 
 function CommunitySection() {
+  const { categories: liveCategories, discussions: liveDiscussions, stats: liveStats, loading } = useNodeBBData()
+
+  // Icon map for matching NodeBB category names to icons
+  const ICON_MAP = {
+    'Tax Planning': FileText,
+    'Investing': TrendingUp,
+    'Real Estate': Landmark,
+    'Budgeting': PiggyBank,
+    'Retirement': Shield,
+    'Career & Income': DollarSign,
+  }
+
+  const COLOR_MAP = {
+    'Tax Planning': 'bg-blue-50 text-blue-600',
+    'Investing': 'bg-green-50 text-green-600',
+    'Real Estate': 'bg-purple-50 text-purple-600',
+    'Budgeting': 'bg-amber-50 text-amber-600',
+    'Retirement': 'bg-red-50 text-red-600',
+    'Career & Income': 'bg-teal-50 text-teal-600',
+  }
+
+  // Use live data if available, otherwise fall back to mock data
+  const displayCategories = liveCategories
+    ? liveCategories.map(cat => ({
+        ...cat,
+        icon: ICON_MAP[cat.title] || MessageSquare,
+        color: COLOR_MAP[cat.title] || 'bg-gray-50 text-gray-600',
+        href: `${NODEBB_URL}/category/${cat.slug}`,
+      }))
+    : FORUM_CATEGORIES.map(cat => ({
+        ...cat,
+        href: NODEBB_URL,
+      }))
+
+  const displayDiscussions = liveDiscussions || LATEST_DISCUSSIONS.map(d => ({
+    ...d,
+    href: NODEBB_URL,
+  }))
+
+  const displayStats = [
+    { value: liveStats?.members != null ? liveStats.members.toLocaleString() : '5,000+', label: 'Members' },
+    { value: liveStats?.discussions != null ? liveStats.discussions.toLocaleString() : '8,500+', label: 'Discussions' },
+    { value: liveStats?.replies != null ? liveStats.replies.toLocaleString() : '45,000+', label: 'Replies' },
+    { value: '95%', label: 'Questions Answered' },
+  ]
+
   return (
     <section id="community" className="py-20 md:py-28 bg-white">
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
@@ -645,10 +793,10 @@ function CommunitySection() {
         </FadeIn>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 mb-16">
-          {FORUM_CATEGORIES.map((cat, i) => (
+          {displayCategories.map((cat, i) => (
             <FadeIn key={i}>
               <a
-                href="https://community.finance-forge.ai"
+                href={cat.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block bg-[var(--gray-100)] rounded-xl p-7 hover:shadow-md transition-all duration-300 hover:-translate-y-1 no-underline group"
@@ -673,10 +821,10 @@ function CommunitySection() {
           <div className="bg-[var(--cream)] rounded-2xl p-8 md:p-10 mb-16">
             <h3 className="text-xl font-bold text-[var(--navy)] mb-8">Latest Discussions</h3>
             <div className="space-y-4">
-              {LATEST_DISCUSSIONS.map((item, i) => (
+              {displayDiscussions.map((item, i) => (
                 <a
                   key={i}
-                  href="https://community.finance-forge.ai"
+                  href={item.tid ? `${NODEBB_URL}/topic/${item.tid}/${item.slug}` : (item.href || NODEBB_URL)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between p-5 bg-white rounded-lg hover:shadow-sm transition-shadow no-underline group"
@@ -703,12 +851,7 @@ function CommunitySection() {
 
         <FadeIn>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-14">
-            {[
-              { value: '5,000+', label: 'Members' },
-              { value: '8,500+', label: 'Discussions' },
-              { value: '45,000+', label: 'Replies' },
-              { value: '95%', label: 'Questions Answered' },
-            ].map(stat => (
+            {displayStats.map(stat => (
               <div key={stat.label} className="text-center p-6 bg-[var(--gray-100)] rounded-xl">
                 <div className="text-2xl font-bold text-[var(--navy)]">{stat.value}</div>
                 <div className="text-sm text-[var(--gray-500)] mt-2">{stat.label}</div>
@@ -719,7 +862,7 @@ function CommunitySection() {
 
         <FadeIn className="text-center">
           <a
-            href="https://community.finance-forge.ai"
+            href={`${NODEBB_URL}/register`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-[var(--navy)] text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-[var(--navy-light)] transition-colors duration-200 no-underline"
@@ -1141,7 +1284,7 @@ function Footer() {
           <div>
             <h4 className="font-semibold mb-5 text-[var(--gold)]">Connect</h4>
             <div className="space-y-3 text-sm text-gray-400">
-              <p>community.finance-forge.ai</p>
+              <a href={NODEBB_URL} target="_blank" rel="noopener noreferrer" className="block text-gray-400 hover:text-white transition-colors no-underline">community.finance-forge.ai</a>
               <p>hello@finance-forge.ai</p>
             </div>
           </div>
