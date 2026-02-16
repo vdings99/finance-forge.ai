@@ -3,7 +3,7 @@ import {
   Menu, X, ChevronDown, ChevronUp, ArrowUp, Send, CheckCircle,
   BookOpen, Users, Calculator, MessageSquare, TrendingUp, Shield,
   DollarSign, PiggyBank, Landmark, FileText, Calendar, Clock,
-  ExternalLink
+  ExternalLink, Search, Hash
 } from 'lucide-react'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
@@ -594,11 +594,24 @@ function HowItWorks() {
 function BlogSection() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [expandedPost, setExpandedPost] = useState(null)
+  const [searchTag, setSearchTag] = useState('')
+  const [tagSearch, setTagSearch] = useState('')
 
   const categories = ['All', 'News', 'Opinion', 'Education']
-  const filtered = activeCategory === 'All'
-    ? BLOG_POSTS
-    : BLOG_POSTS.filter(p => p.category === activeCategory)
+
+  const allTags = [...new Set(BLOG_POSTS.flatMap(p => p.tags || []))].sort((a, b) =>
+    a.toLowerCase().localeCompare(b.toLowerCase())
+  )
+
+  const visibleTags = tagSearch
+    ? allTags.filter(t => t.toLowerCase().includes(tagSearch.toLowerCase()))
+    : allTags
+
+  const filtered = BLOG_POSTS.filter(p => {
+    const matchesCategory = activeCategory === 'All' || p.category === activeCategory
+    const matchesTag = !searchTag || (p.tags && p.tags.includes(searchTag))
+    return matchesCategory && matchesTag
+  })
 
   return (
     <section id="blog" className="py-20 md:py-28 bg-[var(--gray-100)]">
@@ -613,7 +626,7 @@ function BlogSection() {
         </FadeIn>
 
         <FadeIn>
-          <div className="flex flex-wrap justify-center gap-3 mb-14">
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
             {categories.map(cat => (
               <button
                 key={cat}
@@ -630,46 +643,110 @@ function BlogSection() {
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map(post => (
-            <FadeIn key={post.id}>
-              <article className={`bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden border-l-4 ${CATEGORY_COLORS[post.category]} h-full flex flex-col`}>
-                <div className="p-7 md:p-8 flex flex-col flex-1">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-semibold text-[var(--gold)] uppercase tracking-wider">
-                      {post.category}
-                    </span>
-                    <span className="text-xs text-[var(--gray-400)]">{post.date}</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-[var(--navy)] mb-3 leading-snug">{post.title}</h3>
-                  <p className="text-sm text-[var(--gray-500)] mb-5 leading-relaxed flex-1">{post.excerpt}</p>
+        <FadeIn>
+          <div className="sticky top-0 z-10 bg-white rounded-xl shadow-sm p-5 mb-8 border border-[var(--gray-200)]">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="relative flex-1">
+                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--gray-400)]" />
+                <input
+                  type="text"
+                  placeholder="Search by hashtag..."
+                  value={tagSearch}
+                  onChange={e => setTagSearch(e.target.value)}
+                  className="w-full pl-9 pr-4 py-2.5 rounded-lg border border-[var(--gray-200)] text-sm text-[var(--navy)] placeholder-[var(--gray-400)] focus:outline-none focus:border-[var(--gold)] focus:ring-1 focus:ring-[var(--gold)] transition-colors bg-[var(--gray-100)]"
+                />
+              </div>
+              {searchTag && (
+                <button
+                  onClick={() => { setSearchTag(''); setTagSearch('') }}
+                  className="px-4 py-2.5 rounded-lg text-sm font-medium text-[var(--gray-600)] bg-[var(--gray-100)] hover:bg-[var(--gray-200)] transition-colors cursor-pointer border-none flex items-center gap-1.5"
+                >
+                  <X size={14} /> Clear
+                </button>
+              )}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {visibleTags.map(tag => (
+                <button
+                  key={tag}
+                  onClick={() => setSearchTag(searchTag === tag ? '' : tag)}
+                  className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer border-none ${
+                    searchTag === tag
+                      ? 'bg-[var(--navy)] text-white shadow-sm'
+                      : 'bg-[var(--gray-100)] text-[var(--gray-600)] hover:bg-[var(--gray-200)]'
+                  }`}
+                >
+                  <Hash size={10} />{tag}
+                </button>
+              ))}
+              {visibleTags.length === 0 && (
+                <span className="text-xs text-[var(--gray-400)] py-1.5">No matching tags</span>
+              )}
+            </div>
+          </div>
+        </FadeIn>
 
-                  {expandedPost === post.id && (
-                    <div
-                      className="text-sm text-[var(--gray-600)] mb-5 leading-relaxed border-t border-[var(--gray-200)] pt-5 prose prose-sm max-w-none"
-                      dangerouslySetInnerHTML={{ __html: post.content }}
-                    />
-                  )}
+        <div className="max-h-[800px] overflow-y-auto rounded-xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-1">
+            {filtered.map(post => (
+              <FadeIn key={post.id}>
+                <article className={`bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden border-l-4 ${CATEGORY_COLORS[post.category]} h-full flex flex-col`}>
+                  <div className="p-7 md:p-8 flex flex-col flex-1">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-semibold text-[var(--gold)] uppercase tracking-wider">
+                        {post.category}
+                      </span>
+                      <span className="text-xs text-[var(--gray-400)]">{post.date}</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-[var(--navy)] mb-3 leading-snug">{post.title}</h3>
+                    <p className="text-sm text-[var(--gray-500)] mb-5 leading-relaxed flex-1">{post.excerpt}</p>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-[var(--gray-100)]">
-                    <span className="text-xs text-[var(--gray-400)] flex items-center gap-1.5">
-                      <Clock size={12} /> {post.readTime}
-                    </span>
-                    <button
-                      onClick={() => setExpandedPost(expandedPost === post.id ? null : post.id)}
-                      className="text-[var(--gold)] text-sm font-semibold flex items-center gap-1 hover:text-[var(--gold-light)] transition-colors bg-transparent border-none cursor-pointer"
-                    >
-                      {expandedPost === post.id ? (
-                        <>Read Less <ChevronUp size={16} /></>
-                      ) : (
-                        <>Read More <ChevronDown size={16} /></>
-                      )}
-                    </button>
+                    {expandedPost === post.id && (
+                      <div
+                        className="text-sm text-[var(--gray-600)] mb-5 leading-relaxed border-t border-[var(--gray-200)] pt-5 prose prose-sm max-w-none"
+                        dangerouslySetInnerHTML={{ __html: post.content }}
+                      />
+                    )}
+
+                    {post.tags && post.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mb-4">
+                        {post.tags.map(tag => (
+                          <span
+                            key={tag}
+                            onClick={() => { setSearchTag(tag); setTagSearch('') }}
+                            className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[10px] font-medium bg-[var(--gray-100)] text-[var(--gray-500)] cursor-pointer hover:bg-[var(--gray-200)] transition-colors"
+                          >
+                            <Hash size={8} />{tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    <div className="flex items-center justify-between pt-4 border-t border-[var(--gray-100)]">
+                      <span className="text-xs text-[var(--gray-400)] flex items-center gap-1.5">
+                        <Clock size={12} /> {post.readTime}
+                      </span>
+                      <button
+                        onClick={() => setExpandedPost(expandedPost === post.id ? null : post.id)}
+                        className="text-[var(--gold)] text-sm font-semibold flex items-center gap-1 hover:text-[var(--gold-light)] transition-colors bg-transparent border-none cursor-pointer"
+                      >
+                        {expandedPost === post.id ? (
+                          <>Read Less <ChevronUp size={16} /></>
+                        ) : (
+                          <>Read More <ChevronDown size={16} /></>
+                        )}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </article>
-            </FadeIn>
-          ))}
+                </article>
+              </FadeIn>
+            ))}
+            {filtered.length === 0 && (
+              <div className="col-span-full text-center py-12 text-[var(--gray-400)]">
+                No posts match the selected filters.
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

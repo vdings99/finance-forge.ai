@@ -34,6 +34,7 @@ export default function blogLoader() {
           date: data.date,
           excerpt: data.excerpt,
           readTime: data.readTime,
+          tags: data.tags || [],
           content: html,
         }
       })
