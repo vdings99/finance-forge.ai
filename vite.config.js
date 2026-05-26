@@ -5,4 +5,7 @@ import blogLoader from './src/blog-loader.js'
 
 export default defineConfig({
   plugins: [blogLoader(), react(), tailwindcss()],
+  define: {
+    'process.platform': JSON.stringify('linux'),
+  },
 })
