@@ -1,0 +1,66 @@
+---
+interface NavItem {
+  label: string
+  href?: string
+  children?: Array<{ label: string; href: string }>
+}
+
+interface Props {
+  items: NavItem[]
+  currentPath: string
+}
+
+const { items, currentPath } = Astro.props
+
+function isActive(item: NavItem): boolean {
+  if (item.href && item.href !== '/' && currentPath.startsWith(item.href)) return true
+  if (item.children?.some(c => currentPath.startsWith(c.href))) return true
+  if (item.href === '/' && currentPath === '/') return true
+  return false
+}
+---
+
+{items.map((item, i) => {
+  const active = isActive(item)
+  const dropdownId = `dropdown-${i}`
+
+  if (item.children?.length) {
+    return (
+      <div class="nav-item" key={i}>
+        <button
+          class:list={['nav-item__trigger', active && 'nav-item__trigger--active']}
+          data-has-dropdown
+          aria-expanded="false"
+          aria-controls={dropdownId}
+          aria-haspopup="true"
+          type="button"
+        >
+          {item.label}
+          <span class="nav-item__chevron" aria-hidden="true"></span>
+        </button>
+        <div class="nav-dropdown" id={dropdownId} role="menu">
+          {item.children.map(child => (
+            <a
+              href={child.href}
+              class:list={['nav-dropdown__item', currentPath === child.href && 'nav-dropdown__item--active']}
+              role="menuitem"
+            >
+              {child.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div class="nav-item" key={i}>
+      <a
+        href={item.href}
+        class:list={['nav-item__trigger', active && 'nav-item__trigger--active']}
+      >
+        {item.label}
+      </a>
+    </div>
+  )
+})}

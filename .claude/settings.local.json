@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git commit:*)",
+      "Bash(gh repo create:*)",
+      "Bash(curl:*)",
+      "Bash(unzip:*)",
+      "Bash(npm run build:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(npm run dev:*)",
+      "WebSearch",
+      "WebFetch(domain:tinacms.org)",
+      "WebFetch(domain:tinacms-site-next-tinacms.vercel.app)",
+      "WebFetch(domain:tina.io)",
+      "WebFetch(domain:www.delosian.pro)"
+    ]
+  }
+}

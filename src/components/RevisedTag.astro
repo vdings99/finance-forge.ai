@@ -1,0 +1,11 @@
+---
+interface Props {
+  date: string  // YYYY-MM-DD
+}
+
+const { date } = Astro.props
+---
+
+<p class="revised-tag">
+  Revised:&nbsp;<time datetime={date}>{date}</time>
+</p>

@@ -1,0 +1,85 @@
+---
+title: "Federal Income Tax Brackets and Rates"
+description: "Comprehensive federal personal income tax brackets and combined federal/provincial marginal rates for all Canadian provinces and territories, 2024–2026."
+breadcrumb: ["Home", "Personal Income Tax"]
+section: "personal-tax"
+archetype: "datatable"
+revised: "2026-02-15"
+toc: false
+lead: "[TODO: One or two sentences describing this page. Placeholder — write original copy.]"
+---
+
+import DataTable from '../../../components/DataTable.astro'
+import Callout from '../../../components/Callout.astro'
+
+<div class="year-selector" aria-label="Select tax year">
+  <span class="year-selector__item year-selector__item--active">2025 &amp; 2026</span>
+  <a href="#2024-federal-income-tax-brackets" class="year-selector__item">2024 &amp; 2025</a>
+  <a href="#2023-federal-income-tax-brackets" class="year-selector__item">2023 &amp; 2024</a>
+  <a href="#2022-federal-income-tax-brackets" class="year-selector__item">2022 &amp; 2023</a>
+</div>
+
+## 2025 Federal Income Tax Brackets
+
+[TODO: Brief note about the 2025 federal brackets. Placeholder — write original copy.]
+
+<DataTable
+  caption="2025 Federal Personal Income Tax Brackets"
+  headers={["Taxable Income", "Tax Rate", "Tax on Lower Bracket", "Tax Rate on Excess"]}
+  rows={[
+    ["$0 – $57,375",        "15.0%", "$0",        "15.0%"],
+    ["$57,375 – $114,750",  "20.5%", "$8,606",    "20.5%"],
+    ["$114,750 – $158,468", "26.0%", "$20,363",   "26.0%"],
+    ["$158,468 – $220,000", "29.0%", "$31,732",   "29.0%"],
+    ["Over $220,000",       "33.0%", "$49,578",   "33.0%"],
+  ]}
+/>
+
+<Callout type="tip">
+[TODO: Relevant tip — e.g. note about federal basic personal amount or indexation. Placeholder.]
+</Callout>
+
+## 2025 Combined Federal and Provincial Marginal Rates — Ontario
+
+[TODO: Table of combined rates for Ontario. Placeholder — populate with verified data.]
+
+<DataTable
+  caption="2025 Combined Federal + Ontario Marginal Tax Rates"
+  headers={["Taxable Income", "Federal", "Provincial", "Combined"]}
+  rows={[
+    ["$0 – $51,446",         "15.0%", "5.05%",  "20.05%"],
+    ["$51,446 – $57,375",    "15.0%", "9.15%",  "24.15%"],
+    ["$57,375 – $102,894",   "20.5%", "9.15%",  "29.65%"],
+    ["$102,894 – $114,750",  "20.5%", "11.16%", "31.66%"],
+    ["$114,750 – $150,000",  "26.0%", "11.16%", "37.16%"],
+    ["$150,000 – $158,468",  "26.0%", "12.16%", "38.16%"],
+    ["$158,468 – $220,000",  "29.0%", "12.16%", "41.16%"],
+    ["Over $220,000",        "33.0%", "13.16%", "46.16%"],
+  ]}
+/>
+
+<Callout type="warning">
+[TODO: Placeholder warning — e.g. "These figures do not account for the Ontario surtax applicable above certain thresholds. See the Ontario provincial page for details."]
+</Callout>
+
+## 2025 Combined Rates — All Provinces and Territories
+
+[TODO: Add a DataTable for each province/territory, or link to dedicated pages. Placeholder — this is a significant content task.]
+
+---
+
+## 2024 Federal Income Tax Brackets
+
+[TODO: 2024 brackets — populate with verified data. Placeholder.]
+
+<DataTable
+  caption="2024 Federal Personal Income Tax Brackets [TODO: verify]"
+  headers={["Taxable Income", "Tax Rate"]}
+  rows={[
+    ["$0 – $55,867",        "15.0%"],
+    ["$55,867 – $111,733",  "20.5%"],
+    ["$111,733 – $154,906", "26.0%"],
+    ["$154,906 – $220,000", "29.0%"],
+    ["Over $220,000",       "33.0%"],
+  ]}
+/>

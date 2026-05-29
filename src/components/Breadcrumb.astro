@@ -1,0 +1,26 @@
+---
+interface Props {
+  /** Array of crumb labels (from front-matter breadcrumb field).
+   *  The current page title is appended automatically. */
+  crumbs: string[]
+  currentTitle: string
+}
+
+const { crumbs, currentTitle } = Astro.props
+
+// Build href for each ancestor crumb: Home = /, others = best-guess slug
+function crumbHref(label: string): string {
+  if (label === 'Home') return '/'
+  return '/' + label.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+}
+---
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  {crumbs.map((crumb, i) => (
+    <>
+      <a href={crumbHref(crumb)}>{crumb}</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+    </>
+  ))}
+  <span class="breadcrumb__current" aria-current="page">{currentTitle}</span>
+</nav>
