@@ -1,0 +1,45 @@
+---
+interface NavItem {
+  label: string
+  href?: string
+  children?: Array<{ label: string; href: string }>
+}
+
+interface Props {
+  items: NavItem[]
+}
+
+const { items } = Astro.props
+---
+
+<div class="mobile-drawer" id="mobile-drawer" aria-modal="true" role="dialog" aria-label="Navigation menu">
+  <div class="mobile-drawer__overlay" aria-hidden="true"></div>
+  <nav class="mobile-drawer__panel" aria-label="Mobile navigation">
+    <button
+      id="drawer-close"
+      class="mobile-drawer__close"
+      aria-label="Close navigation menu"
+      type="button"
+    >
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <line x1="1" y1="1" x2="11" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+        <line x1="11" y1="1" x2="1" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+      </svg>
+      Close
+    </button>
+
+    {items.map(item => {
+      if (item.children?.length) {
+        return (
+          <div>
+            <div class="mobile-drawer__section-title">{item.label}</div>
+            {item.children.map(child => (
+              <a href={child.href} class="mobile-drawer__sub-link">{child.label}</a>
+            ))}
+          </div>
+        )
+      }
+      return <a href={item.href} class="mobile-drawer__nav-link">{item.label}</a>
+    })}
+  </nav>
+</div>

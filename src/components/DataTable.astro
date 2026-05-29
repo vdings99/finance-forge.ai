@@ -1,0 +1,41 @@
+---
+interface Props {
+  /** Optional caption displayed above the table */
+  caption?: string
+  /** Column headers */
+  headers: string[]
+  /** Rows — each row is an array of cell strings.
+   *  Cells that start with "$", "%", or are pure numbers are right-aligned automatically. */
+  rows: string[][]
+}
+
+const { caption, headers, rows } = Astro.props
+
+function isNumeric(val: string): boolean {
+  return /^[\$\-\d%]/.test(val.trim())
+}
+---
+
+<div class="data-table-wrap">
+  {caption && <p class="data-table-wrap__caption">{caption}</p>}
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead>
+        <tr>
+          {headers.map((h, i) => (
+            <th class:list={[i > 0 && isNumeric(rows[0]?.[i] ?? '') && 'num']}>{h}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map(row => (
+          <tr>
+            {row.map((cell, i) => (
+              <td class:list={[i > 0 && isNumeric(cell) && 'num']}>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>

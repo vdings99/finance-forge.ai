@@ -1,0 +1,30 @@
+---
+interface LinkItem {
+  label: string
+  href: string
+  description?: string
+}
+
+interface Props {
+  heading: string
+  links: LinkItem[]
+}
+
+const { heading, links } = Astro.props
+---
+
+<div class="link-index">
+  <h2 class="link-index__heading">{heading}</h2>
+  <ul class="link-index__list" role="list">
+    {links.map(link => (
+      <li class="link-index__item">
+        <a href={link.href} class="link-index__link">
+          <span class="link-index__link-label">{link.label}</span>
+          {link.description && (
+            <span class="link-index__link-desc">{link.description}</span>
+          )}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

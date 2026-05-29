@@ -1,0 +1,23 @@
+---
+import { getEntry } from 'astro:content'
+import PageLayout from '../layouts/PageLayout.astro'
+
+const page = await getEntry('pages', 'index')
+if (!page) throw new Error('Home page content not found at src/content/pages/index.mdx')
+
+const { Content, headings } = await page.render()
+const { title, description, breadcrumb, archetype, revised, toc, lead } = page.data
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  breadcrumb={breadcrumb}
+  archetype={archetype}
+  revised={revised}
+  toc={toc}
+  lead={lead}
+  headings={headings}
+>
+  <Content />
+</PageLayout>

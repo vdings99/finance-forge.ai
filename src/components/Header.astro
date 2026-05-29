@@ -1,0 +1,136 @@
+---
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import yaml from 'js-yaml'
+import MegaMenu from './MegaMenu.astro'
+import MobileDrawer from './MobileDrawer.astro'
+
+const siteRaw = readFileSync(resolve('src/data/site.yaml'), 'utf-8')
+const site = yaml.load(siteRaw) as { name: string; tagline: string }
+
+const navRaw = readFileSync(resolve('src/data/navigation.yaml'), 'utf-8')
+const nav = yaml.load(navRaw) as Array<{ label: string; href?: string; children?: Array<{ label: string; href: string }> }>
+
+const currentPath = Astro.url.pathname
+---
+
+<header class="site-header" role="banner">
+  <div class="container">
+    <div class="site-header__inner">
+
+      <!-- Wordmark -->
+      <a href="/" class="site-header__wordmark" aria-label={`${site.name} — home`}>
+        <span class="site-header__name">{site.name}</span>
+        <span class="site-header__tagline">{site.tagline}</span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="site-header__nav" aria-label="Primary navigation">
+        <MegaMenu items={nav} currentPath={currentPath} />
+
+        <!-- Search (stub — no backend) -->
+        <div class="header-search" role="search">
+          <input
+            class="header-search__input"
+            type="search"
+            placeholder="Search…"
+            aria-label="Search the site"
+          />
+          <button class="header-search__btn" aria-label="Submit search" type="button">
+            <!-- magnifying glass (inline SVG, no icon library) -->
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.4"/>
+              <line x1="9.5" y1="9.5" x2="13" y2="13" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/>
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile hamburger -->
+      <button
+        class="hamburger"
+        id="hamburger-btn"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-drawer"
+        type="button"
+      >
+        <span class="hamburger__bar"></span>
+        <span class="hamburger__bar"></span>
+        <span class="hamburger__bar"></span>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<!-- Mobile drawer (rendered outside header for proper z-index stacking) -->
+<MobileDrawer items={nav} />
+
+<script>
+  // ── Mega-menu keyboard + click behaviour ─────────────────────────────────
+  const triggers = document.querySelectorAll<HTMLElement>('.nav-item__trigger[data-has-dropdown]')
+
+  function closeAll(except?: HTMLElement) {
+    triggers.forEach(t => {
+      if (t === except) return
+      t.setAttribute('aria-expanded', 'false')
+      const panel = document.getElementById(t.getAttribute('aria-controls') ?? '')
+      panel?.classList.remove('is-open')
+    })
+  }
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const expanded = trigger.getAttribute('aria-expanded') === 'true'
+      closeAll(expanded ? undefined : trigger)
+      if (!expanded) {
+        trigger.setAttribute('aria-expanded', 'true')
+        const panelId = trigger.getAttribute('aria-controls')
+        document.getElementById(panelId ?? '')?.classList.add('is-open')
+      }
+    })
+
+    trigger.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeAll()
+        trigger.focus()
+      }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault()
+        const panelId = trigger.getAttribute('aria-controls')
+        const firstItem = document.querySelector<HTMLElement>(`#${panelId} .nav-dropdown__item`)
+        firstItem?.focus()
+      }
+    })
+  })
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!(e.target as HTMLElement).closest('.nav-item')) closeAll()
+  })
+
+  // ── Hamburger / mobile drawer ────────────────────────────────────────────
+  const hamburger = document.getElementById('hamburger-btn')!
+  const drawer    = document.getElementById('mobile-drawer')!
+
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.getAttribute('aria-expanded') === 'true'
+    hamburger.setAttribute('aria-expanded', String(!open))
+    drawer.classList.toggle('is-open', !open)
+    document.body.style.overflow = open ? '' : 'hidden'
+  })
+
+  document.getElementById('drawer-close')?.addEventListener('click', () => {
+    hamburger.setAttribute('aria-expanded', 'false')
+    drawer.classList.remove('is-open')
+    document.body.style.overflow = ''
+    hamburger.focus()
+  })
+
+  drawer.querySelector('.mobile-drawer__overlay')?.addEventListener('click', () => {
+    hamburger.setAttribute('aria-expanded', 'false')
+    drawer.classList.remove('is-open')
+    document.body.style.overflow = ''
+  })
+</script>

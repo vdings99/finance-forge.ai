@@ -1,0 +1,45 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# finance-forge.ai — Site Configuration
+# Edit this file to change site-wide text, links, and social handles.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: "finance-forge.ai"
+tagline: "Free financial guidance for Canadians"
+description: >
+  Free, accurate, and independent personal finance guidance for Canadians.
+  Tax rates, calculators, registered savings plans, and more.
+
+# Copyright — the year range is appended automatically
+copyright_from: 2025
+copyright_holder: "finance-forge.ai"
+
+# Disclaimer paragraph shown in the footer
+# Replace this placeholder with your final legal wording.
+disclaimer: >
+  The information on this site is provided for general reference purposes only
+  and does not constitute professional financial, tax, legal, or investment
+  advice. While we strive for accuracy, we make no guarantee that all
+  information is current or complete. Always consult a qualified professional
+  before making financial decisions. [TODO: replace with final legal wording.]
+
+# Footer links
+footer_links:
+  - label: "Privacy Policy"
+    href: "/privacy"
+  - label: "Contact"
+    href: "/contact"
+  - label: "About"
+    href: "/about"
+  - label: "Site Map"
+    href: "/sitemap"
+  - label: "Content Use Policy"
+    href: "/content-use-policy"
+
+# Social links (set href to "" to hide a platform)
+social:
+  - platform: "LinkedIn"
+    href: "https://linkedin.com/company/finance-forge-ai"   # TODO: update
+  - platform: "X"
+    href: "https://x.com/financeforgeai"                    # TODO: update
+  - platform: "Facebook"
+    href: ""                                                 # leave empty to hide

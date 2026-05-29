@@ -1,0 +1,95 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import Breadcrumb from '../components/Breadcrumb.astro'
+import TableOfContents from '../components/TableOfContents.astro'
+import RevisedTag from '../components/RevisedTag.astro'
+
+interface Heading {
+  text: string
+  slug: string
+  depth: number
+}
+
+interface Props {
+  title: string
+  description?: string
+  breadcrumb?: string[]
+  archetype?: 'home' | 'hub' | 'article' | 'datatable' | 'calculator' | 'utility'
+  revised?: string
+  toc?: boolean
+  lead?: string
+  headings?: Heading[]
+}
+
+const {
+  title,
+  description,
+  breadcrumb = ['Home'],
+  archetype = 'utility',
+  revised,
+  toc = false,
+  lead,
+  headings = [],
+} = Astro.props
+
+const showToc = toc && headings.filter(h => h.depth === 2).length > 0
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+
+  <main id="main-content" class="page-main">
+    <div class="container">
+
+      {archetype === 'home'
+        ? <slot />   /* home archetype has its own full layout */
+        : (
+            <>
+              <Breadcrumb crumbs={breadcrumb} currentTitle={title} />
+
+              <div class:list={['grid-12', (archetype === 'article') && 'article-grid']}>
+
+                {/* Main content column */}
+                <div class:list={[
+                  archetype === 'article'  ? 'col-prose'
+                  : archetype === 'hub'    ? 'col-full'
+                  : 'col-full'
+                ]}>
+
+                  <h1 class="page-h1">{title}</h1>
+
+                  {lead && <p class="lead">{lead}</p>}
+
+                  {showToc && <TableOfContents headings={headings} />}
+
+                  <div class:list={[archetype === 'article' && 'prose']}>
+                    <slot />
+                  </div>
+
+                  {revised && <RevisedTag date={revised} />}
+                </div>
+
+                {/* Article aside column (deliberately left empty — whitespace is the design) */}
+                {archetype === 'article' && <aside class="col-aside" aria-hidden="true"></aside>}
+
+              </div>
+            </>
+          )
+      }
+
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Article prose offset grid */
+  @media (min-width: 1024px) {
+    .article-grid {
+      align-items: start;
+    }
+  }
+</style>

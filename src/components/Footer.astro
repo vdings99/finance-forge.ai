@@ -1,0 +1,85 @@
+---
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import yaml from 'js-yaml'
+
+const raw = readFileSync(resolve('src/data/site.yaml'), 'utf-8')
+const site = yaml.load(raw) as {
+  name: string
+  tagline: string
+  copyright_from: number
+  copyright_holder: string
+  disclaimer: string
+  footer_links: Array<{ label: string; href: string }>
+  social: Array<{ platform: string; href: string }>
+}
+
+const year = new Date().getFullYear()
+const copyright = `© ${site.copyright_from}–${year} ${site.copyright_holder}. All rights reserved.`
+const activeSocial = site.social.filter(s => s.href)
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="site-footer__grid">
+
+      <!-- Col 1: wordmark + disclaimer -->
+      <div>
+        <a href="/" class="site-footer__wordmark">{site.name}</a>
+        <p class="site-footer__tagline">{site.tagline}</p>
+        <p class="site-footer__disclaimer">{site.disclaimer}</p>
+      </div>
+
+      <!-- Col 2: Quick links -->
+      <div>
+        <p class="site-footer__heading">Quick Links</p>
+        <ul class="site-footer__links">
+          {site.footer_links.map(link => (
+            <li>
+              <a href={link.href} class="site-footer__link">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Col 3: Sections -->
+      <div>
+        <p class="site-footer__heading">Topics</p>
+        <ul class="site-footer__links">
+          <li><a href="/personal-tax" class="site-footer__link">Personal Income Tax</a></li>
+          <li><a href="/financial-planning" class="site-footer__link">Financial Planning</a></li>
+          <li><a href="/calculators" class="site-footer__link">Calculators & Tools</a></li>
+          <li><a href="/business" class="site-footer__link">Business / Self-Employment</a></li>
+          <li><a href="/provinces" class="site-footer__link">Provinces & Territories</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Social links -->
+      {activeSocial.length > 0 && (
+        <div>
+          <p class="site-footer__heading">Connect</p>
+          <ul class="site-footer__links">
+            {activeSocial.map(s => (
+              <li>
+                <a href={s.href} class="site-footer__link" rel="noopener noreferrer" target="_blank">
+                  {s.platform}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="site-footer__bottom">
+      <p>{copyright}</p>
+      <ul class="site-footer__bottom-links">
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/content-use-policy">Content Use Policy</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

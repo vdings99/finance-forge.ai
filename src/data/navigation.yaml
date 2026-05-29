@@ -1,0 +1,121 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# finance-forge.ai — Navigation Tree
+# To change the menu, edit this file.
+#
+# Structure:
+#   label:    The text shown in the nav bar
+#   href:     The URL (use "/" for a direct link; omit if it has children)
+#   children: Sub-items rendered as a dropdown panel
+# ─────────────────────────────────────────────────────────────────────────────
+
+- label: "Home"
+  href: "/"
+
+- label: "What's New"
+  href: "/whats-new"
+
+- label: "Resources & Links"
+  href: "/resources"
+
+- label: "About / Contact"
+  href: "/about"
+
+- label: "Calculators & Tools"
+  children:
+    - label: "All Calculators"
+      href: "/calculators"
+    - label: "Detailed Income Tax Calculator"
+      href: "/calculators/income-tax"
+    - label: "Quebec Tax Calculator"
+      href: "/calculators/quebec-tax"
+    - label: "Investment Income Tax Calculator"
+      href: "/calculators/investment-income-tax"
+    - label: "Basic / Quick Tax Calculator"
+      href: "/calculators/quick-tax"
+    - label: "RRSP / RRIF Withdrawal & Retirement"
+      href: "/calculators/rrsp-rrif"
+    - label: "Investment Return Calculator"
+      href: "/calculators/investment-return"
+    - label: "Loan & Mortgage Calculator"
+      href: "/calculators/loan-mortgage"
+
+- label: "Financial Planning & Investing"
+  children:
+    - label: "Financial Independence"
+      href: "/financial-planning/financial-independence"
+    - label: "Registered Savings Plans"
+      href: "/financial-planning/registered-savings-plans"
+    - label: "Investing — Stocks, Bonds & Securities"
+      href: "/financial-planning/investing"
+    - label: "Real Estate"
+      href: "/financial-planning/real-estate"
+    - label: "Company Pensions"
+      href: "/financial-planning/company-pensions"
+    - label: "Wills & Estate Planning"
+      href: "/financial-planning/wills-estate"
+    - label: "Government Benefits & Services"
+      href: "/financial-planning/government-benefits"
+
+- label: "Personal Income Tax"
+  children:
+    - label: "Filing Your Tax Return"
+      href: "/personal-tax/filing"
+    - label: "Tax Rates & Brackets"
+      href: "/personal-tax/tax-rates"
+    - label: "Dividend Tax Credits"
+      href: "/personal-tax/dividend-tax-credits"
+    - label: "Non-Refundable Tax Credits"
+      href: "/personal-tax/non-refundable-credits"
+    - label: "CPP & EI Rates"
+      href: "/personal-tax/cpp-ei-rates"
+    - label: "Seniors — OAS, CPP, Taxes"
+      href: "/personal-tax/seniors"
+    - label: "Disabilities Resources"
+      href: "/personal-tax/disabilities"
+
+- label: "Business / Self-Employment"
+  href: "/business"
+
+- label: "Sales Taxes (GST / HST / PST)"
+  href: "/sales-taxes"
+
+- label: "Provinces & Territories"
+  children:
+    - label: "Alberta (AB)"
+      href: "/provinces/ab"
+    - label: "British Columbia (BC)"
+      href: "/provinces/bc"
+    - label: "Manitoba (MB)"
+      href: "/provinces/mb"
+    - label: "New Brunswick (NB)"
+      href: "/provinces/nb"
+    - label: "Newfoundland & Labrador (NL)"
+      href: "/provinces/nl"
+    - label: "Nova Scotia (NS)"
+      href: "/provinces/ns"
+    - label: "Ontario (ON)"
+      href: "/provinces/on"
+    - label: "Prince Edward Island (PE)"
+      href: "/provinces/pe"
+    - label: "Quebec (QC)"
+      href: "/provinces/qc"
+    - label: "Saskatchewan (SK)"
+      href: "/provinces/sk"
+    - label: "Northwest Territories (NT)"
+      href: "/provinces/nt"
+    - label: "Nunavut (NU)"
+      href: "/provinces/nu"
+    - label: "Yukon (YT)"
+      href: "/provinces/yt"
+
+- label: "Federal Budget & Resources"
+  href: "/federal-budget"
+
+- label: "Provincial / Territorial Budgets"
+  href: "/provincial-budgets"
+
+- label: "Statistics & Other Information"
+  href: "/statistics"
+
+- label: "Site Map"
+  href: "/sitemap"

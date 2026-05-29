@@ -1,0 +1,47 @@
+---
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import yaml from 'js-yaml'
+import PageLayout from '../layouts/PageLayout.astro'
+
+const navRaw = readFileSync(resolve('src/data/navigation.yaml'), 'utf-8')
+const nav = yaml.load(navRaw) as Array<{
+  label: string
+  href?: string
+  children?: Array<{ label: string; href: string }>
+}>
+---
+
+<PageLayout
+  title="Site Map"
+  description="Complete index of all pages on finance-forge.ai."
+  breadcrumb={['Home']}
+  archetype="utility"
+  revised="2026-01-01"
+>
+  <p class="lead">A complete index of every section and page on finance-forge.ai.</p>
+
+  <div class="grid-12" style="margin-top: var(--space-8)">
+    {nav.map(item => (
+      <div class="col-6" style="margin-bottom: var(--space-8)">
+        <div class="sitemap-section">
+          <h2 class="sitemap-section__heading">
+            {item.href
+              ? <a href={item.href}>{item.label}</a>
+              : item.label
+            }
+          </h2>
+          {item.children && (
+            <ul class="sitemap-list">
+              {item.children.map(child => (
+                <li class="sitemap-list__item">
+                  <a href={child.href} class="sitemap-list__link">{child.label}</a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</PageLayout>
