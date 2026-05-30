@@ -1,102 +1,22 @@
 ---
 title: "Detailed Income Tax Calculator"
-description: "Estimate your Canadian federal and provincial income tax. Select your province, enter your income and deductions, and see a detailed tax breakdown."
+description: "Estimate your Canadian federal and provincial income tax, CPP, EI, after-tax income, and RRSP tax savings. All calculations run in your browser — nothing is sent to a server."
 breadcrumb: ["Home", "Calculators & Tools"]
 section: "calculators"
 archetype: "calculator"
-revised: "2026-05-29"
+revised: "2026-05-30"
+taxYear: 2025
 toc: false
-lead: "[TODO: One sentence describing the calculator's purpose. Placeholder.]"
+lead: "Enter your income and deductions to see federal and provincial tax, CPP and EI, your average and marginal rates, and the tax savings from an additional RRSP contribution."
 ---
 
 import Callout from '../../../components/Callout.astro'
-import CalculatorShell from '../../../components/CalculatorShell.astro'
+import DetailedTaxCalcIsland from '../../../components/DetailedTaxCalcIsland.astro'
 
-<Callout type="warning">
-This calculator is a UI shell only. Calculation logic is out of scope for the current phase and will be implemented in a future update. [TODO: remove this callout when logic is live.]
+<DetailedTaxCalcIsland />
+
+<Callout type="note">
+Results are estimates based on the rates published on this site for the selected
+tax year. They do not account for every deduction, credit, or special rule.
+Consult a qualified tax professional for advice specific to your situation.
 </Callout>
-
-<CalculatorShell
-  title="Detailed Income Tax Calculator"
-  footnote="Results are estimates only. This tool does not account for all deductions, credits, or special rates. Consult a qualified tax professional for advice specific to your situation. [TODO: finalize footnote wording.]"
->
-  <div slot="inputs">
-    <div class="calc-shell__field">
-      <label class="calc-shell__label" for="calc-province">Province / Territory</label>
-      <select class="calc-shell__select" id="calc-province" aria-describedby="province-hint">
-        <option value="">— Select —</option>
-        <option value="AB">Alberta (AB)</option>
-        <option value="BC">British Columbia (BC)</option>
-        <option value="MB">Manitoba (MB)</option>
-        <option value="NB">New Brunswick (NB)</option>
-        <option value="NL">Newfoundland & Labrador (NL)</option>
-        <option value="NS">Nova Scotia (NS)</option>
-        <option value="NT">Northwest Territories (NT)</option>
-        <option value="NU">Nunavut (NU)</option>
-        <option value="ON">Ontario (ON)</option>
-        <option value="PE">Prince Edward Island (PE)</option>
-        <option value="QC">Quebec (QC)</option>
-        <option value="SK">Saskatchewan (SK)</option>
-        <option value="YT">Yukon (YT)</option>
-      </select>
-    </div>
-
-    <div class="calc-shell__field">
-      <label class="calc-shell__label" for="calc-employment-income">Employment Income</label>
-      <input class="calc-shell__input" type="number" id="calc-employment-income" placeholder="0" min="0" step="1000" aria-describedby="employment-hint" />
-    </div>
-
-    <div class="calc-shell__field">
-      <label class="calc-shell__label" for="calc-self-employment">Self-Employment Income</label>
-      <input class="calc-shell__input" type="number" id="calc-self-employment" placeholder="0" min="0" step="1000" />
-    </div>
-
-    <div class="calc-shell__field">
-      <label class="calc-shell__label" for="calc-other-income">Other Income</label>
-      <input class="calc-shell__input" type="number" id="calc-other-income" placeholder="0" min="0" step="1000" />
-    </div>
-
-    <div class="calc-shell__field">
-      <label class="calc-shell__label" for="calc-rrsp">RRSP Deduction</label>
-      <input class="calc-shell__input" type="number" id="calc-rrsp" placeholder="0" min="0" step="100" />
-    </div>
-
-    <button class="btn" type="button" style="margin-top: var(--space-2)">
-      Calculate
-      {/* TODO: wire to tax logic — out of scope this phase */}
-    </button>
-  </div>
-
-  <div slot="results">
-    <p class="label" style="margin-bottom: var(--space-4)">Results</p>
-
-    <div class="calc-shell__result-row">
-      <span class="calc-shell__result-label">Federal Tax</span>
-      <span class="calc-shell__result-value">—</span>
-    </div>
-    <div class="calc-shell__result-row">
-      <span class="calc-shell__result-label">Provincial Tax</span>
-      <span class="calc-shell__result-value">—</span>
-    </div>
-    <div class="calc-shell__result-row">
-      <span class="calc-shell__result-label">CPP Contributions</span>
-      <span class="calc-shell__result-value">—</span>
-    </div>
-    <div class="calc-shell__result-row">
-      <span class="calc-shell__result-label">EI Premiums</span>
-      <span class="calc-shell__result-value">—</span>
-    </div>
-    <div class="calc-shell__result-row" style="font-weight: 600; border-top: var(--hairline-dark); padding-top: var(--space-4); margin-top: var(--space-2)">
-      <span class="calc-shell__result-label" style="font-weight: 600; color: var(--color-text)">Total Deductions</span>
-      <span class="calc-shell__result-value">—</span>
-    </div>
-    <div class="calc-shell__result-row">
-      <span class="calc-shell__result-label">Effective Tax Rate</span>
-      <span class="calc-shell__result-value calc-shell__result-value--accent">—</span>
-    </div>
-    <div class="calc-shell__result-row">
-      <span class="calc-shell__result-label">After-Tax Income</span>
-      <span class="calc-shell__result-value">—</span>
-    </div>
-  </div>
-</CalculatorShell>

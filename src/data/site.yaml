@@ -13,14 +13,14 @@ description: >
 copyright_from: 2025
 copyright_holder: "finance-forge.ai"
 
-# Disclaimer paragraph shown in the footer
-# Replace this placeholder with your final legal wording.
+# Disclaimer paragraph shown in the footer.
+# This is presentable default wording — refine it with your final legal text.
 disclaimer: >
   The information on this site is provided for general reference purposes only
   and does not constitute professional financial, tax, legal, or investment
   advice. While we strive for accuracy, we make no guarantee that all
   information is current or complete. Always consult a qualified professional
-  before making financial decisions. [TODO: replace with final legal wording.]
+  before making financial decisions.
 
 # Footer links
 footer_links:

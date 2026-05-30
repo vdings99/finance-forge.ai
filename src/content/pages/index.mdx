@@ -4,20 +4,22 @@ description: "Free, accurate, and independent personal finance guidance for Cana
 breadcrumb: ["Home"]
 section: "home"
 archetype: "home"
-revised: "2026-05-29"
+revised: "2026-05-30"
 toc: false
 ---
 
 import Callout from '../../components/Callout.astro'
-import LinkIndex from '../../components/LinkIndex.astro'
+import CardGrid from '../../components/CardGrid.astro'
 
 {/* ─── Hero ─────────────────────────────────────────────────────────────── */}
 <div class="hero">
   <div class="container">
-    <p class="hero__eyebrow">Free · Accurate · Independent</p>
-    <h1 class="hero__heading">Personal finance<br />guidance for Canadians.</h1>
-    <p class="hero__subheading">
-      [TODO: One-line value statement — e.g. "Comprehensive tax rates, calculators, and registered savings plan guides. No fees, no advice — just facts."]
+    <p class="hero__eyebrow reveal">Free · Accurate · Independent</p>
+    <h1 class="hero__heading reveal" transition:name="page-title">Canadian personal<br />finance, made clear.</h1>
+    <p class="hero__subheading reveal">
+      Current-year tax rates, a detailed income-tax calculator, and plain-language
+      guides for every province and territory. No fees, no ads, no sales pitch —
+      just accurate reference you can trust.
     </p>
   </div>
 </div>
@@ -27,56 +29,61 @@ import LinkIndex from '../../components/LinkIndex.astro'
   <div class="grid-12">
     <div class="col-prose">
 
-      <hr class="rule-dark" style="margin-bottom: var(--space-10)" />
+      <h2 class="reveal"><span class="section-eyebrow">What we do</span>Reference you can rely on</h2>
+      <p class="reveal">
+        finance-forge.ai brings together the figures Canadians actually need at
+        tax time — federal and provincial brackets, contribution limits, and
+        credit amounts — alongside guides that explain how they fit together.
+        Every page carries a "Revised" date so you always know how current it is.
+      </p>
 
-      <h2>How can we help?</h2>
-      <p>[TODO: 2–3 sentences describing the site's purpose and scope. Replace this placeholder with your own copy before publishing.]</p>
-
-      <h2>Our Calculators</h2>
-      <p>[TODO: Brief description of the calculator tools available. Placeholder — replace with final copy.]</p>
+      <h2 class="reveal"><span class="section-eyebrow">Our calculators</span>Numbers, not guesswork</h2>
+      <p class="reveal">
+        Our flagship Detailed Income Tax &amp; RRSP Savings Calculator computes
+        federal and provincial tax, CPP, EI, and your marginal and average rates
+        entirely in your browser — nothing is ever sent to a server. Additional
+        tools cover retirement, investing, and debt.
+      </p>
 
       <Callout type="tip">
-        All information on this site is provided for reference only. Always verify figures with CRA or a qualified professional before filing. [TODO: refine.]
+        All figures are provided for reference only. Always verify amounts with the
+        CRA or a qualified professional before filing.
       </Callout>
-
-      <h2>Key Resources</h2>
-      <p>[TODO: Brief description of the reference tables and data pages available.]</p>
 
     </div>
   </div>
 
-  {/* ─── Resource link index ──────────────────────────────────────────── */}
-  <div style="margin-top: var(--space-12)">
-    <LinkIndex
-      heading="Calculators & Tools"
-      links={[
-        { label: "Detailed Income Tax Calculator", href: "/calculators/income-tax", description: "Federal + provincial" },
-        { label: "RRSP / RRIF Withdrawal & Retirement", href: "/calculators/rrsp-rrif", description: "Contribution room, withdrawals" },
-        { label: "Investment Return Calculator", href: "/calculators/investment-return", description: "Compound growth" },
-        { label: "Loan & Mortgage Calculator", href: "/calculators/loan-mortgage", description: "Amortization, payments" },
-        { label: "All Calculators →", href: "/calculators", description: "" },
-      ]}
-    />
-
-    <LinkIndex
-      heading="Personal Income Tax"
-      links={[
-        { label: "Tax Rates & Brackets", href: "/personal-tax/tax-rates", description: "Federal + all provinces, 2025–2026" },
-        { label: "Filing Your Tax Return", href: "/personal-tax/filing", description: "Deadlines, forms, NETFILE" },
-        { label: "Non-Refundable Tax Credits", href: "/personal-tax/non-refundable-credits", description: "Basic personal, tuition, medical" },
-        { label: "CPP & EI Rates", href: "/personal-tax/cpp-ei-rates", description: "Current contribution rates" },
-        { label: "Seniors — OAS, CPP, Taxes", href: "/personal-tax/seniors", description: "GIS, OAS clawback" },
-      ]}
-    />
-
-    <LinkIndex
-      heading="Financial Planning & Investing"
-      links={[
-        { label: "Registered Savings Plans", href: "/financial-planning/registered-savings-plans", description: "RRSP, TFSA, RESP, RDSP, FHSA" },
-        { label: "Financial Independence", href: "/financial-planning/financial-independence", description: "FIRE, savings rate, projections" },
-        { label: "Investing — Stocks, Bonds & Securities", href: "/financial-planning/investing", description: "ETFs, asset allocation" },
-        { label: "Real Estate", href: "/financial-planning/real-estate", description: "First home, mortgages, rental" },
-        { label: "Wills & Estate Planning", href: "/financial-planning/wills-estate", description: "Probate, beneficiaries" },
+  {/* ─── Resource card grid ───────────────────────────────────────────── */}
+  <div style="margin-top: var(--space-16)">
+    <CardGrid
+      groups={[
+        {
+          heading: "Calculators & Tools",
+          cards: [
+            { title: "Detailed Income Tax Calculator", href: "/calculators/income-tax", description: "Federal + provincial tax, CPP/EI, and RRSP savings — calculated live.", eyebrow: "Flagship" },
+            { title: "RRSP / RRIF & Retirement", href: "/calculators/rrsp-rrif", description: "Contribution room and withdrawal planning." },
+            { title: "Investment Return", href: "/calculators/investment-return", description: "Project compound growth over time." },
+            { title: "All Calculators", href: "/calculators", description: "Browse the full set of tools." },
+          ],
+        },
+        {
+          heading: "Personal Income Tax",
+          cards: [
+            { title: "Tax Rates & Brackets", href: "/personal-tax/tax-rates", description: "Federal and provincial rates for 2024 and 2025." },
+            { title: "Filing Your Return", href: "/personal-tax/filing", description: "Deadlines, forms, and NETFILE basics." },
+            { title: "Non-Refundable Credits", href: "/personal-tax/non-refundable-credits", description: "Basic personal, tuition, medical, and more." },
+            { title: "CPP & EI Rates", href: "/personal-tax/cpp-ei-rates", description: "Current contribution rates and maximums." },
+          ],
+        },
+        {
+          heading: "Financial Planning & Investing",
+          cards: [
+            { title: "Registered Savings Plans", href: "/financial-planning/registered-savings-plans", description: "RRSP, TFSA, RESP, RDSP, and FHSA explained." },
+            { title: "Financial Independence", href: "/financial-planning/financial-independence", description: "Saving rate, projections, and the Free In 30! framework." },
+            { title: "Investing", href: "/financial-planning/investing", description: "Stocks, bonds, ETFs, and asset allocation." },
+            { title: "Real Estate", href: "/financial-planning/real-estate", description: "First home, mortgages, and rental property." },
+          ],
+        },
       ]}
     />
   </div>

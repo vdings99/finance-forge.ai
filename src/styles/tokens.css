@@ -11,20 +11,21 @@
   /* ── Typography ─────────────────────────────────────────────────────────── */
   --font-sans: 'Inter', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   --font-mono: 'IBM Plex Mono', 'SFMono-Regular', ui-monospace, 'Menlo', monospace;
-  /* Space Grotesk for display/headlines */
-  --font-display: 'Space Grotesk', var(--font-sans);
+  /* Geist — clean neo-grotesque for display/headlines (sleek, neutral) */
+  --font-display: 'Geist', var(--font-sans);
 
   /* Fluid type scale — clamp(min, preferred, max) */
-  --fs-display: clamp(3rem, 7vw, 6.5rem);
+  --fs-display: clamp(3.25rem, 7.5vw, 7rem);
   --fs-h1:      clamp(2.25rem, 4.5vw, 4rem);
   --fs-h2:      clamp(1.6rem, 2.6vw, 2.5rem);
   --fs-h3:      1.4rem;
+  --fs-lead:    clamp(1.125rem, 1.6vw, 1.35rem);  /* deliberate lead step */
   --fs-body:    1.0625rem;    /* ≈17px */
   --fs-small:   0.875rem;
   --fs-caption: 0.75rem;
   --fs-eyebrow: 0.6875rem;    /* uppercase labels */
 
-  --lh-tight:  1.04;          /* big headlines */
+  --lh-tight:  1.02;          /* big headlines — tighter for sleeker display */
   --lh-snug:   1.25;
   --lh-body:   1.55;
 
@@ -39,15 +40,17 @@
   --paper-2:  #f4f4f2;        /* warm off-white section band */
   --hairline: #e2e2e0;
 
-  /* ONE accent — links, active states, key figures. Change here to rebrand. */
-  --accent:   #0a66ff;
-  --accent-2: #0050cc;        /* hover / darker tint */
+  /* ONE accent — Swiss signal vermilion. Links, active states, key figures.
+     Change this single value to rebrand the entire accent. */
+  --accent:       #E2231A;
+  --accent-2:     #B81C14;    /* hover / darker tint */
+  --accent-light: var(--accent-2);  /* compat alias for older rules */
 
-  /* Signal red — warnings only */
-  --signal:   #d2261d;
+  /* Warning red — kept distinct from the accent so warnings don't read as links */
+  --signal:   #B00020;        /* deeper crimson */
   --signal-2: #ff3b30;
 
-  --focus:    #0a66ff;
+  --focus:    var(--accent);
 
   /* ── Grid & spacing ─────────────────────────────────────────────────────── */
   --gutter:        clamp(1rem, 2.5vw, 2rem);
@@ -67,6 +70,9 @@
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
+
+  /* Sticky header height — used for scroll-margin offset on anchors */
+  --header-h: 4rem;
 
   /* ── Depth (used sparingly — Apple finish) ───────────────────────────────── */
   --shadow:  0 6px 28px rgba(0,0,0,.07);
@@ -101,11 +107,14 @@
   --step-h2:          var(--fs-h2);
   --step-h3:          var(--fs-h3);
   --step-display:     var(--fs-display);
-  --step-lead:        1.125rem;
+  --step-hero:        var(--fs-display);
+  --step-lead:        var(--fs-lead);
   --tracking-tight:   var(--track-display);
+  --tracking-wide:    var(--track-caps);
   --tracking-wider:   var(--track-caps);
   --leading-body:     var(--lh-body);
   --leading-tight:    var(--lh-tight);
+  --leading-loose:    1.75;
   --page-pad-sm:      1.25rem;
   --page-pad-md:      2.5rem;
   --page-pad-lg:      var(--margin);
@@ -118,26 +127,38 @@
   --z-overlay:  300;
 }
 
-/* ── Dark mode ───────────────────────────────────────────────────────────── */
+/* ── Dark mode ─────────────────────────────────────────────────────────────
+   Auto (follows OS) when no explicit choice is set; a header toggle writes
+   data-theme="light|dark" on <html> to override. The dark palette is shared
+   between the media query and the explicit [data-theme="dark"] selector. */
+
+/* Shared dark palette, applied via a custom property block we reuse */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --ink:     #f2f2f2;
     --ink-2:   #b8b8b8;
     --ink-3:   #888888;
     --paper:   #0c0c0d;
     --paper-2: #161617;
     --hairline: #2a2a2c;
-    --color-text:       var(--ink);
-    --color-bg:         var(--paper);
-    --color-bg-warm:    var(--paper-2);
     --color-bg-subtle:  #1e1e20;
-    --color-muted:      var(--ink-2);
-    --color-faint:      var(--ink-3);
-    --color-rule:       var(--hairline);
     --color-rule-dark:  #3a3a3c;
     --hairline-dark:    1px solid #3a3a3c;
     --shadow:  0 6px 28px rgba(0,0,0,.35);
   }
+}
+
+:root[data-theme="dark"] {
+  --ink:     #f2f2f2;
+  --ink-2:   #b8b8b8;
+  --ink-3:   #888888;
+  --paper:   #0c0c0d;
+  --paper-2: #161617;
+  --hairline: #2a2a2c;
+  --color-bg-subtle:  #1e1e20;
+  --color-rule-dark:  #3a3a3c;
+  --hairline-dark:    1px solid #3a3a3c;
+  --shadow:  0 6px 28px rgba(0,0,0,.35);
 }
 
 /* ── Reduced motion kill-switch ──────────────────────────────────────────── */
