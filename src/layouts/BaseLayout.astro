@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css'
-import { ClientRouter } from 'astro:transitions'
+import { ViewTransitions } from 'astro:transitions'
 
 interface Props {
   title: string
@@ -75,7 +75,7 @@ const websiteJsonLd = {
       })} />
     )}
 
-    <ClientRouter />
+    <ViewTransitions />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>

@@ -5,10 +5,12 @@ import preact from '@astrojs/preact'
 
 export default defineConfig({
   site: 'https://www.finance-forge.ai',
-  integrations: [mdx(), sitemap(), preact({ compat: true })],
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => Boolean(page) && !page.includes('undefined'),
+    }),
+    preact({ compat: true }),
+  ],
   output: 'static',
-  // Redirect map — keep in sync with src/redirects.ts (canonical source of truth)
-  redirects: {
-    '/index.html': '/',
-  },
 })

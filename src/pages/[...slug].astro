@@ -3,16 +3,29 @@ import { getCollection } from 'astro:content'
 import PageLayout from '../layouts/PageLayout.astro'
 
 export async function getStaticPaths() {
+  // pages/ collection — exclude 'index' which is handled by src/pages/index.astro
   const pages = await getCollection('pages')
-  return pages.map(page => ({
-    params: { slug: page.slug },
-    props: { page },
+  const pageRoutes = pages
+    .filter(p => p.slug !== 'index')
+    .map(page => ({
+      params: { slug: page.slug },
+      props: { page, collectionType: 'pages' as const },
+    }))
+
+  // articles/ collection
+  const articles = await getCollection('articles')
+  const articleRoutes = articles.map(article => ({
+    params: { slug: article.slug },
+    props: { page: article, collectionType: 'articles' as const },
   }))
+
+  return [...pageRoutes, ...articleRoutes]
 }
 
-const { page } = Astro.props
+const { page, collectionType } = Astro.props
 const { Content, headings } = await page.render()
-const { title, description, breadcrumb, archetype, revised, toc, lead } = page.data
+const { title, description, breadcrumb, revised, toc, lead } = page.data
+const archetype = collectionType === 'articles' ? 'article' : (page.data as any).archetype
 ---
 
 <PageLayout
