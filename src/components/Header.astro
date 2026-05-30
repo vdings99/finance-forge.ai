@@ -14,7 +14,7 @@ const nav = yaml.load(navRaw) as Array<{ label: string; href?: string; children?
 const currentPath = Astro.url.pathname
 ---
 
-<header class="site-header" role="banner">
+<header class="site-header" role="banner" transition:persist transition:name="site-header">
   <div class="container">
     <div class="site-header__inner">
 

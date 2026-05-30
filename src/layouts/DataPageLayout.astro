@@ -1,0 +1,114 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import Breadcrumb from '../components/Breadcrumb.astro'
+import Contents from '../components/Contents.astro'
+import RevisedStamp from '../components/RevisedStamp.astro'
+import TaxYearPicker from '../components/TaxYearPicker.astro'
+import Callout from '../components/Callout.astro'
+
+interface Heading {
+  text: string
+  slug: string
+  depth: number
+}
+
+interface YearLink {
+  year: number
+  href: string
+}
+
+interface Props {
+  title: string
+  description?: string
+  breadcrumb?: string[]
+  revised?: string
+  taxYear: number
+  verified?: boolean
+  headings?: Heading[]
+  yearLinks?: YearLink[]
+}
+
+const {
+  title,
+  description,
+  breadcrumb = ['Home'],
+  revised,
+  taxYear,
+  verified = true,
+  headings = [],
+  yearLinks = [],
+} = Astro.props
+
+const h2s = headings.filter(h => h.depth === 2)
+const showToc = h2s.length >= 3
+
+const yearPickerItems = yearLinks.map(yl => ({
+  year: yl.year,
+  href: yl.href,
+  active: yl.year === taxYear,
+}))
+---
+
+<BaseLayout title={title} description={description} taxYear={taxYear}>
+  <Header />
+
+  <main id="main-content" class="page-main">
+    <div class="container">
+      <Breadcrumb crumbs={breadcrumb} currentTitle={title} />
+
+      <div class="grid-12 article-grid">
+        <div class="col-prose">
+          <h1 class="page-h1">
+            {title}
+            <span class="tax-year-badge">{taxYear}</span>
+          </h1>
+
+          {!verified && (
+            <div class="callout callout--warning" role="status">
+              <p class="callout__type">Preliminary Estimate</p>
+              <div class="callout__body">
+                <p>These figures have not yet been confirmed by the CRA. They are based on the expected indexation factor and may change once official numbers are released.</p>
+              </div>
+            </div>
+          )}
+
+          {yearPickerItems.length > 0 && (
+            <TaxYearPicker years={yearPickerItems} />
+          )}
+
+          {showToc && <Contents headings={headings} />}
+
+          <div class="prose">
+            <slot />
+          </div>
+
+          {revised && <RevisedStamp date={revised} taxYear={taxYear} verified={verified} />}
+        </div>
+
+        <aside class="col-aside" aria-hidden="true"></aside>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .tax-year-badge {
+    display: inline-block;
+    font-family: var(--font-data);
+    font-size: var(--fs-h3);
+    font-weight: 500;
+    color: var(--accent);
+    vertical-align: middle;
+    margin-left: var(--space-3);
+  }
+
+  @media (min-width: 1024px) {
+    .article-grid {
+      align-items: start;
+    }
+  }
+</style>

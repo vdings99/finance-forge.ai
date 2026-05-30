@@ -39,6 +39,9 @@ const activeSocial = site.social.filter(s => s.href)
               <a href={link.href} class="site-footer__link">{link.label}</a>
             </li>
           ))}
+          <li>
+            <a href="/rss.xml" class="site-footer__link">RSS Feed</a>
+          </li>
         </ul>
       </div>
 
@@ -70,6 +73,23 @@ const activeSocial = site.social.filter(s => s.href)
         </div>
       )}
 
+    </div>
+
+    <!-- Newsletter signup stub — no backend; add a handler when ready -->
+    <div class="site-footer__newsletter" data-stub>
+      <p class="site-footer__heading">Stay Updated</p>
+      <form class="site-footer__newsletter-form" action="#" method="post" data-stub>
+        <!-- TODO: connect to newsletter service (e.g. Buttondown, ConvertKit) -->
+        <input
+          type="email"
+          name="email"
+          class="form-input site-footer__newsletter-input"
+          placeholder="you@example.com"
+          aria-label="Email address for newsletter"
+          required
+        />
+        <button type="submit" class="btn site-footer__newsletter-btn">Subscribe</button>
+      </form>
     </div>
 
     <!-- Bottom bar -->

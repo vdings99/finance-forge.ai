@@ -1,0 +1,27 @@
+---
+interface YearItem {
+  year: number
+  href: string
+  active?: boolean
+}
+
+interface Props {
+  years: YearItem[]
+}
+
+const { years } = Astro.props
+---
+
+{years.length > 0 && (
+  <nav class="year-selector" aria-label="Select tax year">
+    {years.map(y => (
+      <a
+        href={y.href}
+        class:list={['year-selector__item', y.active && 'year-selector__item--active']}
+        aria-current={y.active ? 'page' : undefined}
+      >
+        {y.year}
+      </a>
+    ))}
+  </nav>
+)}

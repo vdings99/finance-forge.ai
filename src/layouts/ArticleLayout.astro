@@ -1,0 +1,77 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import Breadcrumb from '../components/Breadcrumb.astro'
+import Contents from '../components/Contents.astro'
+import RevisedStamp from '../components/RevisedStamp.astro'
+
+interface Heading {
+  text: string
+  slug: string
+  depth: number
+}
+
+interface Props {
+  title: string
+  description?: string
+  lead?: string
+  breadcrumb?: string[]
+  revised?: string
+  taxYear?: number
+  headings?: Heading[]
+}
+
+const {
+  title,
+  description,
+  lead,
+  breadcrumb = ['Home'],
+  revised,
+  taxYear,
+  headings = [],
+} = Astro.props
+
+const h2s = headings.filter(h => h.depth === 2)
+const showToc = h2s.length >= 3
+---
+
+<BaseLayout title={title} description={description} taxYear={taxYear}>
+  <Header />
+
+  <main id="main-content" class="page-main">
+    <div class="container">
+      <Breadcrumb crumbs={breadcrumb} currentTitle={title} />
+
+      <div class="grid-12 article-grid">
+        <div class="col-prose">
+          <h1 class="page-h1">{title}</h1>
+
+          {lead && <p class="lead">{lead}</p>}
+
+          {showToc && <Contents headings={headings} />}
+
+          <div class="prose">
+            <slot />
+          </div>
+
+          <slot name="resources" />
+
+          {revised && <RevisedStamp date={revised} taxYear={taxYear} />}
+        </div>
+
+        <aside class="col-aside" aria-hidden="true"></aside>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  @media (min-width: 1024px) {
+    .article-grid {
+      align-items: start;
+    }
+  }
+</style>
