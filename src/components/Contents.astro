@@ -1,0 +1,58 @@
+---
+interface Heading {
+  text: string
+  slug: string
+  depth: number
+}
+
+interface Props {
+  headings: Heading[]
+}
+
+const { headings } = Astro.props
+const h2s = headings.filter(h => h.depth === 2)
+---
+
+{h2s.length > 0 && (
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc__label">Contents</p>
+    <ol class="toc__list" role="list">
+      {h2s.map((h, i) => (
+        <li class="toc__item">
+          <span class="toc__num data">{String(i + 1).padStart(2, '0')}</span>
+          <a href={`#${h.slug}`} class="toc__link" data-toc-link={h.slug}>{h.text}</a>
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}
+
+<script>
+  function initTocTracking() {
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]')
+    if (!tocLinks.length) return
+
+    const slugs = Array.from(tocLinks).map(l => l.dataset.tocLink!)
+    const headingEls = slugs.map(s => document.getElementById(s)).filter(Boolean) as HTMLElement[]
+    if (!headingEls.length) return
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const id = entry.target.id
+            tocLinks.forEach(link => {
+              link.classList.toggle('is-active', link.dataset.tocLink === id)
+            })
+          }
+        }
+      },
+      { rootMargin: '-10% 0px -80% 0px' }
+    )
+
+    headingEls.forEach(el => io.observe(el))
+  }
+
+  document.addEventListener('astro:page-load', initTocTracking)
+  initTocTracking()
+</script>

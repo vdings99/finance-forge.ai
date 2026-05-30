@@ -1,0 +1,65 @@
+---
+interface InternalLink {
+  label: string
+  href: string
+  description?: string
+}
+
+interface ExternalLink {
+  label: string
+  href: string
+}
+
+interface Props {
+  financeForge?: {
+    heading?: string
+    links: InternalLink[]
+  }
+  official?: {
+    heading?: string
+    links: ExternalLink[]
+  }
+}
+
+const { financeForge, official } = Astro.props
+---
+
+{(financeForge || official) && (
+  <div class="resource-list">
+    {financeForge && financeForge.links.length > 0 && (
+      <div class="resource-list__col">
+        <h3 class="resource-list__heading">{financeForge.heading ?? 'On this site'}</h3>
+        <ul class="resource-list__links">
+          {financeForge.links.map(link => (
+            <li>
+              <a href={link.href} class="resource-list__link resource-list__link--internal">
+                {link.label}
+              </a>
+              {link.description && (
+                <span class="resource-list__desc">{link.description}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {official && official.links.length > 0 && (
+      <div class="resource-list__col">
+        <h3 class="resource-list__heading">{official.heading ?? 'Official sources'}</h3>
+        <ul class="resource-list__links">
+          {official.links.map(link => (
+            <li>
+              <a href={link.href} class="resource-list__link resource-list__link--external" rel="noopener noreferrer" target="_blank">
+                {link.label}
+                <svg class="resource-list__external-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M3.5 1.5h7v7M10.5 1.5L1.5 10.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+)}

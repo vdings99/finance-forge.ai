@@ -1,0 +1,29 @@
+{
+  "province": "SK",
+  "name": "Saskatchewan",
+  "year": 2025,
+  "bpa": 17661,
+  "surtax": [],
+  "brackets": [
+    {
+      "min": 0,
+      "max": 52057,
+      "rate": 0.105
+    },
+    {
+      "min": 52057,
+      "max": 148734,
+      "rate": 0.125
+    },
+    {
+      "min": 148734,
+      "max": null,
+      "rate": 0.145
+    }
+  ],
+  "dividendTaxCredit": {
+    "eligible": 0,
+    "nonEligible": 0
+  },
+  "verified": false
+}

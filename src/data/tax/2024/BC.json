@@ -1,0 +1,49 @@
+{
+  "province": "BC",
+  "name": "British Columbia",
+  "year": 2024,
+  "bpa": 11981,
+  "surtax": [],
+  "brackets": [
+    {
+      "min": 0,
+      "max": 45654,
+      "rate": 0.0506
+    },
+    {
+      "min": 45654,
+      "max": 91310,
+      "rate": 0.077
+    },
+    {
+      "min": 91310,
+      "max": 104835,
+      "rate": 0.105
+    },
+    {
+      "min": 104835,
+      "max": 127299,
+      "rate": 0.1229
+    },
+    {
+      "min": 127299,
+      "max": 172602,
+      "rate": 0.147
+    },
+    {
+      "min": 172602,
+      "max": 240716,
+      "rate": 0.168
+    },
+    {
+      "min": 240716,
+      "max": null,
+      "rate": 0.205
+    }
+  ],
+  "dividendTaxCredit": {
+    "eligible": 0.12,
+    "nonEligible": 0.02
+  },
+  "verified": true
+}

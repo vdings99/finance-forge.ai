@@ -1,0 +1,51 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import Breadcrumb from '../components/Breadcrumb.astro'
+import PreviewCalcBanner from '../components/PreviewCalcBanner.astro'
+
+interface Props {
+  title: string
+  description?: string
+  breadcrumb?: string[]
+  revised?: string
+  taxYear?: number
+  preview?: boolean
+}
+
+const {
+  title,
+  description,
+  breadcrumb = ['Home'],
+  revised,
+  taxYear,
+  preview = false,
+} = Astro.props
+---
+
+<BaseLayout title={title} description={description} taxYear={taxYear}>
+  <Header />
+
+  <main id="main-content" class="page-main">
+    <div class="container">
+      <Breadcrumb crumbs={breadcrumb} currentTitle={title} />
+
+      <h1 class="page-h1">{title}</h1>
+
+      {description && <p class="lead">{description}</p>}
+
+      {preview && <PreviewCalcBanner />}
+
+      <slot />
+
+      {revised && (
+        <p class="revised-tag">
+          Revised:&nbsp;<time datetime={revised}>{revised}</time>
+        </p>
+      )}
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

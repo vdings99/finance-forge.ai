@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0c0c0d"/>
+  <text x="600" y="280" text-anchor="middle" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="64" font-weight="700" fill="#ffffff" letter-spacing="-0.03em">finance-forge.ai</text>
+  <text x="600" y="350" text-anchor="middle" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="22" fill="#b8b8b8" letter-spacing="0.08em" text-transform="uppercase">Free financial guidance for Canadians</text>
+  <rect x="540" y="390" width="120" height="3" fill="#0a66ff" rx="1.5"/>
+</svg>

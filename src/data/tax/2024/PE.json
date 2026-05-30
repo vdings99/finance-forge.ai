@@ -1,0 +1,44 @@
+{
+  "province": "PE",
+  "name": "Prince Edward Island",
+  "year": 2024,
+  "bpa": 12000,
+  "surtax": [
+    {
+      "threshold": 12500,
+      "rate": 0.1
+    }
+  ],
+  "brackets": [
+    {
+      "min": 0,
+      "max": 32656,
+      "rate": 0.096
+    },
+    {
+      "min": 32656,
+      "max": 64313,
+      "rate": 0.134
+    },
+    {
+      "min": 64313,
+      "max": 105000,
+      "rate": 0.167
+    },
+    {
+      "min": 105000,
+      "max": 140000,
+      "rate": 0.18
+    },
+    {
+      "min": 140000,
+      "max": null,
+      "rate": 0.187
+    }
+  ],
+  "dividendTaxCredit": {
+    "eligible": 0.1,
+    "nonEligible": 0
+  },
+  "verified": true
+}

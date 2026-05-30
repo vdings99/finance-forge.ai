@@ -1,4 +1,17 @@
 ---
+/*
+ * PageLayout — universal page wrapper.
+ *
+ * Routes to the correct layout anatomy based on `archetype`:
+ *   hub | province | glossary | log → HubLayout / ProvinceLayout / GlossaryLayout / LogLayout
+ *   article | datatable             → ArticleLayout / DataPageLayout
+ *   calculator                      → CalculatorLayout
+ *   utility | home                  → existing inline behavior
+ *
+ * The new specialised layouts can also be imported directly from pages when
+ * more granular props are needed. This wrapper keeps backward compatibility
+ * for the dynamic [...slug].astro catch-all route.
+ */
 import BaseLayout from './BaseLayout.astro'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
@@ -16,11 +29,13 @@ interface Props {
   title: string
   description?: string
   breadcrumb?: string[]
-  archetype?: 'home' | 'hub' | 'article' | 'datatable' | 'calculator' | 'utility'
+  archetype?: 'home' | 'hub' | 'article' | 'datatable' | 'calculator' | 'utility' | 'province' | 'glossary' | 'log'
   revised?: string
   toc?: boolean
   lead?: string
   headings?: Heading[]
+  taxYear?: number
+  preview?: boolean
 }
 
 const {
@@ -32,39 +47,49 @@ const {
   toc = false,
   lead,
   headings = [],
+  taxYear,
+  preview = false,
 } = Astro.props
 
 const showToc = toc && headings.filter(h => h.depth === 2).length > 0
+
+// Determine content column class
+const useArticleGrid = archetype === 'article' || archetype === 'datatable'
+const useProse = archetype === 'article' || archetype === 'datatable'
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} taxYear={taxYear}>
   <Header />
 
   <main id="main-content" class="page-main">
     <div class="container">
 
       {archetype === 'home'
-        ? <slot />   /* home archetype has its own full layout */
+        ? <slot />
         : (
             <>
               <Breadcrumb crumbs={breadcrumb} currentTitle={title} />
 
-              <div class:list={['grid-12', (archetype === 'article') && 'article-grid']}>
+              <div class:list={['grid-12', useArticleGrid && 'article-grid']}>
 
                 {/* Main content column */}
                 <div class:list={[
-                  archetype === 'article'  ? 'col-prose'
-                  : archetype === 'hub'    ? 'col-full'
-                  : 'col-full'
+                  useArticleGrid ? 'col-prose' : 'col-full'
                 ]}>
 
                   <h1 class="page-h1">{title}</h1>
 
                   {lead && <p class="lead">{lead}</p>}
 
+                  {preview && (
+                    <div class="preview-banner" role="status">
+                      <p>Preview — This calculator's interface is shown for reference. The calculation engine is in development and will be activated in a future update.</p>
+                    </div>
+                  )}
+
                   {showToc && <TableOfContents headings={headings} />}
 
-                  <div class:list={[archetype === 'article' && 'prose']}>
+                  <div class:list={[useProse && 'prose']}>
                     <slot />
                   </div>
 
@@ -72,7 +97,7 @@ const showToc = toc && headings.filter(h => h.depth === 2).length > 0
                 </div>
 
                 {/* Article aside column (deliberately left empty — whitespace is the design) */}
-                {archetype === 'article' && <aside class="col-aside" aria-hidden="true"></aside>}
+                {useArticleGrid && <aside class="col-aside" aria-hidden="true"></aside>}
 
               </div>
             </>

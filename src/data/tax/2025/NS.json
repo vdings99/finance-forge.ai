@@ -1,0 +1,39 @@
+{
+  "province": "NS",
+  "name": "Nova Scotia",
+  "year": 2025,
+  "bpa": 8481,
+  "surtax": [],
+  "brackets": [
+    {
+      "min": 0,
+      "max": 29590,
+      "rate": 0.0879
+    },
+    {
+      "min": 29590,
+      "max": 59180,
+      "rate": 0.1495
+    },
+    {
+      "min": 59180,
+      "max": 93000,
+      "rate": 0.1667
+    },
+    {
+      "min": 93000,
+      "max": 150000,
+      "rate": 0.175
+    },
+    {
+      "min": 150000,
+      "max": null,
+      "rate": 0.21
+    }
+  ],
+  "dividendTaxCredit": {
+    "eligible": 0.0885,
+    "nonEligible": 0.0167
+  },
+  "verified": false
+}

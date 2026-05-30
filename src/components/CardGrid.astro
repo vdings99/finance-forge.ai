@@ -1,0 +1,34 @@
+---
+interface Card {
+  title: string
+  href: string
+  description: string
+  eyebrow?: string
+}
+
+interface CardGroup {
+  heading: string
+  cards: Card[]
+}
+
+interface Props {
+  groups: CardGroup[]
+}
+
+const { groups } = Astro.props
+---
+
+{groups.map(group => (
+  <div class="card-grid-group reveal">
+    <p class="card-grid-group__heading">{group.heading}</p>
+    <div class="card-grid">
+      {group.cards.map(card => (
+        <a href={card.href} class="card reveal">
+          {card.eyebrow && <span class="card__eyebrow">{card.eyebrow}</span>}
+          <h3 class="card__title">{card.title}</h3>
+          <p class="card__desc">{card.description}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+))}

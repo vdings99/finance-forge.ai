@@ -1,0 +1,39 @@
+{
+  "province": "YT",
+  "name": "Yukon",
+  "year": 2024,
+  "bpa": 15705,
+  "surtax": [],
+  "brackets": [
+    {
+      "min": 0,
+      "max": 55867,
+      "rate": 0.064
+    },
+    {
+      "min": 55867,
+      "max": 111733,
+      "rate": 0.09
+    },
+    {
+      "min": 111733,
+      "max": 154906,
+      "rate": 0.109
+    },
+    {
+      "min": 154906,
+      "max": 500000,
+      "rate": 0.128
+    },
+    {
+      "min": 500000,
+      "max": null,
+      "rate": 0.15
+    }
+  ],
+  "dividendTaxCredit": {
+    "eligible": 0.121,
+    "nonEligible": 0
+  },
+  "verified": true
+}

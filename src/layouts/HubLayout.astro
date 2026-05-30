@@ -1,0 +1,54 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import Breadcrumb from '../components/Breadcrumb.astro'
+
+interface Props {
+  title: string
+  description?: string
+  eyebrow?: string
+  lead?: string
+  breadcrumb?: string[]
+  revised?: string
+}
+
+const {
+  title,
+  description,
+  eyebrow,
+  lead,
+  breadcrumb = ['Home'],
+  revised,
+} = Astro.props
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+
+  <main id="main-content" class="page-main">
+    <div class="container">
+      <Breadcrumb crumbs={breadcrumb} currentTitle={title} />
+
+      {eyebrow && (
+        <p class="label reveal">{eyebrow}</p>
+      )}
+
+      <h1 class="page-h1 reveal">{title}</h1>
+
+      {lead && <p class="lead">{lead}</p>}
+
+      <div class="reveal">
+        <slot />
+      </div>
+
+      {revised && (
+        <p class="revised-tag">
+          Revised:&nbsp;<time datetime={revised}>{revised}</time>
+        </p>
+      )}
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,54 @@
+{
+  "province": "NL",
+  "name": "Newfoundland and Labrador",
+  "year": 2025,
+  "bpa": 10818,
+  "surtax": [],
+  "brackets": [
+    {
+      "min": 0,
+      "max": 43198,
+      "rate": 0.087
+    },
+    {
+      "min": 43198,
+      "max": 86395,
+      "rate": 0.145
+    },
+    {
+      "min": 86395,
+      "max": 154244,
+      "rate": 0.158
+    },
+    {
+      "min": 154244,
+      "max": 215943,
+      "rate": 0.178
+    },
+    {
+      "min": 215943,
+      "max": 275870,
+      "rate": 0.198
+    },
+    {
+      "min": 275870,
+      "max": 551739,
+      "rate": 0.208
+    },
+    {
+      "min": 551739,
+      "max": 1103478,
+      "rate": 0.213
+    },
+    {
+      "min": 1103478,
+      "max": null,
+      "rate": 0.218
+    }
+  ],
+  "dividendTaxCredit": {
+    "eligible": 0.05,
+    "nonEligible": 0.04
+  },
+  "verified": false
+}

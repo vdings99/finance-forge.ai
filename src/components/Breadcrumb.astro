@@ -8,10 +8,31 @@ interface Props {
 
 const { crumbs, currentTitle } = Astro.props
 
+const siteUrl = 'https://www.finance-forge.ai'
+
 // Build href for each ancestor crumb: Home = /, others = best-guess slug
 function crumbHref(label: string): string {
   if (label === 'Home') return '/'
   return '/' + label.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+}
+
+// Build BreadcrumbList structured data
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    ...crumbs.map((crumb, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: crumb,
+      item: siteUrl + crumbHref(crumb),
+    })),
+    {
+      '@type': 'ListItem',
+      position: crumbs.length + 1,
+      name: currentTitle,
+    },
+  ],
 }
 ---
 
@@ -24,3 +45,5 @@ function crumbHref(label: string): string {
   ))}
   <span class="breadcrumb__current" aria-current="page">{currentTitle}</span>
 </nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />

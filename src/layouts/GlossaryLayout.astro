@@ -1,0 +1,104 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+
+interface Term {
+  letter: string
+  term: string
+  slug: string
+  definition: string
+}
+
+interface Props {
+  title: string
+  description?: string
+  terms?: Term[]
+}
+
+const {
+  title,
+  description,
+  terms = [],
+} = Astro.props
+
+const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+const letterSet = new Set(terms.map(t => t.letter.toUpperCase()))
+
+// Group terms by letter
+const grouped = new Map<string, Term[]>()
+for (const t of terms) {
+  const l = t.letter.toUpperCase()
+  if (!grouped.has(l)) grouped.set(l, [])
+  grouped.get(l)!.push(t)
+}
+// Sort within each letter
+for (const [, arr] of grouped) {
+  arr.sort((a, b) => a.term.localeCompare(b.term))
+}
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+
+  <main id="main-content" class="page-main">
+    <div class="container">
+      <h1 class="page-h1">{title}</h1>
+
+      <!-- Sticky A–Z nav -->
+      <nav class="glossary-nav" aria-label="Glossary letter navigation">
+        {alphabet.map(letter => (
+          letterSet.has(letter)
+            ? <a href={`#letter-${letter}`} class="glossary-nav__letter" data-letter={letter}>{letter}</a>
+            : <span class="glossary-nav__letter glossary-nav__letter--disabled">{letter}</span>
+        ))}
+      </nav>
+
+      <!-- Term sections -->
+      <div class="glossary-body">
+        {alphabet.filter(l => letterSet.has(l)).map(letter => (
+          <section id={`letter-${letter}`} class="glossary-section" data-glossary-section={letter}>
+            <h2 class="glossary-section__letter">{letter}</h2>
+            <dl class="glossary-section__list">
+              {grouped.get(letter)!.map(t => (
+                <div class="glossary-entry" id={t.slug}>
+                  <dt class="glossary-entry__term"><dfn>{t.term}</dfn></dt>
+                  <dd class="glossary-entry__def">{t.definition}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  function initGlossaryNav() {
+    const sections = document.querySelectorAll<HTMLElement>('[data-glossary-section]')
+    const navLinks = document.querySelectorAll<HTMLElement>('.glossary-nav__letter[data-letter]')
+    if (!sections.length || !navLinks.length) return
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const letter = (entry.target as HTMLElement).dataset.glossarySection
+            navLinks.forEach(link => {
+              link.classList.toggle('glossary-nav__letter--active', link.dataset.letter === letter)
+            })
+          }
+        }
+      },
+      { rootMargin: '-20% 0px -70% 0px' }
+    )
+
+    sections.forEach(s => io.observe(s))
+  }
+
+  document.addEventListener('astro:page-load', initGlossaryNav)
+  initGlossaryNav()
+</script>

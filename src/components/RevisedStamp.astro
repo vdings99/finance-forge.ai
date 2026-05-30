@@ -1,0 +1,62 @@
+---
+interface Props {
+  date: string
+  taxYear?: number
+  verified?: boolean
+}
+
+const { date, taxYear, verified } = Astro.props
+---
+
+<div class="revised-stamp">
+  <span class="revised-stamp__date">
+    Revised:&nbsp;<time datetime={date}>{date}</time>
+  </span>
+  {taxYear && (
+    <span class="revised-stamp__tax-year">Tax Year {taxYear}</span>
+  )}
+  {verified === false && (
+    <span class="revised-stamp__preliminary">Preliminary Estimate</span>
+  )}
+</div>
+
+<style>
+  .revised-stamp {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-data);
+    font-size: var(--fs-caption);
+    letter-spacing: var(--track-caps);
+    text-transform: uppercase;
+    color: var(--ink-3);
+    border-top: 1px solid var(--hairline);
+    padding-top: var(--space-3);
+    margin-top: var(--space-12);
+  }
+
+  .revised-stamp__tax-year {
+    display: inline-block;
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--hairline);
+    font-size: var(--fs-caption);
+    color: var(--ink-2);
+  }
+
+  .revised-stamp__preliminary {
+    display: inline-block;
+    padding: var(--space-1) var(--space-2);
+    background: #fef3cd;
+    color: #856404;
+    font-size: var(--fs-caption);
+    font-weight: 600;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .revised-stamp__preliminary {
+      background: #3d3200;
+      color: #ffc107;
+    }
+  }
+</style>

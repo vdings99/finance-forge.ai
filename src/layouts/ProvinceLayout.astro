@@ -1,0 +1,72 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import Breadcrumb from '../components/Breadcrumb.astro'
+
+interface Props {
+  title: string
+  description?: string
+  breadcrumb?: string[]
+  revised?: string
+  provinceName: string
+  provinceCode: string
+}
+
+const {
+  title,
+  description,
+  breadcrumb = ['Home', 'Provinces'],
+  revised,
+  provinceName,
+  provinceCode,
+} = Astro.props
+
+const sections = [
+  { slot: 'rates', heading: 'Tax Rates & Brackets' },
+  { slot: 'calculators', heading: 'Calculators' },
+  { slot: 'credits', heading: 'Credits & Deductions' },
+  { slot: 'salesTax', heading: 'Sales Tax' },
+  { slot: 'benefits', heading: 'Benefits & Programs' },
+  { slot: 'budgets', heading: 'Provincial Budget' },
+  { slot: 'officialLinks', heading: 'Official Resources' },
+] as const
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+
+  <main id="main-content" class="page-main">
+    <div class="container">
+      <Breadcrumb crumbs={breadcrumb} currentTitle={title} />
+
+      <h1 class="page-h1">{provinceName}</h1>
+
+      {sections.map(({ slot, heading }) => (
+        <section class="province-section">
+          <hr class="rule" />
+          <h2>{heading}</h2>
+          <slot name={slot}>
+            <div class="draft-notice">
+              <p>Coming soon: {heading.toLowerCase()} information for {provinceName}.</p>
+            </div>
+          </slot>
+        </section>
+      ))}
+
+      {revised && (
+        <p class="revised-tag">
+          Revised:&nbsp;<time datetime={revised}>{revised}</time>
+        </p>
+      )}
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .province-section {
+    margin-bottom: var(--space-12);
+  }
+</style>

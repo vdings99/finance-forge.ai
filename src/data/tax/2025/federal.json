@@ -1,0 +1,60 @@
+{
+  "year": 2025,
+  "verified": true,
+  "brackets": [
+    {
+      "min": 0,
+      "max": 57375,
+      "rate": 0.15
+    },
+    {
+      "min": 57375,
+      "max": 114750,
+      "rate": 0.205
+    },
+    {
+      "min": 114750,
+      "max": 158468,
+      "rate": 0.26
+    },
+    {
+      "min": 158468,
+      "max": 220000,
+      "rate": 0.29
+    },
+    {
+      "min": 220000,
+      "max": null,
+      "rate": 0.33
+    }
+  ],
+  "bpa": 16129,
+  "ageAmount": 8790,
+  "cpp": {
+    "employeeRate": 0.0595,
+    "maxContrib": 3867.5,
+    "exemption": 3500,
+    "maxPensionableEarnings": 71300
+  },
+  "cpp2": {
+    "employeeRate": 0.04,
+    "maxContrib": 396,
+    "additionalWage": 73200
+  },
+  "ei": {
+    "employeeRate": 0.01666,
+    "maxInsEarnings": 65700,
+    "maxPremium": 1095.12
+  },
+  "dividendGrossUp": {
+    "eligible": 1.38,
+    "nonEligible": 1.15
+  },
+  "dividendTaxCredit": {
+    "eligible": 0.150198,
+    "nonEligible": 0.090301
+  },
+  "capitalGainsInclusion": 0.5,
+  "rrspDeductionLimit": 32490,
+  "tfsaLimit": 7000
+}

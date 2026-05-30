@@ -1,0 +1,70 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+
+interface LogEntry {
+  title: string
+  date: string
+  summary: string
+  slug: string
+  category: string
+}
+
+interface Props {
+  title: string
+  description?: string
+  entries?: LogEntry[]
+}
+
+const {
+  title,
+  description,
+  entries = [],
+} = Astro.props
+
+// Reverse-chronological order
+const sorted = [...entries].sort((a, b) => b.date.localeCompare(a.date))
+
+const categoryLabels: Record<string, string> = {
+  tax: 'Tax',
+  calculator: 'Calculator',
+  site: 'Site',
+  budget: 'Budget',
+  regulation: 'Regulation',
+  general: 'General',
+}
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+
+  <main id="main-content" class="page-main">
+    <div class="container">
+      <h1 class="page-h1">{title}</h1>
+
+      <slot />
+
+      {sorted.length > 0 && (
+        <div class="log-list">
+          {sorted.map(entry => (
+            <article class="log-entry">
+              <div class="log-entry__meta">
+                <time class="log-entry__date" datetime={entry.date}>{entry.date}</time>
+                <span class={`log-entry__badge log-entry__badge--${entry.category}`}>
+                  {categoryLabels[entry.category] ?? entry.category}
+                </span>
+              </div>
+              <h2 class="log-entry__title">
+                <a href={`/whats-new/${entry.slug}`}>{entry.title}</a>
+              </h2>
+              <p class="log-entry__summary">{entry.summary}</p>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
