@@ -1,12 +1,44 @@
 ---
 import '../styles/global.css'
+import { ClientRouter } from 'astro:transitions'
 
 interface Props {
   title: string
   description?: string
+  ogImage?: string
+  breadcrumbJsonLd?: object[]
+  taxYear?: number
+  section?: string
 }
 
-const { title, description = 'Free financial guidance for Canadians.' } = Astro.props
+const {
+  title,
+  description = 'Free, accurate, and independent personal finance guidance for Canadians. Tax rates, calculators, registered savings plans, and more.',
+  ogImage = '/og-default.png',
+  breadcrumbJsonLd,
+  taxYear,
+  section,
+} = Astro.props
+
+const siteUrl = 'https://www.finance-forge.ai'
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href
+const pageTitle = title === 'finance-forge.ai' ? title : `${title} — finance-forge.ai`
+
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'finance-forge.ai',
+  url: siteUrl,
+  description: 'Free personal finance guidance for Canadians.',
+  sameAs: [],
+}
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'finance-forge.ai',
+  url: siteUrl,
+}
 ---
 <!doctype html>
 <html lang="en">
@@ -14,11 +46,72 @@ const { title, description = 'Free financial guidance for Canadians.' } = Astro.
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <title>{title} — finance-forge.ai</title>
+    <link rel="canonical" href={canonicalUrl} />
+    <title>{pageTitle}</title>
     <link rel="icon" href="/favicon.ico" />
+    <link rel="alternate" type="application/rss+xml" title="finance-forge.ai — What's New" href="/rss.xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url"         content={canonicalUrl} />
+    <meta property="og:image"       content={new URL(ogImage, siteUrl).href} />
+    <meta property="og:site_name"   content="finance-forge.ai" />
+    <!-- Twitter / X -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={new URL(ogImage, siteUrl).href} />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+    {breadcrumbJsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbJsonLd,
+      })} />
+    )}
+
+    <ClientRouter />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <slot />
+
+    <!-- Scroll-reveal: re-init on every Astro page-load event -->
+    <script>
+      function initReveal() {
+        const els = document.querySelectorAll('.reveal')
+        if (!els.length) return
+        const io = new IntersectionObserver(
+          (entries) => entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in-view')
+              io.unobserve(e.target)
+            }
+          }),
+          { threshold: 0.08 }
+        )
+        els.forEach(el => io.observe(el))
+      }
+      document.addEventListener('astro:page-load', initReveal)
+      initReveal()
+    </script>
+
+    <!-- Sticky header hairline: fade in after scroll -->
+    <script>
+      function initHeader() {
+        const header = document.querySelector('.site-header')
+        if (!header) return
+        const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 48)
+        window.addEventListener('scroll', onScroll, { passive: true })
+        onScroll()
+      }
+      document.addEventListener('astro:page-load', initHeader)
+      initHeader()
+    </script>
   </body>
 </html>

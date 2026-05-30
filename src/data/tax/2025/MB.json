@@ -1,0 +1,29 @@
+{
+  "province": "MB",
+  "name": "Manitoba",
+  "year": 2025,
+  "bpa": 15780,
+  "surtax": [],
+  "brackets": [
+    {
+      "min": 0,
+      "max": 47000,
+      "rate": 0.108
+    },
+    {
+      "min": 47000,
+      "max": 100000,
+      "rate": 0.1275
+    },
+    {
+      "min": 100000,
+      "max": null,
+      "rate": 0.174
+    }
+  ],
+  "dividendTaxCredit": {
+    "eligible": 0.0806,
+    "nonEligible": 0
+  },
+  "verified": false
+}

@@ -1,0 +1,48 @@
+{
+  "province": "ON",
+  "name": "Ontario",
+  "year": 2024,
+  "bpa": 11865,
+  "surtax": [
+    {
+      "threshold": 5315,
+      "rate": 0.2
+    },
+    {
+      "threshold": 6802,
+      "rate": 0.36
+    }
+  ],
+  "brackets": [
+    {
+      "min": 0,
+      "max": 51446,
+      "rate": 0.0505
+    },
+    {
+      "min": 51446,
+      "max": 102894,
+      "rate": 0.0915
+    },
+    {
+      "min": 102894,
+      "max": 150000,
+      "rate": 0.1116
+    },
+    {
+      "min": 150000,
+      "max": 220000,
+      "rate": 0.1216
+    },
+    {
+      "min": 220000,
+      "max": null,
+      "rate": 0.1316
+    }
+  ],
+  "dividendTaxCredit": {
+    "eligible": 0.1,
+    "nonEligible": 0.033
+  },
+  "verified": true
+}

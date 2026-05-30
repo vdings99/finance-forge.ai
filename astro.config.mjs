@@ -1,7 +1,10 @@
 import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
+import sitemap from '@astrojs/sitemap'
+import preact from '@astrojs/preact'
 
 export default defineConfig({
-  integrations: [mdx()],
+  site: 'https://www.finance-forge.ai',
+  integrations: [mdx(), sitemap(), preact({ compat: true })],
   output: 'static',
 })

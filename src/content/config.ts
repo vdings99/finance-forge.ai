@@ -1,54 +1,64 @@
 import { defineCollection, z } from 'astro:content'
 
-/**
- * Front-matter schema for every page in src/content/pages/
- * All fields are required unless marked optional (.optional()).
- */
+// ── Shared field definitions ─────────────────────────────────────────────────────
+
+/** Hub/section page index (existing pages/ collection) */
 const pages = defineCollection({
   type: 'content',
   schema: z.object({
-    /** Page <title> and main H1 */
-    title: z.string(),
-
-    /** Meta description for <head> */
+    title:       z.string(),
     description: z.string(),
-
-    /**
-     * Breadcrumb trail — an array of labels shown before the page title.
-     * The current page title is automatically appended as the last crumb.
-     * Example: ["Home", "Personal Income Tax"]
-     */
-    breadcrumb: z.array(z.string()).default(['Home']),
-
-    /**
-     * Top-level section slug — used to highlight the active nav item.
-     * Should match a top-level href segment, e.g. "personal-tax", "calculators"
-     */
-    section: z.string().optional(),
-
-    /**
-     * Page archetype — controls which inner layout is applied.
-     * home | hub | article | datatable | calculator | utility
-     */
-    archetype: z.enum(['home', 'hub', 'article', 'datatable', 'calculator', 'utility']),
-
-    /**
-     * ISO 8601 date string (YYYY-MM-DD) — drives the "Revised:" tag.
-     * Update this whenever you edit the page content.
-     */
-    revised: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'revised must be YYYY-MM-DD').optional(),
-
-    /**
-     * Show an in-page Table of Contents (generated from H2 headings).
-     * Defaults to false.
-     */
-    toc: z.boolean().default(false),
-
-    /**
-     * Optional lead paragraph shown below the H1 and above body content.
-     */
-    lead: z.string().optional(),
+    breadcrumb:  z.array(z.string()).default(['Home']),
+    section:     z.string().optional(),
+    archetype:   z.enum(['home', 'hub', 'article', 'datatable', 'calculator', 'utility', 'province', 'glossary', 'log']),
+    revised:     z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    toc:         z.boolean().default(false),
+    lead:        z.string().optional(),
+    taxYear:     z.number().optional(),
+    order:       z.number().optional(),
+    preview:     z.boolean().default(false), // true = calculator preview shell
   }),
 })
 
-export const collections = { pages }
+/** Article / topic pages — all prose pages in the article library */
+const articles = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title:       z.string(),
+    description: z.string(),
+    breadcrumb:  z.array(z.string()).default(['Home']),
+    section:     z.string(),          // e.g. "personal-tax", "financial-planning"
+    group:       z.string().optional(), // e.g. "tax-topics", "employee-topics"
+    revised:     z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    taxYear:     z.number().optional(),
+    toc:         z.boolean().default(true),
+    lead:        z.string().optional(),
+    order:       z.number().default(99),
+    draft:       z.boolean().default(false),
+  }),
+})
+
+/** Glossary entries */
+const glossary = defineCollection({
+  type: 'content',
+  schema: z.object({
+    term:       z.string(),
+    letter:     z.string().length(1).toUpperCase(), // A–Z index key
+    definition: z.string(),                          // short plain-text definition for meta
+    seeAlso:    z.array(z.string()).default([]),      // slugs of related terms
+    revised:    z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+  }),
+})
+
+/** What's New / newsletter archive entries */
+const whatsnew = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title:    z.string(),
+    date:     z.string().regex(/^\d{4}-\d{2}-\d{2}$/), // YYYY-MM-DD
+    summary:  z.string(),    // one-line for the RSS feed & log index
+    category: z.enum(['tax', 'calculator', 'site', 'budget', 'regulation', 'general']).default('general'),
+  }),
+})
+
+export const collections = { pages, articles, glossary, whatsnew }
