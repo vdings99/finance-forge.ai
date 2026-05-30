@@ -1181,6 +1181,260 @@ td.num, th.num { text-align: right; }
   border-left-color: var(--accent);
 }
 
+/* ── Detailed Tax Calculator ─────────────────────────────────────────────────── */
+.calc-detailed {
+  border: var(--hairline);
+  margin-block: var(--space-8);
+}
+
+.calc-detailed__inputs {
+  padding: var(--space-6);
+}
+
+.calc-detailed__group {
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-6);
+  border-bottom: var(--hairline);
+}
+
+.calc-detailed__group:last-of-type {
+  border-bottom: none;
+  margin-bottom: var(--space-4);
+}
+
+.calc-detailed__group-label {
+  font-family: var(--font-display);
+  font-size: var(--step-small);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-4);
+}
+
+/* ── Calc field (shared input/select) ──────────────────────────────────────── */
+.calc-field {
+  margin-bottom: var(--space-4);
+}
+
+.calc-field__label {
+  display: block;
+  font-size: var(--step-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-1);
+}
+
+.calc-field__label--inline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-transform: none;
+  font-size: var(--step-small);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.calc-field__input,
+.calc-field__select {
+  display: block;
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: var(--hairline-dark);
+  background: var(--color-bg);
+  font-family: var(--font-data);
+  font-size: var(--step-body);
+  color: var(--color-text);
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color var(--transition-fast);
+}
+
+.calc-field__input:focus,
+.calc-field__select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ── Calculate button ──────────────────────────────────────────────────────── */
+.calc-detailed__btn {
+  display: inline-block;
+  padding: var(--space-3) var(--space-8);
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-family: var(--font-body);
+  font-size: var(--step-small);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.calc-detailed__btn:hover {
+  background: var(--accent);
+}
+
+.calc-detailed__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Error ──────────────────────────────────────────────────────────────────── */
+.calc-detailed__error {
+  padding: var(--space-4) var(--space-6);
+  background: #fff0f0;
+  border-top: 2px solid var(--signal);
+  color: var(--signal);
+  font-size: var(--step-small);
+}
+
+/* ── Results ───────────────────────────────────────────────────────────────── */
+.calc-detailed__results {
+  padding: var(--space-6);
+  background: var(--color-bg-warm);
+  border-top: var(--hairline-dark);
+}
+
+.calc-detailed__badge {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  background: var(--signal);
+  color: white;
+  font-family: var(--font-body);
+  font-size: var(--step-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+
+.calc-detailed__results-heading {
+  font-family: var(--font-display);
+  font-size: var(--step-h3);
+  font-weight: 700;
+  margin-bottom: var(--space-6);
+}
+
+/* ── Summary grid ──────────────────────────────────────────────────────────── */
+.calc-detailed__summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: var(--hairline-dark);
+}
+
+.calc-detailed__summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.calc-detailed__summary-label {
+  font-size: var(--step-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.calc-detailed__summary-value {
+  font-family: var(--font-data);
+  font-size: var(--step-h3);
+  font-weight: 500;
+  letter-spacing: var(--track-display);
+}
+
+.calc-detailed__summary-value--accent {
+  color: var(--accent);
+}
+
+/* ── Breakdown table ───────────────────────────────────────────────────────── */
+.calc-detailed__breakdown {
+  margin-bottom: var(--space-6);
+}
+
+.calc-detailed__breakdown-heading {
+  font-family: var(--font-display);
+  font-size: var(--step-small);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-4);
+}
+
+.calc-detailed__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-2) 0;
+  border-bottom: var(--hairline);
+  font-size: var(--step-small);
+}
+
+.calc-detailed__row--section {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-small);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border-bottom: var(--hairline-dark);
+  padding-top: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.calc-detailed__row--section:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.calc-detailed__row--indent {
+  color: var(--color-muted);
+}
+
+.calc-detailed__row--indent .calc-detailed__row-label {
+  padding-left: var(--space-4);
+}
+
+.calc-detailed__row--total {
+  font-weight: 600;
+}
+
+.calc-detailed__row-label {
+  flex: 1;
+}
+
+.calc-detailed__row-amount {
+  font-family: var(--font-data);
+  font-weight: 500;
+  text-align: right;
+  white-space: nowrap;
+  padding-left: var(--space-4);
+}
+
+/* ── Updated stamp ─────────────────────────────────────────────────────────── */
+.calc-detailed__updated {
+  font-size: var(--step-caption);
+  color: var(--color-faint);
+  margin-top: var(--space-4);
+}
+
+/* ── Privacy note ──────────────────────────────────────────────────────────── */
+.calc-detailed__privacy {
+  padding: var(--space-3) var(--space-6);
+  border-top: var(--hairline);
+  font-size: var(--step-caption);
+  color: var(--color-faint);
+  background: var(--color-bg-subtle);
+}
+
 /* ── Focus visible ring (global) ────────────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--accent);
