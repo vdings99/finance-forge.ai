@@ -1,73 +1,83 @@
 ---
 title: "Financial Planning & Investing"
-description: "Guides covering financial independence, registered savings plans, investing, real estate, pensions, estate planning, and government benefits."
+description: "Plain-language Canadian guides to financial independence, registered savings plans (RRSP, TFSA, FHSA, RESP, RDSP), investing, real estate, pensions, estate planning, and government benefits."
 breadcrumb: ["Home"]
 section: "financial-planning"
 archetype: "hub"
-revised: "2026-05-29"
+revised: "2026-05-30"
 toc: true
-lead: "[TODO: One or two sentences introducing this section. Placeholder — replace with your own copy.]"
+lead: "Financial planning in Canada has a small number of structural choices that disproportionately affect outcomes — which registered accounts you use, how you allocate between them, and how those interact with government benefits in retirement. This section explains each piece."
 ---
 
-import LinkIndex from '../../../components/LinkIndex.astro'
+import CardGrid from '../../../components/CardGrid.astro'
 import Callout from '../../../components/Callout.astro'
 
-## Registered Savings Plans
+## Registered savings plans
 
-<LinkIndex
-  heading="Registered Savings Plans"
-  links={[
-    { label: "RRSP — Registered Retirement Savings Plan", href: "/financial-planning/registered-savings-plans#rrsp", description: "Contribution limits, deductions, withdrawal" },
-    { label: "TFSA — Tax-Free Savings Account", href: "/financial-planning/registered-savings-plans#tfsa", description: "Annual limits, contribution room" },
-    { label: "RESP — Registered Education Savings Plan", href: "/financial-planning/registered-savings-plans#resp", description: "CESG, lifetime limits" },
-    { label: "RDSP — Registered Disability Savings Plan", href: "/financial-planning/registered-savings-plans#rdsp", description: "CDSG, CDSB" },
-    { label: "FHSA — First Home Savings Account", href: "/financial-planning/registered-savings-plans#fhsa", description: "New for 2023" },
-    { label: "RRIF — Registered Retirement Income Fund", href: "/financial-planning/registered-savings-plans#rrif", description: "Minimum withdrawals, conversion rules" },
+The Canadian tax system gives you several registered accounts to save and
+invest inside. Each has a different purpose, contribution mechanic, and
+tax treatment — and choosing among them matters more than which individual
+investments you hold.
+
+<CardGrid
+  groups={[
+    {
+      heading: "Registered savings plans",
+      cards: [
+        { title: "RRSP / RRIF", href: "/financial-planning/registered-savings-plans#rrsp", description: "Retirement savings: tax-deductible contributions, tax-deferred growth, taxed on withdrawal." },
+        { title: "TFSA",        href: "/financial-planning/registered-savings-plans#tfsa", description: "Tax-free growth and withdrawals; no deduction on contribution. Annual limit $7,000 (2025)." },
+        { title: "FHSA",        href: "/financial-planning/registered-savings-plans#fhsa", description: "First-home savings; combines RRSP-style deduction with TFSA-style tax-free withdrawal for a qualifying home." },
+        { title: "RESP",        href: "/financial-planning/registered-savings-plans#resp", description: "Education savings: government grants up to 20% on the first $2,500/year." },
+        { title: "RDSP",        href: "/financial-planning/registered-savings-plans#rdsp", description: "Disability savings: substantial federal grants and bonds for eligible beneficiaries." },
+      ],
+    },
   ]}
 />
 
 ## Investing
 
-<LinkIndex
-  heading="Investing"
-  links={[
-    { label: "Stocks, Bonds & Securities", href: "/financial-planning/investing", description: "Dividends, capital gains, ACB" },
-    { label: "ETFs & Index Investing", href: "/financial-planning/investing#etfs", description: "MERs, asset allocation" },
-    { label: "Investment Income Tax", href: "/calculators/investment-income-tax", description: "Calculator" },
+Once you have the right accounts open, the next decision is how to invest
+inside them. The Canadian-specific concerns are dividend tax treatment,
+foreign-content rules, currency exposure, and how capital gains compare to
+interest income inside a non-registered account.
+
+<CardGrid
+  groups={[
+    {
+      heading: "Investing",
+      cards: [
+        { title: "Stocks, bonds & ETFs", href: "/financial-planning/investing", description: "Asset classes, ACB, dividends vs interest vs capital gains." },
+        { title: "Real estate",          href: "/financial-planning/real-estate", description: "Principal residence, rental property, land transfer tax." },
+        { title: "Investment Return Calculator", href: "/calculators/investment-return", description: "Compound growth projections." },
+      ],
+    },
   ]}
 />
 
-## Financial Independence
+## Retirement, pensions, and benefits
 
-<LinkIndex
-  heading="Financial Independence"
-  links={[
-    { label: "Financial Independence Overview", href: "/financial-planning/financial-independence", description: "FIRE, savings rate" },
-    { label: "Investment Return Calculator", href: "/calculators/investment-return", description: "Compound growth projections" },
-  ]}
-/>
+Retirement planning in Canada has three pillars: public benefits (CPP and
+OAS), employer pensions if you have one, and personal registered accounts.
+Most of the planning lift is in coordinating the timing and order of
+withdrawals across the three.
 
-## Real Estate
-
-<LinkIndex
-  heading="Real Estate"
-  links={[
-    { label: "Buying a Home in Canada", href: "/financial-planning/real-estate", description: "First home, land transfer tax" },
-    { label: "Mortgage & Loan Calculator", href: "/calculators/loan-mortgage", description: "Amortization, monthly payments" },
-  ]}
-/>
-
-## Other Topics
-
-<LinkIndex
-  heading="Other Topics"
-  links={[
-    { label: "Company Pensions", href: "/financial-planning/company-pensions", description: "DB, DC, group RRSP" },
-    { label: "Wills & Estate Planning", href: "/financial-planning/wills-estate", description: "Probate, powers of attorney" },
-    { label: "Government Benefits & Services", href: "/financial-planning/government-benefits", description: "OAS, GIS, CCB, disability" },
+<CardGrid
+  groups={[
+    {
+      heading: "Retirement & benefits",
+      cards: [
+        { title: "Financial independence", href: "/financial-planning/financial-independence", description: "Savings-rate framework and FIRE-style projections." },
+        { title: "Company pensions",       href: "/financial-planning/company-pensions",      description: "Defined-benefit vs defined-contribution, group RRSPs." },
+        { title: "Government benefits",    href: "/financial-planning/government-benefits",  description: "CPP, OAS, GIS, CCB, Climate Action Incentive, GST/HST credit." },
+        { title: "Wills & estate",         href: "/financial-planning/wills-estate",        description: "Probate, beneficiaries, estate freezes." },
+      ],
+    },
   ]}
 />
 
 <Callout type="note">
-[TODO: Add a standing note about the scope or currency of this section. Placeholder.]
+Every figure on these pages comes from the same versioned data files that
+power our [Detailed Income Tax Calculator](/calculators/income-tax). When
+CRA publishes new indexation each autumn, the data files are updated and
+every page advances together.
 </Callout>
