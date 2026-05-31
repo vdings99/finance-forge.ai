@@ -1,85 +1,78 @@
 ---
 title: "Federal Income Tax Brackets and Rates"
-description: "Comprehensive federal personal income tax brackets and combined federal/provincial marginal rates for all Canadian provinces and territories, 2024–2026."
+description: "Canadian federal personal income tax brackets for 2025 and 2024, plus a worked example of combined federal + provincial marginal rates using Ontario as an illustration."
 breadcrumb: ["Home", "Personal Income Tax"]
 section: "personal-tax"
 archetype: "datatable"
-revised: "2026-02-15"
-toc: false
-lead: "[TODO: One or two sentences describing this page. Placeholder — write original copy.]"
+revised: "2026-05-30"
+taxYear: 2025
+toc: true
+lead: "Current and recent federal personal income tax brackets, plus an example of how federal and provincial brackets combine to produce a combined marginal rate."
 ---
 
-import DataTable from '../../../components/DataTable.astro'
 import Callout from '../../../components/Callout.astro'
+import TaxBracketTable from '../../../components/TaxBracketTable.astro'
 
 <div class="year-selector" aria-label="Select tax year">
-  <span class="year-selector__item year-selector__item--active">2025 &amp; 2026</span>
-  <a href="#2024-federal-income-tax-brackets" class="year-selector__item">2024 &amp; 2025</a>
-  <a href="#2023-federal-income-tax-brackets" class="year-selector__item">2023 &amp; 2024</a>
-  <a href="#2022-federal-income-tax-brackets" class="year-selector__item">2022 &amp; 2023</a>
+  <span class="year-selector__item year-selector__item--active">2025</span>
+  <a href="#2024-federal-brackets" class="year-selector__item">2024</a>
 </div>
 
-## 2025 Federal Income Tax Brackets
+## 2025 federal brackets
 
-[TODO: Brief note about the 2025 federal brackets. Placeholder — write original copy.]
+Federal personal income tax in 2025 uses five brackets, the lowest taxed at
+15% and the top taxed at 33%. These figures are republished from our
+[versioned tax data](/statistics) and feed the
+[Detailed Income Tax Calculator](/calculators/income-tax) directly.
 
-<DataTable
-  caption="2025 Federal Personal Income Tax Brackets"
-  headers={["Taxable Income", "Tax Rate", "Tax on Lower Bracket", "Tax Rate on Excess"]}
-  rows={[
-    ["$0 – $57,375",        "15.0%", "$0",        "15.0%"],
-    ["$57,375 – $114,750",  "20.5%", "$8,606",    "20.5%"],
-    ["$114,750 – $158,468", "26.0%", "$20,363",   "26.0%"],
-    ["$158,468 – $220,000", "29.0%", "$31,732",   "29.0%"],
-    ["Over $220,000",       "33.0%", "$49,578",   "33.0%"],
-  ]}
-/>
+<TaxBracketTable year={2025} jurisdiction="federal" />
 
-<Callout type="tip">
-[TODO: Relevant tip — e.g. note about federal basic personal amount or indexation. Placeholder.]
-</Callout>
+The 2025 federal basic personal amount is $16,129 (the credit reduces federal
+tax by 15% × $16,129 ≈ $2,419 for most taxpayers).
 
-## 2025 Combined Federal and Provincial Marginal Rates — Ontario
+## Combined federal and provincial — Ontario example
 
-[TODO: Table of combined rates for Ontario. Placeholder — populate with verified data.]
+Outside Quebec, your total marginal tax rate is the federal rate at your
+income plus the provincial rate at your income. Ontario provincial brackets:
 
-<DataTable
-  caption="2025 Combined Federal + Ontario Marginal Tax Rates"
-  headers={["Taxable Income", "Federal", "Provincial", "Combined"]}
-  rows={[
-    ["$0 – $51,446",         "15.0%", "5.05%",  "20.05%"],
-    ["$51,446 – $57,375",    "15.0%", "9.15%",  "24.15%"],
-    ["$57,375 – $102,894",   "20.5%", "9.15%",  "29.65%"],
-    ["$102,894 – $114,750",  "20.5%", "11.16%", "31.66%"],
-    ["$114,750 – $150,000",  "26.0%", "11.16%", "37.16%"],
-    ["$150,000 – $158,468",  "26.0%", "12.16%", "38.16%"],
-    ["$158,468 – $220,000",  "29.0%", "12.16%", "41.16%"],
-    ["Over $220,000",        "33.0%", "13.16%", "46.16%"],
-  ]}
-/>
+<TaxBracketTable year={2025} jurisdiction="ON" caption="2025 Ontario Personal Income Tax Brackets" />
+
+Adding the federal rate to the Ontario rate at each income level produces the
+following combined marginal rates (Ontario surtaxes not yet applied, basic
+personal amount credits not netted):
+
+| Taxable income | Federal | Ontario | Combined |
+| --- | --- | --- | --- |
+| Up to $51,446 | 15.0% | 5.05% | 20.05% |
+| $51,446 – $57,375 | 15.0% | 9.15% | 24.15% |
+| $57,375 – $102,894 | 20.5% | 9.15% | 29.65% |
+| $102,894 – $114,750 | 20.5% | 11.16% | 31.66% |
+| $114,750 – $150,000 | 26.0% | 11.16% | 37.16% |
+| $150,000 – $158,468 | 26.0% | 12.16% | 38.16% |
+| $158,468 – $220,000 | 29.0% | 12.16% | 41.16% |
+| Over $220,000 | 33.0% | 13.16% | 46.16% |
 
 <Callout type="warning">
-[TODO: Placeholder warning — e.g. "These figures do not account for the Ontario surtax applicable above certain thresholds. See the Ontario provincial page for details."]
+The combined rates above do not include the **Ontario surtax**, which adds 20% to provincial tax above $5,554 and a further 36% above $7,108 in 2025. The surtax has the effect of raising the top marginal rate at higher incomes; the [Detailed Income Tax Calculator](/calculators/income-tax) applies it correctly.
 </Callout>
 
-## 2025 Combined Rates — All Provinces and Territories
+## All provinces and territories
 
-[TODO: Add a DataTable for each province/territory, or link to dedicated pages. Placeholder — this is a significant content task.]
+For combined marginal rate examples specific to a jurisdiction, see the
+per-province pages:
+
+- [Alberta](/provinces/ab) · [British Columbia](/provinces/bc) · [Manitoba](/provinces/mb) · [New Brunswick](/provinces/nb) · [Newfoundland and Labrador](/provinces/nl) · [Nova Scotia](/provinces/ns) · [Ontario](/provinces/on) · [Prince Edward Island](/provinces/pe) · [Quebec](/provinces/qc) · [Saskatchewan](/provinces/sk)
+- [Northwest Territories](/provinces/nt) · [Nunavut](/provinces/nu) · [Yukon](/provinces/yt)
 
 ---
 
-## 2024 Federal Income Tax Brackets
+## 2024 federal brackets
 
-[TODO: 2024 brackets — populate with verified data. Placeholder.]
+<TaxBracketTable year={2024} jurisdiction="federal" />
 
-<DataTable
-  caption="2024 Federal Personal Income Tax Brackets [TODO: verify]"
-  headers={["Taxable Income", "Tax Rate"]}
-  rows={[
-    ["$0 – $55,867",        "15.0%"],
-    ["$55,867 – $111,733",  "20.5%"],
-    ["$111,733 – $154,906", "26.0%"],
-    ["$154,906 – $220,000", "29.0%"],
-    ["Over $220,000",       "33.0%"],
-  ]}
-/>
+The 2024 federal basic personal amount was $15,705.
+
+For Ontario 2024 brackets and combined rates, refer to the
+[Ontario provincial page](/provinces/on) or use the
+[Detailed Income Tax Calculator](/calculators/income-tax) with **Tax Year 2024**
+selected to see line-by-line figures for that year.

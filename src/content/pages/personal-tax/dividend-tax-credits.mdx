@@ -1,0 +1,94 @@
+---
+title: "Dividend Tax Credits"
+description: "How Canadian dividend tax credits work for 2025 — eligible vs non-eligible dividends, the gross-up mechanic, federal and provincial dividend tax credits, and a worked example."
+breadcrumb: ["Home", "Personal Income Tax"]
+section: "personal-tax"
+archetype: "article"
+revised: "2026-05-30"
+toc: true
+lead: "The Canadian dividend tax credit mechanism — gross-up plus credit — is designed to approximate 'integration', so income earned through a corporation and paid out as a dividend is taxed roughly the same as if you earned it directly."
+---
+
+import Callout from '../../../components/Callout.astro'
+
+## Why dividends get a credit
+
+A corporation pays tax on its profits before distributing them as dividends.
+Without an offsetting mechanism, the same dollar of income would be taxed
+twice — once at the corporate level and again at the shareholder level. The
+**dividend gross-up + dividend tax credit (DTC)** system is designed to
+approximate **integration**: the total tax should be roughly the same as if
+you had earned the income directly.
+
+## Eligible vs non-eligible dividends
+
+Canadian dividends come in two flavours, with different gross-up factors and
+credit rates because the underlying corporate tax rates differ.
+
+| Type | Source | Gross-up | Federal DTC | Approx. provincial DTC |
+| --- | --- | --- | --- | --- |
+| **Eligible** | Public corporations and CCPCs paying out of GRIP | 38% | ~15.02% of grossed-up | Varies by province (~10% in ON) |
+| **Non-eligible** | CCPCs paying out of small-business deduction income | 15% | ~9.03% of grossed-up | Varies by province (~3.3% in ON) |
+
+(Figures shown are for 2025. The federal DTC rate is more precisely
+15.0198% for eligible and 9.0301% for non-eligible.)
+
+## The mechanic — step by step
+
+For an eligible dividend of $1,000:
+
+1. **Gross up.** Reported on the tax return at $1,000 × 1.38 = **$1,380**.
+2. **Add to taxable income.** $1,380 is added to your other taxable income at your marginal rate.
+3. **Federal tax** is calculated at your bracket.
+4. **Federal DTC** reduces the federal tax: $1,380 × 0.150198 ≈ **$207**.
+5. **Provincial tax** is calculated at your provincial bracket.
+6. **Provincial DTC** reduces the provincial tax (e.g. in Ontario, $1,380 × 0.10 = $138).
+
+The net result, for a middle-bracket investor, is a substantially lower
+effective tax rate on Canadian dividend income than on the same amount of
+interest income.
+
+<Callout type="tip">
+Eligible dividends are the kind a typical retail investor receives from a Canadian large-cap stock (RBC, TD, BCE, Enbridge, etc.). Non-eligible dividends are more common from a small private corporation distributing income that qualified for the small-business deduction.
+</Callout>
+
+## Worked example — Ontario, 2025
+
+Compare $10,000 of interest income vs. $10,000 of eligible dividends for an
+Ontario resident already in the 29.65% combined bracket ($57,375–$102,894 of
+taxable income):
+
+| Item | Interest | Eligible dividend |
+| --- | --- | --- |
+| Cash received | $10,000 | $10,000 |
+| Taxable amount | $10,000 | $13,800 (grossed up) |
+| Combined tax @ 29.65% | $2,965 | $4,091 |
+| Federal DTC (~15.02% × $13,800) | — | $2,073 |
+| Ontario DTC (~10% × $13,800) | — | $1,380 |
+| **Net tax** | **$2,965** | **$638** |
+| **After-tax cash** | **$7,035** | **$9,362** |
+| **Effective rate** | **29.7%** | **6.4%** |
+
+The same $10,000 produces materially different after-tax outcomes depending
+on the income type. This is why dividend-heavy Canadian portfolios are
+typically held in **non-registered** accounts (where the credit is usable),
+not RRSPs (where the credit is wasted because all withdrawals become
+ordinary income anyway).
+
+For a full breakdown across every income type and province, use our
+[Detailed Income Tax Calculator](/calculators/income-tax) with values in the
+**Eligible dividends** or **Non-eligible dividends** fields.
+
+## Negative tax rates at very low incomes
+
+For low-income individuals, the dividend tax credit can produce a **negative
+effective rate** on Canadian eligible dividends — the credit exceeds the
+tax owed on the grossed-up amount. The benefit is capped at the tax otherwise
+owing on other income (the credit is non-refundable) but can be a powerful
+planning tool for retirees with modest cash income.
+
+## See also
+
+- [Tax Rates](/personal-tax/tax-rates) — federal and combined marginal rates
+- [Investing](/financial-planning/investing) — choosing accounts for different income types
+- [Investment Income Tax Calculator](/calculators/investment-income-tax) — side-by-side after-tax comparison

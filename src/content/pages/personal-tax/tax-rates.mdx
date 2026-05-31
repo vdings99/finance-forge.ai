@@ -1,59 +1,100 @@
 ---
 title: "Personal Income Tax Rates in Canada"
-description: "Federal and provincial personal income tax rates and brackets for 2025 and 2026. Includes marginal and combined rates for all provinces and territories."
+description: "Federal personal income tax brackets and rates for 2025, how the basic personal amount works, how federal and provincial tax combine, and how dividends and capital gains are taxed."
 breadcrumb: ["Home", "Personal Income Tax"]
 section: "personal-tax"
 archetype: "article"
-revised: "2026-02-15"
+revised: "2026-05-30"
 toc: true
-lead: "[TODO: One or two sentences summarizing what this page covers and why it matters. Placeholder — replace with your own copy.]"
+lead: "How Canadian personal income tax is structured: federal brackets, the basic personal amount, the combined federal + provincial rate, and the special treatment of dividends and capital gains."
 ---
 
 import Callout from '../../../components/Callout.astro'
-import DataTable from '../../../components/DataTable.astro'
+import TaxBracketTable from '../../../components/TaxBracketTable.astro'
 
-## Federal Tax Rates and Brackets
+## Federal tax rates
 
-[TODO: 1–2 paragraphs introducing Canadian federal income tax structure. Do not copy from taxtips.ca. Write original copy.]
+Canadian federal personal income tax is structured as a **progressive bracket
+system**: the first dollars you earn are taxed at the lowest rate, and each
+subsequent income range is taxed at a higher rate. Only the income within a
+given bracket is taxed at that bracket's rate — a common misconception is that
+crossing into a higher bracket increases the tax on all your income, which is
+not how the system works.
 
-<DataTable
-  caption="2025 Federal Personal Income Tax Brackets"
-  headers={["Taxable Income", "Federal Tax Rate"]}
-  rows={[
-    ["$0 – $57,375",        "15.0%"],
-    ["$57,375 – $114,750",  "20.5%"],
-    ["$114,750 – $158,468", "26.0%"],
-    ["$158,468 – $220,000", "29.0%"],
-    ["Over $220,000",       "33.0%"],
-  ]}
-/>
+<TaxBracketTable year={2025} jurisdiction="federal" />
 
 <Callout type="tip">
-These brackets are indexed to inflation annually. The 2026 brackets will be updated when released by CRA. [TODO: verify and update each year.]
+Brackets are indexed to inflation each January using the prior year's October-over-October CPI from Statistics Canada. The October-published indexation factor is what drives the new January thresholds.
 </Callout>
 
-## Basic Personal Amount
+## Basic personal amount
 
-[TODO: Explain the federal basic personal amount credit for 2025. Placeholder — write original copy.]
+Before any tax is owed, every individual receives a **basic personal amount
+(BPA)** — a portion of income on which no federal tax is payable. For 2025
+the federal BPA is **$16,129**.
 
-## Combined Federal and Provincial Rates
+The BPA does not work as a deduction; it is a non-refundable tax credit
+calculated at the lowest-bracket rate (15%). So the federal BPA reduces your
+federal tax by 15% × $16,129 ≈ $2,419 in 2025.
 
-[TODO: Explain how federal and provincial rates combine. Note that provincial rates are on the personal-tax/federal-tax-brackets page. Placeholder.]
+A higher-income phase-out applies: taxpayers in the top federal bracket
+receive a slightly smaller BPA than the headline figure. The bracket-by-bracket
+arithmetic is exactly what our [Detailed Income Tax Calculator](/calculators/income-tax)
+handles automatically.
+
+## How federal and provincial tax combine
+
+Outside Quebec, you pay federal tax administered by CRA *plus* provincial
+tax — also administered by CRA in most provinces, on the same return. Your
+**combined marginal rate** is the sum of the federal rate at your income and
+the provincial rate at your income; they are calculated on the same taxable
+income.
+
+Each province has its own brackets, its own basic personal amount, and (in
+Ontario and PEI) its own provincial surtax that applies to higher provincial
+tax amounts.
+
+For a complete combined federal + provincial marginal-rate table by
+jurisdiction and year, see the [Federal Tax Brackets and Rates](/personal-tax/federal-tax-brackets)
+page.
+
+## Dividend tax credits
+
+Dividends paid by Canadian corporations to individual shareholders receive
+preferential tax treatment via a **gross-up + dividend tax credit** mechanism.
+The mechanic is designed to approximate "integration" — to ensure that income
+earned through a corporation and paid out as a dividend is taxed at roughly the
+same total rate as if you had earned it directly.
+
+For 2025:
+
+- **Eligible dividends** (paid out of corporate income taxed at the general rate) are grossed up by **38%** and receive a federal dividend tax credit of approximately **15.02%** of the grossed-up amount, plus a provincial credit.
+- **Non-eligible dividends** (paid out of small-business income taxed at the lower CCPC rate) are grossed up by **15%** and receive a federal credit of approximately **9.03%**, plus a (smaller) provincial credit.
+
+For a deeper explanation with worked examples, see our dedicated
+[Dividend Tax Credits page](/personal-tax/dividend-tax-credits).
+
+## Capital gains
+
+When you sell capital property (shares, real estate other than your principal
+residence, certain other assets) at a profit, only **50%** of the gain is
+included in your taxable income in 2025. The remaining 50% is tax-free.
+
+This is the **inclusion rate**. It applies before brackets are applied, so a
+$10,000 capital gain produces $5,000 of taxable income, which is then taxed
+at your combined marginal rate.
 
 <Callout type="note">
-The combined rates shown in the data table on the brackets page include the federal basic personal amount credit but do not reflect provincial non-refundable credits, surtaxes, or special rates on capital gains and dividends. [TODO: refine.]
+Capital losses can only be applied against capital gains, not against other income (with very narrow exceptions). Losses carry back three years and forward indefinitely.
 </Callout>
 
-## Dividend Tax Credits
+## Provincial and territorial rates
 
-[TODO: Brief overview of the enhanced and ordinary dividend tax credit mechanism. Link to the dedicated page. Placeholder.]
+Each province and territory publishes its own brackets, BPA, and credit
+amounts. The 2025 values are available on the per-jurisdiction pages:
 
-## Capital Gains
+- [Alberta](/provinces/ab) · [British Columbia](/provinces/bc) · [Manitoba](/provinces/mb) · [New Brunswick](/provinces/nb) · [Newfoundland and Labrador](/provinces/nl) · [Nova Scotia](/provinces/ns) · [Ontario](/provinces/on) · [Prince Edward Island](/provinces/pe) · [Quebec](/provinces/qc) · [Saskatchewan](/provinces/sk)
+- [Northwest Territories](/provinces/nt) · [Nunavut](/provinces/nu) · [Yukon](/provinces/yt)
 
-[TODO: Brief explanation of the capital gains inclusion rate and how it interacts with marginal rates. Placeholder — do not reproduce taxtips.ca text.]
-
-## Provincial and Territorial Rates
-
-[TODO: Introductory paragraph linking out to each province's page or the comprehensive brackets page. Placeholder.]
-
-See the [Federal Tax Brackets and Rates](/personal-tax/federal-tax-brackets) page for detailed combined federal and provincial tables for all provinces and territories.
+For combined federal + provincial marginal rate tables across all
+jurisdictions, see [Federal Tax Brackets and Rates](/personal-tax/federal-tax-brackets).

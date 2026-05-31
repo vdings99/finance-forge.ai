@@ -1,0 +1,87 @@
+---
+/**
+ * TaxBracketTable
+ * Renders the personal-income-tax brackets for a given year and jurisdiction
+ * by reading the verified figures from src/data/tax/{year}/{code|federal}.json
+ * — the same source the calculator engine uses.
+ *
+ * Usage in MDX:
+ *   <TaxBracketTable year={2025} jurisdiction="federal" />
+ *   <TaxBracketTable year={2025} jurisdiction="ON" />
+ *   <TaxBracketTable year={2025} jurisdiction="ON" caption="Custom caption" />
+ *
+ * The component never invents figures; if the requested JSON is missing,
+ * the build fails loudly (this is intentional — preventing silent drift).
+ */
+
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import DataTable from './DataTable.astro'
+
+interface Props {
+  year: number
+  /** "federal" or a two-letter province/territory code (e.g. "ON", "BC") */
+  jurisdiction: string
+  /** Optional override for the table caption */
+  caption?: string
+}
+
+interface Bracket {
+  min: number
+  max: number | null
+  rate: number
+}
+
+interface TaxJson {
+  year: number
+  brackets: Bracket[]
+  bpa?: number
+  verified?: boolean
+  province?: string
+  name?: string
+}
+
+const { year, jurisdiction, caption } = Astro.props
+
+// Load the JSON synchronously at build time
+const filename = jurisdiction === 'federal' ? 'federal.json' : `${jurisdiction.toUpperCase()}.json`
+const path = resolve('src/data/tax', String(year), filename)
+const data = JSON.parse(readFileSync(path, 'utf-8')) as TaxJson
+
+// Formatters
+function fmtCurrency(n: number): string {
+  return '$' + n.toLocaleString('en-CA')
+}
+function fmtRate(r: number): string {
+  // Strip trailing zeros e.g. 0.205 -> "20.5%", 0.15 -> "15%"
+  return (r * 100).toFixed(2).replace(/\.?0+$/, '') + '%'
+}
+function fmtRange(b: Bracket): string {
+  if (b.min === 0 && b.max !== null) return `Up to ${fmtCurrency(b.max)}`
+  if (b.max === null)                 return `Over ${fmtCurrency(b.min)}`
+  return `${fmtCurrency(b.min)} – ${fmtCurrency(b.max)}`
+}
+
+const jurisdictionName =
+  jurisdiction === 'federal'
+    ? 'Federal'
+    : (data.name ?? jurisdiction.toUpperCase())
+
+const resolvedCaption =
+  caption ?? `${year} ${jurisdictionName} Personal Income Tax Brackets`
+
+const headers = ['Taxable income', 'Tax rate']
+const rows = data.brackets.map(b => [fmtRange(b), fmtRate(b.rate)])
+---
+
+<DataTable caption={resolvedCaption} headers={headers} rows={rows} />
+
+{data.verified === false && (
+  <p
+    class="text-caption"
+    style="margin-top: calc(-1 * var(--space-6)); margin-bottom: var(--space-8); color: var(--ink-3);"
+  >
+    Preliminary estimate — these figures are not yet confirmed by CRA / the
+    relevant provincial authority and may change.
+  </p>
+)}
