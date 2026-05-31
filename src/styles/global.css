@@ -14,7 +14,14 @@
   font-weight: 100 900;
   font-display: swap;
 }
-/* Space Grotesk — display / headlines */
+/* Geist — display / headlines (clean neo-grotesque) */
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-display: swap;
+}
+/* Space Grotesk — retained (legacy / fallback) */
 @font-face {
   font-family: 'Space Grotesk';
   src: url('/fonts/SpaceGrotesk-Variable.woff2') format('woff2-variations');
@@ -108,11 +115,16 @@ a {
   text-underline-offset: 0.15em;
   transition: color var(--transition-fast);
 }
-a:hover { color: var(--accent-light); }
+a:hover { color: var(--accent-2); }
 a:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
   border-radius: 1px;
+}
+
+/* Anchor jumps land clear of the sticky header */
+h2[id], h3[id], h4[id], [id].anchor-target {
+  scroll-margin-top: calc(var(--header-h) + var(--space-6));
 }
 
 strong { font-weight: 600; }
@@ -1437,6 +1449,208 @@ td.num, th.num { text-align: right; }
 
 /* ── Focus visible ring (global) ────────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
+}
+
+/* ═════════════════════════════════════════════════════════════════════════════
+   AESTHETIC REFRESH — motion, cards, eyebrows, bands, theme toggle
+   ═════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Scroll reveal ──────────────────────────────────────────────────────────── */
+/* JS (BaseLayout) toggles .in-view via IntersectionObserver. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--dur-slow) var(--ease),
+              transform var(--dur-slow) var(--ease);
+  will-change: opacity, transform;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+/* Stagger siblings ~70ms each (cards, rows) for a settled cascade */
+.reveal:nth-child(2)  { transition-delay: 70ms; }
+.reveal:nth-child(3)  { transition-delay: 140ms; }
+.reveal:nth-child(4)  { transition-delay: 210ms; }
+.reveal:nth-child(5)  { transition-delay: 280ms; }
+.reveal:nth-child(6)  { transition-delay: 350ms; }
+
+/* ── Eyebrow (letterspaced uppercase label above section headings) ──────────── */
+.section-eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: var(--space-3);
+}
+
+/* ── Section bands (quiet alternating segmentation on long pages) ───────────── */
+.section-band {
+  padding-block: var(--space-section);
+}
+.section-band--warm { background: var(--paper-2); }
+
+/* ── Card grid (hub directories, home resource groups) ──────────────────────── */
+.card-grid-group { margin-bottom: var(--space-12); }
+
+.card-grid-group__heading {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-6);
+  border-bottom: var(--hairline);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--gutter);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border: var(--hairline);
+  background: var(--paper);
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: var(--ink-3);
+}
+.card:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.card__eyebrow {
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.card__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: var(--track-display);
+  margin: 0;
+}
+.card__desc {
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+  line-height: var(--lh-body);
+  margin: 0;
+  max-width: none;
+}
+
+/* ── Link underline wipe (prose links) ──────────────────────────────────────── */
+.prose a {
+  text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--dur) var(--ease), color var(--dur-fast) var(--ease);
+}
+.prose a:hover { background-size: 100% 1px; }
+
+/* ── Active TOC item ────────────────────────────────────────────────────────── */
+.toc__link.is-active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Button :active press ───────────────────────────────────────────────────── */
+.btn:active,
+.calc-detailed__btn:active { transform: scale(0.98); }
+.btn { transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+
+/* ── Dropdown fade-in ───────────────────────────────────────────────────────── */
+.nav-dropdown {
+  /* keep display toggle, layer a fade+lift when open */
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.nav-dropdown.is-open {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Sticky header: hairline + backdrop blur after scroll ───────────────────── */
+.site-header {
+  border-bottom-color: transparent;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.site-header.scrolled {
+  border-bottom-color: var(--color-rule-dark);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ── Theme toggle button ────────────────────────────────────────────────────── */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-left: var(--space-2);
+  border: var(--hairline-dark);
+  background: none;
+  color: var(--ink-2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.theme-toggle__sun { display: none; }
+.theme-toggle__moon { display: block; }
+/* When dark is active (explicit or auto), show the sun (to switch back to light) */
+:root[data-theme="dark"] .theme-toggle__sun  { display: block; }
+:root[data-theme="dark"] .theme-toggle__moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .theme-toggle__sun  { display: block; }
+  :root:not([data-theme]) .theme-toggle__moon { display: none; }
+}
+
+@media (max-width: 1023px) {
+  .theme-toggle { display: none; }
+}
+
+/* ── Draft / preview notices (content scaffolding) ──────────────────────────── */
+.draft-notice {
+  border-left: 2px solid var(--ink-3);
+  background: var(--paper-2);
+  padding: var(--space-3) var(--space-5);
+  margin-block: var(--space-6);
+  font-size: var(--fs-small);
+  font-style: italic;
+  color: var(--ink-2);
+}
+.preview-banner {
+  border-left: 2px solid var(--accent);
+  background: var(--paper-2);
+  padding: var(--space-4) var(--space-6);
+  margin-bottom: var(--space-8);
+  font-size: var(--fs-small);
+  color: var(--ink-2);
 }
