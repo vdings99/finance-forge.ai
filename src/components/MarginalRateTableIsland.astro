@@ -1,0 +1,22 @@
+---
+/**
+ * MarginalRateTableIsland
+ * Loads combined marginal rate data from JSON and passes it to the Preact island.
+ *
+ * Usage in MDX:
+ *   <MarginalRateTableIsland defaultProvince="ON" />
+ *
+ * To update for a new year, create src/data/tax/combined-marginal-YYYY.json
+ * and update the import below.
+ */
+import MarginalRateTable from './MarginalRateTable.tsx'
+import data from '../data/tax/combined-marginal-2025.json'
+
+interface Props {
+  defaultProvince?: string
+}
+
+const { defaultProvince = 'ON' } = Astro.props
+---
+
+<MarginalRateTable client:load data={data} defaultProvince={defaultProvince} />

@@ -1,0 +1,154 @@
+---
+title: "Corporate Tax Rates — Canada 2025"
+description: "Canadian corporate income tax rates for 2025: federal and provincial general rates, small business (CCPC) rates, manufacturing & processing rates, and integrated personal + corporate tax rates by province."
+breadcrumb: ["Home", "Personal Income Tax", "Tax Rates & Brackets"]
+section: "personal-tax"
+archetype: "datatable"
+revised: "2026-05-30"
+taxYear: 2025
+toc: true
+lead: "Federal and provincial corporate income tax rates for 2025 — general (active business), small business CCPC, manufacturing & processing, and CCPC investment income — plus integrated personal + corporate rates."
+---
+
+import Callout from '../../../../components/Callout.astro'
+
+## Federal corporate rates
+
+Canada's federal corporate tax is structured around three primary rates:
+
+| Rate Type | Rate | Income Eligible |
+|---|---:|---|
+| General (active business) | **15.0%** | Active business income in excess of the SBD limit |
+| Small business (CCPC) | **9.0%** | First $500,000 of active business income of a CCPC |
+| CCPC investment income | **38⅔%** | Passive/investment income earned by a CCPC |
+
+**Key mechanisms:**
+- The **general rate** results from the 38% basic rate, less a 10% provincial abatement, less a 13% general rate reduction.
+- The **small business deduction (SBD)** reduces the federal rate to 9% on the first $500,000 of *active* business income for Canadian-controlled private corporations (CCPCs). The SBD phases out for CCPCs with more than $10M in passive income, and is reduced for associated corporations sharing the $500K limit.
+- **CCPC investment income** is taxed at 38⅔% (28% regular + 10⅔% refundable). The 10⅔% is refundable when the corporation pays taxable dividends — this creates the "refundable dividend tax on hand" (RDTOH) mechanism.
+- **Manufacturing & Processing (M&P)** income qualifies for the M&P credit, which effectively makes the federal M&P rate equal to the general rate (15%).
+
+## Combined federal + provincial: general & small business rates
+
+The table shows combined federal + provincial rates. For each province, the corporate
+income tax is filed in that province's return (or the federal T2 for most provinces).
+
+<Callout type="note">
+Quebec administers its own corporate income tax, filed separately from the federal T2. The combined rate shown for Quebec uses the standard federal rate (15%) for comparison; the effective federal rate in Quebec is lower due to the 16.5% Quebec abatement.
+</Callout>
+
+| Province / Territory | Combined General | Combined Small Business | SB Limit | Combined M&P |
+|---|---:|---:|---|---:|
+| **Federal only** | **15.0%** | **9.0%** | $500,000 | **15.0%** |
+| Alberta | **23.0%** | 11.0% | $500,000 | 23.0% |
+| British Columbia | **27.0%** | 11.0% | $500,000 | 27.0% |
+| Manitoba | **27.0%** | 9.0%† | $500,000 | 27.0% |
+| New Brunswick | **29.0%** | 11.5% | $500,000 | 29.0% |
+| Newfoundland & Labrador | **30.0%** | 11.5% | $500,000 | 30.0% |
+| Nova Scotia | **29.0%** | 10.5%‡ | $700,000‡ | 29.0% |
+| Northwest Territories | **26.5%** | 11.0% | $500,000 | 26.5% |
+| Nunavut | **27.0%** | 12.0% | $500,000 | 27.0% |
+| Ontario | **26.5%** | 12.2% | $500,000 | 25.0%§ |
+| Prince Edward Island | **30.0%**¶ | 10.0% | $600,000¶ | 30.0% |
+| Quebec | **26.5%** | 12.2% | $500,000 | 26.5% |
+| Saskatchewan | **27.0%** | 10.0% | $600,000 | 25.0%§ |
+| Yukon | **27.0%** | 9.0%† | $500,000 | 17.5%§§ |
+
+**Footnotes:**
+- **†** Provincial small business rate is 0%; combined is the 9% federal rate alone.
+- **‡** Nova Scotia reduced its small business rate from 2.5% to 1.5% effective April 1, 2025, and increased the SB limit from $500,000 to $700,000. Rate shown is the post-April 1 rate.
+- **§** Ontario and Saskatchewan have a lower provincial M&P rate (10%) vs. general (11.5% / 12%), producing a combined M&P rate of 25%.
+- **¶** PEI reduced its general rate from 16% to 15% effective July 1, 2025, and raised the SB limit from $500,000 to $600,000.
+- **§§** Yukon's provincial M&P rate is 2.5%, giving a combined M&P rate of 17.5%.
+
+## Provincial rates — standalone
+
+If you need the provincial component alone (e.g. for a corporation taxed only in that province):
+
+| Province | Provincial General | Provincial Small Business | Provincial M&P |
+|---|---:|---:|---:|
+| Alberta | 8.0% | 2.0% | 8.0% |
+| British Columbia | 12.0% | 2.0% | 12.0% |
+| Manitoba | 12.0% | 0.0% | 12.0% |
+| New Brunswick | 14.0% | 2.5% | 14.0% |
+| Newfoundland & Labrador | 15.0% | 2.5% | 15.0% |
+| Nova Scotia | 14.0% | 1.5%‡ | 14.0% |
+| Northwest Territories | 11.5% | 2.0% | 11.5% |
+| Nunavut | 12.0% | 3.0% | 12.0% |
+| Ontario | 11.5% | 3.2% | 10.0% |
+| Prince Edward Island | 15.0%¶ | 1.0% | 15.0% |
+| Quebec | 11.5% | 3.2% | 11.5% |
+| Saskatchewan | 12.0% | 1.0% | 10.0% |
+| Yukon | 12.0% | 0.0% | 2.5% |
+
+## Integrated personal + corporate rates
+
+The integrated rate shows the total tax paid on $1.00 of corporate pre-tax income when
+the after-tax remainder is distributed to the shareholder as a dividend and taxed at the
+**top personal marginal rate** in that province.
+
+**Formula:**
+
+```
+Integrated rate = Corp rate + (1 − Corp rate) × Personal top dividend rate
+```
+
+Integration is designed to make shareholders roughly indifferent between earning income
+directly (salary) vs. through a corporation (dividends). Perfect integration would produce
+the same after-tax dollar regardless of the vehicle. In practice, results vary by province.
+
+### Eligible dividends (general-rate corporation)
+
+The shareholder receives an eligible dividend, which carries a 38% gross-up and a larger
+federal + provincial dividend tax credit.
+
+| Province | Salary (top rate) | Corp General Rate | Integrated (Corp + Elig Div) | Difference vs. Salary |
+|---|---:|---:|---:|---:|
+| Alberta | 48.00% | 23.0% | **49.42%** | +1.42% |
+| British Columbia | 53.50% | 27.0% | **53.67%** | +0.17% |
+| Manitoba | 51.25% | 27.0% | **55.44%** | +4.19% |
+| New Brunswick | 52.50% | 29.0% | **52.00%** | −0.50% |
+| Newfoundland & Labrador | 54.80% | 30.0% | **62.34%** | +7.54% |
+| Nova Scotia | 54.00% | 29.0% | **58.52%** | +4.52% |
+| Northwest Territories | 47.05% | 26.5% | **47.32%** | +0.27% |
+| Nunavut | 44.50% | 27.0% | **51.15%** | +6.65% |
+| Ontario | 53.53% | 26.5% | **55.42%** | +1.89% |
+| Prince Edward Island | 52.00% | 30.0% | **55.90%** | +3.90% |
+| Quebec | 53.31% | 26.5% | **55.98%** | +2.67% |
+| Saskatchewan | 47.50% | 27.0% | **48.64%** | +1.14% |
+| Yukon | 48.00% | 27.0% | **48.12%** | +0.12% |
+
+### Non-eligible dividends (small-business-rate CCPC)
+
+The shareholder receives a non-eligible dividend from income taxed at the small business rate,
+with the smaller 15% gross-up and a reduced dividend tax credit.
+
+| Province | Salary (top rate) | Corp SB Rate | Integrated (Corp + Non-Elig Div) | Difference vs. Salary |
+|---|---:|---:|---:|---:|
+| Alberta | 48.00% | 11.0% | **48.66%** | +0.66% |
+| British Columbia | 53.50% | 11.0% | **54.51%** | +1.01% |
+| Manitoba | 51.25% | 9.0% | **52.36%** | +1.11% |
+| New Brunswick | 52.50% | 11.5% | **52.94%** | +0.44% |
+| Newfoundland & Labrador | 54.80% | 11.5% | **54.83%** | +0.03% |
+| Nova Scotia | 54.00% | 10.5% | **55.49%** | +1.49% |
+| Northwest Territories | 47.05% | 11.0% | **43.77%** | −3.28% |
+| Nunavut | 44.50% | 12.0% | **45.26%** | +0.76% |
+| Ontario | 53.53% | 12.2% | **54.13%** | +0.60% |
+| Prince Edward Island | 52.00% | 10.0% | **53.13%** | +1.13% |
+| Quebec | 53.31% | 12.2% | **54.95%** | +1.64% |
+| Saskatchewan | 47.50% | 10.0% | **47.21%** | −0.29% |
+| Yukon | 48.00% | 9.0% | **49.08%** | +1.08% |
+
+<Callout type="tip">
+A positive "Difference vs. Salary" means paying salary is slightly more tax-efficient at the top bracket. A negative means the corporate + dividend route is marginally cheaper. In most provinces, the difference is small (under 2%) at the top rate. The real advantage of incorporation is often **deferral** — retaining corporate income at the lower corporate rate for years before distributing it — rather than a permanent rate reduction.
+</Callout>
+
+## How the small business deduction phases out
+
+The SBD is reduced when a CCPC (or associated group) has **passive investment income** exceeding $50,000 in the prior year. The SBD is fully eliminated at $150,000 of passive income. This "passive income trap" is a key planning consideration for incorporated business owners who also hold investment portfolios inside their corporation.
+
+Additionally, where associated corporations share the $500,000 SBD limit (e.g., two related companies), the combined active business income eligible for the small business rate is capped at $500,000 across all associates.
+
+---
+
+*Source: TaxTips.ca, KPMG Canadian Corporate Tax Tables, PwC Tax Summaries Canada. Integrated rates calculated from top combined marginal rates for 2025. Updated: May 2026.*

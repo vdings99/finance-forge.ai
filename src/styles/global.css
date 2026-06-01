@@ -339,7 +339,7 @@ td.num, th.num { text-align: right; }
   display: flex;
   align-items: center;
   gap: var(--space-1);
-  padding: 0 var(--space-4);
+  padding: 0 var(--space-3);
   height: 100%;
   font-size: var(--step-small);
   font-weight: 500;
@@ -432,7 +432,12 @@ td.num, th.num { text-align: right; }
   font-size: var(--step-small);
   background: transparent;
   color: var(--color-text);
-  width: 160px;
+  width: 120px;
+}
+
+/* Hide search on narrower desktops where 7 mega-menus need the room */
+@media (max-width: 1279px) {
+  .header-search { display: none; }
 }
 
 .header-search__input::placeholder {
@@ -1046,17 +1051,8 @@ td.num, th.num { text-align: right; }
 
 /* ── Hero (home archetype) ──────────────────────────────────────────────────── */
 .hero {
-  padding-block: var(--space-20) var(--space-16);
+  padding-block: var(--space-24) var(--space-20);
   border-bottom: var(--hairline);
-}
-
-.hero__eyebrow {
-  font-size: var(--step-caption);
-  font-weight: 700;
-  letter-spacing: var(--tracking-wider);
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: var(--space-4);
 }
 
 .hero__heading {
@@ -1653,4 +1649,188 @@ td.num, th.num { text-align: right; }
   margin-bottom: var(--space-8);
   font-size: var(--fs-small);
   color: var(--ink-2);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   MARGINAL RATE TABLE COMPONENT (MarginalRateTable.tsx)
+   Colour palette for 4 income types — desaturated to stay Swiss/neutral.
+   Update these tokens to change column colours across all rate tables.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── MRT shell ──────────────────────────────────────────────────────────── */
+.mrt {
+  margin-block: var(--space-8);
+}
+
+/* ── Controls row ───────────────────────────────────────────────────────── */
+.mrt__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+.mrt__label {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.mrt__select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: var(--space-2) var(--space-8) var(--space-2) var(--space-3);
+  border: var(--hairline-dark);
+  background: var(--paper)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='square'/%3E%3C/svg%3E")
+    no-repeat right var(--space-3) center;
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  min-width: 240px;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+.mrt__select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.mrt__year-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border: var(--hairline-dark);
+  background: var(--paper-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  letter-spacing: var(--track-caps);
+  color: var(--ink-2);
+  text-transform: uppercase;
+}
+
+/* ── Top rates strip ────────────────────────────────────────────────────── */
+.mrt__top-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  padding: var(--space-3) var(--space-4);
+  background: var(--paper-2);
+  border: var(--hairline-dark);
+  border-bottom: none;
+  font-size: var(--fs-caption);
+}
+
+.mrt__top-label {
+  font-weight: 700;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+  margin-right: auto;
+}
+
+.mrt__top-rates {
+  display: flex;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.mrt__top-rate {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--ink-2);
+}
+.mrt__top-rate strong {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--ink);
+}
+
+/* ── Colour dots ────────────────────────────────────────────────────────── */
+.mrt__dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.mrt__dot--other    { background: var(--mrt-other,    #4a4a6a); }
+.mrt__dot--capgains { background: var(--mrt-capgains, #2d6a82); }
+.mrt__dot--elig     { background: var(--mrt-elig,     #2d7a4a); }
+.mrt__dot--nonelig  { background: var(--mrt-nonelig,  #7a5a2a); }
+
+/* ── Table overrides ────────────────────────────────────────────────────── */
+.mrt__table {
+  font-size: var(--fs-small);
+}
+
+.mrt__th--other    { border-top: 2px solid var(--mrt-other,    #4a4a6a); }
+.mrt__th--capgains { border-top: 2px solid var(--mrt-capgains, #2d6a82); }
+.mrt__th--elig     { border-top: 2px solid var(--mrt-elig,     #2d7a4a); }
+.mrt__th--nonelig  { border-top: 2px solid var(--mrt-nonelig,  #7a5a2a); }
+
+/* Top bracket row subtle highlight */
+.mrt__row--top td {
+  background: var(--paper-2);
+  font-weight: 600;
+}
+
+/* Negative rates shown in accent (credit / refund) */
+.mrt__cell--negative {
+  color: var(--mrt-elig, #2d7a4a);
+}
+
+.mrt__cell--range {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+/* ── Note + legend ──────────────────────────────────────────────────────── */
+.mrt__note {
+  margin-top: var(--space-3);
+  font-size: var(--fs-caption);
+  color: var(--ink-3);
+  font-style: italic;
+  max-width: var(--measure);
+}
+
+.mrt__legend {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-left: 2px solid var(--hairline);
+}
+.mrt__legend-text {
+  font-size: var(--fs-caption);
+  color: var(--ink-2);
+  line-height: var(--lh-body);
+  margin: 0;
+}
+
+/* ── Corporate rate table custom styles ─────────────────────────────────── */
+.corp-rate-table .rate-general { color: var(--ink);   font-weight: 600; }
+.corp-rate-table .rate-sb      { color: var(--mrt-elig, #2d7a4a); font-weight: 600; }
+.corp-rate-table .rate-mp      { color: var(--mrt-capgains, #2d6a82); }
+.corp-rate-table .rate-limit   { font-family: var(--font-mono); color: var(--ink-2); }
+
+/* ── Top marginal summary table ─────────────────────────────────────────── */
+.top-marginal-table th { white-space: nowrap; }
+.top-marginal-table .rate-lowest { color: var(--mrt-elig, #2d7a4a); }
+.top-marginal-table .rate-highest { color: var(--accent); font-weight: 700; }
+
+/* ── Integrated rates table ─────────────────────────────────────────────── */
+.integrated-table .gap-positive { color: var(--mrt-nonelig, #7a5a2a); }
+.integrated-table .gap-negative { color: var(--mrt-elig, #2d7a4a); }
+
+@media (max-width: 640px) {
+  .mrt__top-rates { gap: var(--space-3); }
+  .mrt__top-strip { flex-direction: column; align-items: flex-start; gap: var(--space-3); }
 }

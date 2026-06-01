@@ -70,6 +70,8 @@
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
 
   /* Sticky header height — used for scroll-margin offset on anchors */
   --header-h: 4rem;
@@ -125,6 +127,13 @@
   --z-dropdown: 100;
   --z-drawer:   200;
   --z-overlay:  300;
+
+  /* ── Income-type palette (Marginal Rate Table component) ────────────────── */
+  /* Change these four to re-colour all rate table columns site-wide.         */
+  --mrt-other:    #4a4a6a;   /* muted indigo  — employment / other income  */
+  --mrt-capgains: #2d6a82;   /* teal          — capital gains               */
+  --mrt-elig:     #2d7a4a;   /* forest green  — eligible dividends           */
+  --mrt-nonelig:  #7a5a2a;   /* amber-brown   — non-eligible dividends       */
 }
 
 /* ── Dark mode ─────────────────────────────────────────────────────────────

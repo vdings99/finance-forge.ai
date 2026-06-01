@@ -6,21 +6,12 @@
 #   label:    The text shown in the nav bar
 #   href:     The URL (use "/" for a direct link; omit if it has children)
 #   children: Sub-items rendered as a dropdown panel
+#
+# Top-level is capped at 7 mega-menus — secondary pages live inside them.
+# Home is reached via the wordmark (left of nav).
 # ─────────────────────────────────────────────────────────────────────────────
 
-- label: "Home"
-  href: "/"
-
-- label: "What's New"
-  href: "/whats-new"
-
-- label: "Resources & Links"
-  href: "/resources"
-
-- label: "About / Contact"
-  href: "/about"
-
-- label: "Calculators & Tools"
+- label: "Calculators"
   children:
     - label: "All Calculators"
       href: "/calculators"
@@ -39,24 +30,7 @@
     - label: "Loan & Mortgage Calculator"
       href: "/calculators/loan-mortgage"
 
-- label: "Financial Planning & Investing"
-  children:
-    - label: "Financial Independence"
-      href: "/financial-planning/financial-independence"
-    - label: "Registered Savings Plans"
-      href: "/financial-planning/registered-savings-plans"
-    - label: "Investing — Stocks, Bonds & Securities"
-      href: "/financial-planning/investing"
-    - label: "Real Estate"
-      href: "/financial-planning/real-estate"
-    - label: "Company Pensions"
-      href: "/financial-planning/company-pensions"
-    - label: "Wills & Estate Planning"
-      href: "/financial-planning/wills-estate"
-    - label: "Government Benefits & Services"
-      href: "/financial-planning/government-benefits"
-
-- label: "Personal Income Tax"
+- label: "Personal Tax"
   children:
     - label: "Filing Your Tax Return"
       href: "/personal-tax/filing"
@@ -73,13 +47,31 @@
     - label: "Disabilities Resources"
       href: "/personal-tax/disabilities"
 
-- label: "Business / Self-Employment"
-  href: "/business"
+- label: "Business & Sales Tax"
+  children:
+    - label: "Business / Self-Employment"
+      href: "/business"
+    - label: "Sales Taxes (GST / HST / PST)"
+      href: "/sales-taxes"
 
-- label: "Sales Taxes (GST / HST / PST)"
-  href: "/sales-taxes"
+- label: "Financial Planning"
+  children:
+    - label: "Financial Independence"
+      href: "/financial-planning/financial-independence"
+    - label: "Registered Savings Plans"
+      href: "/financial-planning/registered-savings-plans"
+    - label: "Investing — Stocks, Bonds & Securities"
+      href: "/financial-planning/investing"
+    - label: "Real Estate"
+      href: "/financial-planning/real-estate"
+    - label: "Company Pensions"
+      href: "/financial-planning/company-pensions"
+    - label: "Wills & Estate Planning"
+      href: "/financial-planning/wills-estate"
+    - label: "Government Benefits & Services"
+      href: "/financial-planning/government-benefits"
 
-- label: "Provinces & Territories"
+- label: "Provinces"
   children:
     - label: "Alberta (AB)"
       href: "/provinces/ab"
@@ -108,14 +100,22 @@
     - label: "Yukon (YT)"
       href: "/provinces/yt"
 
-- label: "Federal Budget & Resources"
-  href: "/federal-budget"
+- label: "Budgets & Data"
+  children:
+    - label: "Federal Budget & Resources"
+      href: "/federal-budget"
+    - label: "Provincial / Territorial Budgets"
+      href: "/provincial-budgets"
+    - label: "Statistics & Other Information"
+      href: "/statistics"
 
-- label: "Provincial / Territorial Budgets"
-  href: "/provincial-budgets"
-
-- label: "Statistics & Other Information"
-  href: "/statistics"
-
-- label: "Site Map"
-  href: "/sitemap"
+- label: "Resources"
+  children:
+    - label: "What's New"
+      href: "/whats-new"
+    - label: "Resources & Links"
+      href: "/resources"
+    - label: "About / Contact"
+      href: "/about"
+    - label: "Site Map"
+      href: "/sitemap"

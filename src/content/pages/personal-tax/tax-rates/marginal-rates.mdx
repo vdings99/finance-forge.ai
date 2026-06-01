@@ -1,0 +1,51 @@
+---
+title: "Marginal Tax Rates by Province — 2025"
+description: "Combined federal and provincial marginal income tax rates for all Canadian provinces and territories in 2025. Select your province to see brackets for employment income, capital gains, eligible dividends, and non-eligible dividends."
+breadcrumb: ["Home", "Personal Income Tax", "Tax Rates & Brackets"]
+section: "personal-tax"
+archetype: "datatable"
+revised: "2026-05-30"
+taxYear: 2025
+toc: true
+lead: "Select a province or territory to see the full combined federal + provincial marginal rate table for 2025 — broken out by income type across every bracket."
+---
+
+import MarginalRateTableIsland from '../../../../components/MarginalRateTableIsland.astro'
+import Callout from '../../../../components/Callout.astro'
+
+## How to read the table
+
+Each row represents one marginal bracket — the rate that applies to each additional dollar
+earned **within** that income range. Crossing a bracket boundary never raises the tax on
+income already taxed in lower brackets.
+
+The four columns show the effective marginal rate on each type of income:
+
+- **Other income** — employment, self-employment, pension, RRSP withdrawals, interest, rent, etc.
+- **Capital gains** — always one-half of the "Other income" rate, because only 50% of gains are included in taxable income in 2025.
+- **Eligible dividends** — paid by public corporations and CCPCs taxed at the general corporate rate. The gross-up + dividend tax credit can produce *negative* marginal rates in lower brackets, meaning the credit exceeds the tax.
+- **Non-eligible dividends** — paid by CCPCs on income taxed at the small business rate. The gross-up is smaller (15%) and the credit is less generous.
+
+<MarginalRateTableIsland defaultProvince="ON" />
+
+## Province notes
+
+**Ontario** — Rates include the Ontario surtax, which adds 20% to provincial tax above $5,554 and a further 36% above $7,108. This creates additional bracket thresholds that do not appear on the provincial bracket schedule. The Ontario Health Premium (up to $900/year) is not reflected.
+
+**Quebec** — Quebec administers its own personal income tax. The federal rates shown are reduced by a 16.5% federal abatement, which Quebec retains to fund its separate system. Rates are the effective combined amount.
+
+**Manitoba** — The rate in the $253,414–$400,000 band (51.25%) is higher than the rate above $400,000 (50.40%) because a provincial tax reduction phases out, creating a temporary spike at the upper range.
+
+**Newfoundland & Labrador** — NL has five high-income brackets extending past $1,128,858, resulting in Canada's highest absolute top marginal rate for "other income" at 54.80%.
+
+## Federal rate change in 2025
+
+The lowest federal bracket rate was reduced from **15% to 14%** effective July 1, 2025. The table uses the blended annual rate of **14.5%** for the first bracket, which is what you would apply to a full calendar-year income calculation. For a part-year resident or a split-year scenario, apply 15% to income earned before July 1 and 14% after.
+
+<Callout type="tip">
+The [Detailed Income Tax Calculator](/calculators/income-tax) applies the mid-year rate change correctly and produces line-by-line federal and provincial tax figures.
+</Callout>
+
+## Source and update schedule
+
+Rates sourced from [TaxTips.ca](https://www.taxtips.ca/taxrates/) — the most current published combined marginal rate tables for Canadian jurisdictions. Data is updated each October when Statistics Canada releases the prior-year CPI figures used for bracket indexation.

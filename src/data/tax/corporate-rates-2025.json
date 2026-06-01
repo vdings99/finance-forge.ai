@@ -1,0 +1,257 @@
+{
+  "_comment": "Canadian corporate income tax rates for 2025. Source: TaxTips.ca, KPMG, PwC. Update each October/November after budgets finalize. All rates are % of taxable income.",
+  "year": 2025,
+  "revised": "2025-12",
+  "source": "TaxTips.ca, KPMG Tax Facts, PwC Tax Summaries",
+  "federal": {
+    "generalRate": 15.0,
+    "smallBusinessRate": 9.0,
+    "smallBusinessLimit": 500000,
+    "investmentIncome": 38.67,
+    "investmentIncomeNote": "28% regular + 10.67% refundable (RDTOH). Refundable portion recovered when taxable dividends are paid.",
+    "mpRate": 15.0,
+    "mpNote": "Federal M&P rate equals the general rate (after the M&P credit offsets the general rate reduction).",
+    "abatement": 10.0,
+    "abatementNote": "10% federal abatement reduces federal tax for income earned in a province/territory. Quebec administers its own tax so the abatement is 16.5% in Quebec."
+  },
+  "provinces": [
+    {
+      "code": "AB",
+      "name": "Alberta",
+      "provincial": {
+        "generalRate": 8.0,
+        "smallBusinessRate": 2.0,
+        "smallBusinessLimit": 500000,
+        "mpRate": 8.0
+      },
+      "combined": {
+        "generalRate": 23.0,
+        "smallBusinessRate": 11.0,
+        "smallBusinessLimit": 500000,
+        "mpRate": 23.0
+      }
+    },
+    {
+      "code": "BC",
+      "name": "British Columbia",
+      "provincial": {
+        "generalRate": 12.0,
+        "smallBusinessRate": 2.0,
+        "smallBusinessLimit": 500000,
+        "mpRate": 12.0
+      },
+      "combined": {
+        "generalRate": 27.0,
+        "smallBusinessRate": 11.0,
+        "smallBusinessLimit": 500000,
+        "mpRate": 27.0
+      }
+    },
+    {
+      "code": "MB",
+      "name": "Manitoba",
+      "provincial": {
+        "generalRate": 12.0,
+        "smallBusinessRate": 0.0,
+        "smallBusinessLimit": 500000,
+        "mpRate": 12.0
+      },
+      "combined": {
+        "generalRate": 27.0,
+        "smallBusinessRate": 9.0,
+        "smallBusinessLimit": 500000,
+        "mpRate": 27.0
+      }
+    },
+    {
+      "code": "NB",
+      "name": "New Brunswick",
+      "provincial": {
+        "generalRate": 14.0,
+        "smallBusinessRate": 2.5,
+        "smallBusinessLimit": 500000,
+        "mpRate": 14.0
+      },
+      "combined": {
+        "generalRate": 29.0,
+        "smallBusinessRate": 11.5,
+        "smallBusinessLimit": 500000,
+        "mpRate": 29.0
+      }
+    },
+    {
+      "code": "NL",
+      "name": "Newfoundland & Labrador",
+      "provincial": {
+        "generalRate": 15.0,
+        "smallBusinessRate": 2.5,
+        "smallBusinessLimit": 500000,
+        "mpRate": 15.0
+      },
+      "combined": {
+        "generalRate": 30.0,
+        "smallBusinessRate": 11.5,
+        "smallBusinessLimit": 500000,
+        "mpRate": 30.0
+      }
+    },
+    {
+      "code": "NS",
+      "name": "Nova Scotia",
+      "note": "Small business rate reduced from 2.5% to 1.5% effective April 1, 2025; business limit increased to $700,000 at the same time. Rate shown is the April 1+ rate.",
+      "provincial": {
+        "generalRate": 14.0,
+        "smallBusinessRate": 1.5,
+        "smallBusinessLimit": 700000,
+        "smallBusinessRateNote": "Was 2.5% / $500K until April 1, 2025",
+        "mpRate": 14.0
+      },
+      "combined": {
+        "generalRate": 29.0,
+        "smallBusinessRate": 10.5,
+        "smallBusinessLimit": 700000,
+        "mpRate": 29.0
+      }
+    },
+    {
+      "code": "NT",
+      "name": "Northwest Territories",
+      "provincial": {
+        "generalRate": 11.5,
+        "smallBusinessRate": 2.0,
+        "smallBusinessLimit": 500000,
+        "mpRate": 11.5
+      },
+      "combined": {
+        "generalRate": 26.5,
+        "smallBusinessRate": 11.0,
+        "smallBusinessLimit": 500000,
+        "mpRate": 26.5
+      }
+    },
+    {
+      "code": "NU",
+      "name": "Nunavut",
+      "provincial": {
+        "generalRate": 12.0,
+        "smallBusinessRate": 3.0,
+        "smallBusinessLimit": 500000,
+        "mpRate": 12.0
+      },
+      "combined": {
+        "generalRate": 27.0,
+        "smallBusinessRate": 12.0,
+        "smallBusinessLimit": 500000,
+        "mpRate": 27.0
+      }
+    },
+    {
+      "code": "ON",
+      "name": "Ontario",
+      "provincial": {
+        "generalRate": 11.5,
+        "smallBusinessRate": 3.2,
+        "smallBusinessLimit": 500000,
+        "mpRate": 10.0
+      },
+      "combined": {
+        "generalRate": 26.5,
+        "smallBusinessRate": 12.2,
+        "smallBusinessLimit": 500000,
+        "mpRate": 25.0,
+        "mpNote": "Ontario M&P rate is 10% provincial + 15% federal = 25%"
+      }
+    },
+    {
+      "code": "PE",
+      "name": "Prince Edward Island",
+      "note": "General rate reduced from 16% to 15% effective July 1, 2025. Small business limit increased to $600,000.",
+      "provincial": {
+        "generalRate": 15.0,
+        "generalRateNote": "Was 16% before July 1, 2025",
+        "smallBusinessRate": 1.0,
+        "smallBusinessLimit": 600000,
+        "smallBusinessLimitNote": "Was $500,000 before July 1, 2025",
+        "mpRate": 15.0
+      },
+      "combined": {
+        "generalRate": 30.0,
+        "generalRateNote": "Was 31% before July 1, 2025",
+        "smallBusinessRate": 10.0,
+        "smallBusinessLimit": 600000,
+        "mpRate": 30.0
+      }
+    },
+    {
+      "code": "QC",
+      "name": "Quebec",
+      "note": "Quebec levies its own corporate income tax separately. The federal abatement for Quebec is 16.5%, reducing the effective federal rate to ~11.9% rather than 15%.",
+      "provincial": {
+        "generalRate": 11.5,
+        "smallBusinessRate": 3.2,
+        "smallBusinessLimit": 500000,
+        "mpRate": 11.5
+      },
+      "combined": {
+        "generalRate": 26.5,
+        "smallBusinessRate": 12.2,
+        "smallBusinessLimit": 500000,
+        "mpRate": 26.5,
+        "combinedNote": "Combined shown as federal 15% + provincial 11.5%. Federal effective rate in QC is ~11.9% after abatement; see QC corporate tax rules for precise calculation."
+      }
+    },
+    {
+      "code": "SK",
+      "name": "Saskatchewan",
+      "provincial": {
+        "generalRate": 12.0,
+        "smallBusinessRate": 1.0,
+        "smallBusinessLimit": 600000,
+        "mpRate": 10.0
+      },
+      "combined": {
+        "generalRate": 27.0,
+        "smallBusinessRate": 10.0,
+        "smallBusinessLimit": 600000,
+        "mpRate": 25.0,
+        "mpNote": "Saskatchewan M&P rate is 10% provincial + 15% federal = 25%"
+      }
+    },
+    {
+      "code": "YT",
+      "name": "Yukon",
+      "provincial": {
+        "generalRate": 12.0,
+        "smallBusinessRate": 0.0,
+        "smallBusinessLimit": 500000,
+        "mpRate": 2.5
+      },
+      "combined": {
+        "generalRate": 27.0,
+        "smallBusinessRate": 9.0,
+        "smallBusinessLimit": 500000,
+        "mpRate": 17.5,
+        "mpNote": "Yukon M&P rate is 2.5% provincial + 15% federal = 17.5%"
+      }
+    }
+  ],
+  "integratedRates": {
+    "_comment": "Integrated rate = corp rate + (1 - corp rate) x personal top dividend rate. Shows total tax on $1 of corporate income distributed as a dividend vs earned directly as salary.",
+    "source": "Calculated from combined corporate + personal top marginal rates",
+    "provinces": [
+      { "code": "AB", "salary": 48.00, "eligDivIntegrated": 49.42, "nonEligDivIntegrated": 48.66 },
+      { "code": "BC", "salary": 53.50, "eligDivIntegrated": 53.67, "nonEligDivIntegrated": 54.51 },
+      { "code": "MB", "salary": 51.25, "eligDivIntegrated": 55.44, "nonEligDivIntegrated": 52.36 },
+      { "code": "NB", "salary": 52.50, "eligDivIntegrated": 52.00, "nonEligDivIntegrated": 52.94 },
+      { "code": "NL", "salary": 54.80, "eligDivIntegrated": 62.34, "nonEligDivIntegrated": 54.83 },
+      { "code": "NS", "salary": 54.00, "eligDivIntegrated": 58.52, "nonEligDivIntegrated": 55.49 },
+      { "code": "NT", "salary": 47.05, "eligDivIntegrated": 47.32, "nonEligDivIntegrated": 43.77 },
+      { "code": "NU", "salary": 44.50, "eligDivIntegrated": 51.15, "nonEligDivIntegrated": 45.26 },
+      { "code": "ON", "salary": 53.53, "eligDivIntegrated": 55.42, "nonEligDivIntegrated": 54.13 },
+      { "code": "PE", "salary": 52.00, "eligDivIntegrated": 55.90, "nonEligDivIntegrated": 53.13 },
+      { "code": "QC", "salary": 53.31, "eligDivIntegrated": 55.98, "nonEligDivIntegrated": 54.95 },
+      { "code": "SK", "salary": 47.50, "eligDivIntegrated": 48.64, "nonEligDivIntegrated": 47.21 },
+      { "code": "YT", "salary": 48.00, "eligDivIntegrated": 48.12, "nonEligDivIntegrated": 49.08 }
+    ]
+  }
+}
