@@ -1,0 +1,217 @@
+{
+  "_comment": "Combined federal + provincial marginal tax rates for 2024. Source: TaxTips.ca. All rates are % of ACTUAL amount received.",
+  "year": 2024,
+  "revised": "2024-10",
+  "source": "TaxTips.ca (taxtips.ca/priortaxrates/tax-rates-2024-2025/)",
+  "capitalGainsInclusionRate": 0.5,
+  "eligibleDividendGrossUp": 0.38,
+  "nonEligibleDividendGrossUp": 0.15,
+  "provinces": [
+    {
+      "code": "federal",
+      "name": "Federal Only",
+      "brackets": [
+        { "max": 55867,  "other": 15.00, "capGains": 7.50,  "eligDiv": -0.03, "nonEligDiv": 6.87 },
+        { "max": 111733, "other": 20.50, "capGains": 10.25, "eligDiv":  7.56, "nonEligDiv": 13.19 },
+        { "max": 173205, "other": 26.00, "capGains": 13.00, "eligDiv": 15.15, "nonEligDiv": 19.52 },
+        { "max": 246752, "other": 29.32, "capGains": 14.66, "eligDiv": 19.73, "nonEligDiv": 23.34 },
+        { "max": null,   "other": 33.00, "capGains": 16.50, "eligDiv": 24.81, "nonEligDiv": 27.57 }
+      ]
+    },
+    {
+      "code": "AB",
+      "name": "Alberta",
+      "brackets": [
+        { "max": 55867,  "other": 25.00, "capGains": 12.50, "eligDiv":  2.57, "nonEligDiv": 15.86 },
+        { "max": 111733, "other": 30.50, "capGains": 15.25, "eligDiv": 10.16, "nonEligDiv": 22.18 },
+        { "max": 148269, "other": 36.00, "capGains": 18.00, "eligDiv": 17.75, "nonEligDiv": 28.51 },
+        { "max": 173205, "other": 38.00, "capGains": 19.00, "eligDiv": 20.51, "nonEligDiv": 30.81 },
+        { "max": 177922, "other": 41.32, "capGains": 20.66, "eligDiv": 25.09, "nonEligDiv": 34.63 },
+        { "max": 237230, "other": 42.32, "capGains": 21.16, "eligDiv": 26.47, "nonEligDiv": 35.78 },
+        { "max": 246752, "other": 43.31, "capGains": 21.66, "eligDiv": 27.84, "nonEligDiv": 36.92 },
+        { "max": 362961, "other": 47.00, "capGains": 23.50, "eligDiv": 32.93, "nonEligDiv": 41.16 },
+        { "max": null,   "other": 48.00, "capGains": 24.00, "eligDiv": 34.31, "nonEligDiv": 42.31 }
+      ]
+    },
+    {
+      "code": "BC",
+      "name": "British Columbia",
+      "brackets": [
+        { "max": 47937,  "other": 20.06, "capGains": 10.03, "eligDiv": -9.60, "nonEligDiv": 10.43 },
+        { "max": 55867,  "other": 22.70, "capGains": 11.35, "eligDiv": -5.96, "nonEligDiv": 13.47 },
+        { "max": 95875,  "other": 28.20, "capGains": 14.10, "eligDiv":  1.63, "nonEligDiv": 19.80 },
+        { "max": 110076, "other": 31.00, "capGains": 15.50, "eligDiv":  5.49, "nonEligDiv": 23.02 },
+        { "max": 111733, "other": 32.79, "capGains": 16.40, "eligDiv":  7.96, "nonEligDiv": 25.07 },
+        { "max": 133664, "other": 38.29, "capGains": 19.15, "eligDiv": 15.55, "nonEligDiv": 31.40 },
+        { "max": 173205, "other": 40.70, "capGains": 20.35, "eligDiv": 18.88, "nonEligDiv": 34.17 },
+        { "max": 181232, "other": 44.02, "capGains": 22.01, "eligDiv": 23.46, "nonEligDiv": 37.99 },
+        { "max": 246752, "other": 46.12, "capGains": 23.06, "eligDiv": 26.36, "nonEligDiv": 40.41 },
+        { "max": 252752, "other": 49.80, "capGains": 24.90, "eligDiv": 31.44, "nonEligDiv": 44.64 },
+        { "max": null,   "other": 53.50, "capGains": 26.75, "eligDiv": 36.54, "nonEligDiv": 48.89 }
+      ]
+    },
+    {
+      "code": "MB",
+      "name": "Manitoba",
+      "brackets": [
+        { "max": 47000,  "other": 25.80, "capGains": 12.90, "eligDiv":  3.84, "nonEligDiv": 18.38 },
+        { "max": 55867,  "other": 27.75, "capGains": 13.88, "eligDiv":  6.53, "nonEligDiv": 20.63 },
+        { "max": 100000, "other": 33.25, "capGains": 16.63, "eligDiv": 14.12, "nonEligDiv": 26.95 },
+        { "max": 111733, "other": 37.90, "capGains": 18.95, "eligDiv": 20.53, "nonEligDiv": 32.30 },
+        { "max": 173205, "other": 43.40, "capGains": 21.70, "eligDiv": 28.12, "nonEligDiv": 38.62 },
+        { "max": 246752, "other": 46.72, "capGains": 23.36, "eligDiv": 32.71, "nonEligDiv": 42.44 },
+        { "max": null,   "other": 50.40, "capGains": 25.20, "eligDiv": 37.78, "nonEligDiv": 46.67 }
+      ]
+    },
+    {
+      "code": "NB",
+      "name": "New Brunswick",
+      "brackets": [
+        { "max": 49958,  "other": 24.40, "capGains": 12.20, "eligDiv": -6.38, "nonEligDiv": 14.51 },
+        { "max": 55867,  "other": 29.00, "capGains": 14.50, "eligDiv": -0.03, "nonEligDiv": 19.80 },
+        { "max": 99916,  "other": 34.50, "capGains": 17.25, "eligDiv":  7.56, "nonEligDiv": 26.13 },
+        { "max": 111733, "other": 36.50, "capGains": 18.25, "eligDiv": 10.32, "nonEligDiv": 28.43 },
+        { "max": 173205, "other": 42.00, "capGains": 21.00, "eligDiv": 17.91, "nonEligDiv": 34.75 },
+        { "max": 185064, "other": 45.32, "capGains": 22.66, "eligDiv": 22.49, "nonEligDiv": 38.57 },
+        { "max": 246752, "other": 48.82, "capGains": 24.41, "eligDiv": 27.32, "nonEligDiv": 42.60 },
+        { "max": null,   "other": 52.50, "capGains": 26.25, "eligDiv": 32.40, "nonEligDiv": 46.83 }
+      ]
+    },
+    {
+      "code": "NL",
+      "name": "Newfoundland & Labrador",
+      "note": "NL has multiple high-income brackets extending to $1,103,478+.",
+      "brackets": [
+        { "max": 43198,   "other": 23.70, "capGains": 11.85, "eligDiv":  3.28, "nonEligDiv": 13.19 },
+        { "max": 55867,   "other": 29.50, "capGains": 14.75, "eligDiv": 11.29, "nonEligDiv": 19.86 },
+        { "max": 86395,   "other": 35.00, "capGains": 17.50, "eligDiv": 18.88, "nonEligDiv": 26.19 },
+        { "max": 111733,  "other": 36.30, "capGains": 18.15, "eligDiv": 20.67, "nonEligDiv": 27.68 },
+        { "max": 154244,  "other": 41.80, "capGains": 20.90, "eligDiv": 28.26, "nonEligDiv": 34.01 },
+        { "max": 173205,  "other": 43.80, "capGains": 21.90, "eligDiv": 31.02, "nonEligDiv": 36.31 },
+        { "max": 215943,  "other": 47.12, "capGains": 23.56, "eligDiv": 35.60, "nonEligDiv": 40.13 },
+        { "max": 246752,  "other": 49.12, "capGains": 24.56, "eligDiv": 38.36, "nonEligDiv": 42.43 },
+        { "max": 275870,  "other": 52.80, "capGains": 26.40, "eligDiv": 43.44, "nonEligDiv": 46.66 },
+        { "max": 551739,  "other": 53.80, "capGains": 26.90, "eligDiv": 44.82, "nonEligDiv": 47.81 },
+        { "max": 1103478, "other": 54.30, "capGains": 27.15, "eligDiv": 45.51, "nonEligDiv": 48.38 },
+        { "max": null,    "other": 54.80, "capGains": 27.40, "eligDiv": 46.20, "nonEligDiv": 48.96 }
+      ]
+    },
+    {
+      "code": "NS",
+      "name": "Nova Scotia",
+      "brackets": [
+        { "max": 25000,  "other": 23.79, "capGains": 11.90, "eligDiv": -0.11, "nonEligDiv": 13.54 },
+        { "max": 29590,  "other": 24.32, "capGains": 12.16, "eligDiv":  0.62, "nonEligDiv": 14.14 },
+        { "max": 55867,  "other": 30.48, "capGains": 15.24, "eligDiv":  9.12, "nonEligDiv": 21.23 },
+        { "max": 59180,  "other": 35.98, "capGains": 17.99, "eligDiv": 16.71, "nonEligDiv": 27.55 },
+        { "max": 74999,  "other": 37.70, "capGains": 18.85, "eligDiv": 19.09, "nonEligDiv": 29.53 },
+        { "max": 93000,  "other": 37.17, "capGains": 18.59, "eligDiv": 18.35, "nonEligDiv": 28.92 },
+        { "max": 111733, "other": 38.00, "capGains": 19.00, "eligDiv": 19.50, "nonEligDiv": 29.88 },
+        { "max": 150000, "other": 43.50, "capGains": 21.75, "eligDiv": 27.09, "nonEligDiv": 36.20 },
+        { "max": 173205, "other": 47.00, "capGains": 23.50, "eligDiv": 31.92, "nonEligDiv": 40.23 },
+        { "max": 246752, "other": 50.32, "capGains": 25.16, "eligDiv": 36.50, "nonEligDiv": 44.05 },
+        { "max": null,   "other": 54.00, "capGains": 27.00, "eligDiv": 41.58, "nonEligDiv": 48.28 }
+      ]
+    },
+    {
+      "code": "NT",
+      "name": "Northwest Territories",
+      "brackets": [
+        { "max": 50597,  "other": 20.90, "capGains": 10.45, "eligDiv": -7.76, "nonEligDiv":  6.75 },
+        { "max": 55867,  "other": 23.60, "capGains": 11.80, "eligDiv": -4.03, "nonEligDiv":  9.86 },
+        { "max": 101198, "other": 29.10, "capGains": 14.55, "eligDiv":  3.56, "nonEligDiv": 16.18 },
+        { "max": 111733, "other": 32.70, "capGains": 16.35, "eligDiv":  8.53, "nonEligDiv": 20.32 },
+        { "max": 164525, "other": 38.20, "capGains": 19.10, "eligDiv": 16.12, "nonEligDiv": 26.65 },
+        { "max": 173205, "other": 40.05, "capGains": 20.03, "eligDiv": 18.67, "nonEligDiv": 28.77 },
+        { "max": 246752, "other": 43.37, "capGains": 21.69, "eligDiv": 23.25, "nonEligDiv": 32.59 },
+        { "max": null,   "other": 47.05, "capGains": 23.53, "eligDiv": 28.33, "nonEligDiv": 36.82 }
+      ]
+    },
+    {
+      "code": "NU",
+      "name": "Nunavut",
+      "brackets": [
+        { "max": 53268,  "other": 19.00, "capGains":  9.50, "eligDiv": -2.11, "nonEligDiv":  8.46 },
+        { "max": 55867,  "other": 22.00, "capGains": 11.00, "eligDiv":  2.03, "nonEligDiv": 11.91 },
+        { "max": 106537, "other": 27.50, "capGains": 13.75, "eligDiv":  9.62, "nonEligDiv": 18.24 },
+        { "max": 111733, "other": 29.50, "capGains": 14.75, "eligDiv": 12.38, "nonEligDiv": 20.54 },
+        { "max": 173205, "other": 35.00, "capGains": 17.50, "eligDiv": 19.97, "nonEligDiv": 26.86 },
+        { "max": 246752, "other": 40.82, "capGains": 20.41, "eligDiv": 28.00, "nonEligDiv": 33.56 },
+        { "max": null,   "other": 44.50, "capGains": 22.25, "eligDiv": 33.08, "nonEligDiv": 37.79 }
+      ]
+    },
+    {
+      "code": "ON",
+      "name": "Ontario",
+      "note": "Rates include Ontario surtax. Ontario Health Premium not included.",
+      "brackets": [
+        { "max": 51446,  "other": 20.05, "capGains": 10.03, "eligDiv": -6.86, "nonEligDiv":  9.24 },
+        { "max": 55867,  "other": 24.15, "capGains": 12.08, "eligDiv": -1.20, "nonEligDiv": 13.95 },
+        { "max": 90599,  "other": 29.65, "capGains": 14.83, "eligDiv":  6.39, "nonEligDiv": 20.28 },
+        { "max": 102894, "other": 31.48, "capGains": 15.74, "eligDiv":  8.92, "nonEligDiv": 22.38 },
+        { "max": 106732, "other": 33.89, "capGains": 16.95, "eligDiv": 12.24, "nonEligDiv": 25.16 },
+        { "max": 111733, "other": 37.91, "capGains": 18.95, "eligDiv": 17.79, "nonEligDiv": 29.78 },
+        { "max": 150000, "other": 43.41, "capGains": 21.70, "eligDiv": 25.38, "nonEligDiv": 36.10 },
+        { "max": 173205, "other": 44.97, "capGains": 22.48, "eligDiv": 27.53, "nonEligDiv": 37.90 },
+        { "max": 220000, "other": 48.29, "capGains": 24.14, "eligDiv": 32.11, "nonEligDiv": 41.72 },
+        { "max": 246752, "other": 49.85, "capGains": 24.92, "eligDiv": 34.26, "nonEligDiv": 43.51 },
+        { "max": null,   "other": 53.53, "capGains": 26.76, "eligDiv": 39.34, "nonEligDiv": 47.74 }
+      ]
+    },
+    {
+      "code": "PE",
+      "name": "Prince Edward Island",
+      "brackets": [
+        { "max": 32656,  "other": 24.65, "capGains": 12.33, "eligDiv": -1.20, "nonEligDiv": 16.47 },
+        { "max": 55867,  "other": 28.63, "capGains": 14.32, "eligDiv":  4.29, "nonEligDiv": 21.04 },
+        { "max": 64313,  "other": 34.13, "capGains": 17.07, "eligDiv": 11.88, "nonEligDiv": 27.37 },
+        { "max": 105000, "other": 37.15, "capGains": 18.58, "eligDiv": 16.05, "nonEligDiv": 30.84 },
+        { "max": 111733, "other": 38.50, "capGains": 19.25, "eligDiv": 17.91, "nonEligDiv": 32.40 },
+        { "max": 140000, "other": 44.00, "capGains": 22.00, "eligDiv": 25.50, "nonEligDiv": 38.72 },
+        { "max": 173205, "other": 44.75, "capGains": 22.38, "eligDiv": 26.54, "nonEligDiv": 39.58 },
+        { "max": 246752, "other": 48.07, "capGains": 24.04, "eligDiv": 31.12, "nonEligDiv": 43.40 },
+        { "max": null,   "other": 51.75, "capGains": 25.88, "eligDiv": 36.20, "nonEligDiv": 47.63 }
+      ]
+    },
+    {
+      "code": "QC",
+      "name": "Quebec",
+      "note": "Quebec administers its own income tax. Federal abatement of 16.5% reduces federal portion.",
+      "brackets": [
+        { "max": 51780,  "other": 26.53, "capGains": 13.26, "eligDiv":  3.15, "nonEligDiv": 17.90 },
+        { "max": 55867,  "other": 31.53, "capGains": 15.76, "eligDiv": 10.05, "nonEligDiv": 23.65 },
+        { "max": 103545, "other": 36.12, "capGains": 18.06, "eligDiv": 16.39, "nonEligDiv": 28.93 },
+        { "max": 111733, "other": 41.12, "capGains": 20.56, "eligDiv": 23.29, "nonEligDiv": 34.68 },
+        { "max": 126000, "other": 45.71, "capGains": 22.86, "eligDiv": 29.63, "nonEligDiv": 39.96 },
+        { "max": 173205, "other": 47.46, "capGains": 23.73, "eligDiv": 32.04, "nonEligDiv": 41.97 },
+        { "max": 246752, "other": 50.23, "capGains": 25.12, "eligDiv": 35.87, "nonEligDiv": 45.16 },
+        { "max": null,   "other": 53.31, "capGains": 26.65, "eligDiv": 40.11, "nonEligDiv": 48.70 }
+      ]
+    },
+    {
+      "code": "SK",
+      "name": "Saskatchewan",
+      "brackets": [
+        { "max": 52057,  "other": 25.50, "capGains": 12.75, "eligDiv": -0.72, "nonEligDiv": 16.04 },
+        { "max": 55867,  "other": 27.50, "capGains": 13.75, "eligDiv":  2.04, "nonEligDiv": 18.34 },
+        { "max": 111733, "other": 33.00, "capGains": 16.50, "eligDiv":  9.63, "nonEligDiv": 24.67 },
+        { "max": 148734, "other": 38.50, "capGains": 19.25, "eligDiv": 17.22, "nonEligDiv": 30.99 },
+        { "max": 173205, "other": 40.50, "capGains": 20.25, "eligDiv": 19.98, "nonEligDiv": 33.29 },
+        { "max": 246752, "other": 43.82, "capGains": 21.91, "eligDiv": 24.56, "nonEligDiv": 37.11 },
+        { "max": null,   "other": 47.50, "capGains": 23.75, "eligDiv": 29.64, "nonEligDiv": 41.34 }
+      ]
+    },
+    {
+      "code": "YT",
+      "name": "Yukon",
+      "brackets": [
+        { "max": 55867,  "other": 21.40, "capGains": 10.70, "eligDiv": -7.78, "nonEligDiv": 13.45 },
+        { "max": 111733, "other": 29.50, "capGains": 14.75, "eligDiv":  3.40, "nonEligDiv": 22.77 },
+        { "max": 173205, "other": 36.90, "capGains": 18.45, "eligDiv": 13.61, "nonEligDiv": 31.28 },
+        { "max": 246752, "other": 42.25, "capGains": 21.13, "eligDiv": 20.99, "nonEligDiv": 37.43 },
+        { "max": 500000, "other": 45.80, "capGains": 22.90, "eligDiv": 25.89, "nonEligDiv": 41.51 },
+        { "max": null,   "other": 48.00, "capGains": 24.00, "eligDiv": 28.93, "nonEligDiv": 44.04 }
+      ]
+    }
+  ]
+}

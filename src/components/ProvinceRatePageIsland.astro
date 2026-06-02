@@ -1,0 +1,98 @@
+---
+/**
+ * ProvinceRatePageIsland
+ * Loads per-province marginal and corporate rate data from JSON files at
+ * build time and passes it to the ProvinceRatePage Preact island.
+ *
+ * Usage in MDX / Astro pages:
+ *   <ProvinceRatePageIsland provinceName="Ontario" provinceCode="ON" />
+ */
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import ProvinceRatePage from './ProvinceRatePage.tsx'
+
+interface Props {
+  provinceName: string
+  provinceCode: string
+}
+
+const { provinceName, provinceCode } = Astro.props
+
+// ---------------------------------------------------------------------------
+// Load raw JSON at build time
+// ---------------------------------------------------------------------------
+const dataDir = resolve('src/data/tax')
+
+const marginal2024 = JSON.parse(readFileSync(resolve(dataDir, 'combined-marginal-2024.json'), 'utf-8'))
+const marginal2025 = JSON.parse(readFileSync(resolve(dataDir, 'combined-marginal-2025.json'), 'utf-8'))
+const corporate2024 = JSON.parse(readFileSync(resolve(dataDir, 'corporate-rates-2024.json'), 'utf-8'))
+const corporate2025 = JSON.parse(readFileSync(resolve(dataDir, 'corporate-rates-2025.json'), 'utf-8'))
+
+// ---------------------------------------------------------------------------
+// Find province entries
+// ---------------------------------------------------------------------------
+const prov2024 = marginal2024.provinces.find((p: { code: string }) => p.code === provinceCode)
+const prov2025 = marginal2025.provinces.find((p: { code: string }) => p.code === provinceCode)
+
+const corp2024 = corporate2024.provinces.find((p: { code: string }) => p.code === provinceCode)
+const corp2025 = corporate2025.provinces.find((p: { code: string }) => p.code === provinceCode)
+
+// ---------------------------------------------------------------------------
+// Build yearData: { 2024: { brackets, note? }, 2025: { brackets, note? } }
+// ---------------------------------------------------------------------------
+type YearEntry = { brackets: unknown[]; note?: string }
+
+const yearData: Record<number, YearEntry> = {}
+
+if (prov2024) {
+  const entry: YearEntry = { brackets: prov2024.brackets }
+  if (prov2024.note) entry.note = prov2024.note
+  yearData[2024] = entry
+}
+
+if (prov2025) {
+  const entry: YearEntry = { brackets: prov2025.brackets }
+  if (prov2025.note) entry.note = prov2025.note
+  yearData[2025] = entry
+}
+
+// ---------------------------------------------------------------------------
+// Build corpData: { 2024: { generalRate, smallBusinessRate, smallBusinessLimit }, 2025: { ... } }
+// ---------------------------------------------------------------------------
+type CorpEntry = {
+  generalRate: number
+  smallBusinessRate: number
+  smallBusinessLimit: number
+}
+
+const corpData: Record<number, CorpEntry> = {}
+
+if (corp2024?.combined) {
+  corpData[2024] = {
+    generalRate: corp2024.combined.generalRate,
+    smallBusinessRate: corp2024.combined.smallBusinessRate,
+    smallBusinessLimit: corp2024.combined.smallBusinessLimit,
+  }
+}
+
+if (corp2025?.combined) {
+  corpData[2025] = {
+    generalRate: corp2025.combined.generalRate,
+    smallBusinessRate: corp2025.combined.smallBusinessRate,
+    smallBusinessLimit: corp2025.combined.smallBusinessLimit,
+  }
+}
+
+// Show 2023 as "coming soon", 2024 and 2025 as active
+const availableYears = [2023, 2024, 2025]
+---
+
+<ProvinceRatePage
+  client:load
+  provinceName={provinceName}
+  provinceCode={provinceCode}
+  yearData={yearData}
+  corpData={corpData}
+  availableYears={availableYears}
+  defaultYear={2025}
+/>

@@ -7,9 +7,42 @@
 #   href:     The URL (use "/" for a direct link; omit if it has children)
 #   children: Sub-items rendered as a dropdown panel
 #
-# Top-level is capped at 7 mega-menus — secondary pages live inside them.
+# Top-level is capped at 8 mega-menus — secondary pages live inside them.
 # Home is reached via the wordmark (left of nav).
 # ─────────────────────────────────────────────────────────────────────────────
+
+- label: "Rates & Brackets"
+  children:
+    - label: "Overview"
+      href: "/rates"
+    - label: "Federal"
+      href: "/rates/federal"
+    - label: "Alberta"
+      href: "/rates/ab"
+    - label: "British Columbia"
+      href: "/rates/bc"
+    - label: "Manitoba"
+      href: "/rates/mb"
+    - label: "New Brunswick"
+      href: "/rates/nb"
+    - label: "Newfoundland & Labrador"
+      href: "/rates/nl"
+    - label: "Nova Scotia"
+      href: "/rates/ns"
+    - label: "Northwest Territories"
+      href: "/rates/nt"
+    - label: "Nunavut"
+      href: "/rates/nu"
+    - label: "Ontario"
+      href: "/rates/on"
+    - label: "Prince Edward Island"
+      href: "/rates/pe"
+    - label: "Quebec"
+      href: "/rates/qc"
+    - label: "Saskatchewan"
+      href: "/rates/sk"
+    - label: "Yukon"
+      href: "/rates/yt"
 
 - label: "Calculators"
   children:
@@ -34,8 +67,6 @@
   children:
     - label: "Filing Your Tax Return"
       href: "/personal-tax/filing"
-    - label: "Tax Rates & Brackets"
-      href: "/personal-tax/tax-rates"
     - label: "Dividend Tax Credits"
       href: "/personal-tax/dividend-tax-credits"
     - label: "Non-Refundable Tax Credits"

@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import ProvinceRatePageIsland from "../../components/ProvinceRatePageIsland.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { province: "federal" }, props: { name: "Federal Only",             code: "federal" } },
+    { params: { province: "ab"      }, props: { name: "Alberta",                  code: "AB" } },
+    { params: { province: "bc"      }, props: { name: "British Columbia",          code: "BC" } },
+    { params: { province: "mb"      }, props: { name: "Manitoba",                  code: "MB" } },
+    { params: { province: "nb"      }, props: { name: "New Brunswick",             code: "NB" } },
+    { params: { province: "nl"      }, props: { name: "Newfoundland & Labrador",   code: "NL" } },
+    { params: { province: "ns"      }, props: { name: "Nova Scotia",               code: "NS" } },
+    { params: { province: "nt"      }, props: { name: "Northwest Territories",     code: "NT" } },
+    { params: { province: "nu"      }, props: { name: "Nunavut",                   code: "NU" } },
+    { params: { province: "on"      }, props: { name: "Ontario",                   code: "ON" } },
+    { params: { province: "pe"      }, props: { name: "Prince Edward Island",      code: "PE" } },
+    { params: { province: "qc"      }, props: { name: "Quebec",                    code: "QC" } },
+    { params: { province: "sk"      }, props: { name: "Saskatchewan",              code: "SK" } },
+    { params: { province: "yt"      }, props: { name: "Yukon",                     code: "YT" } },
+  ];
+}
+
+const { name, code } = Astro.props;
+
+const title       = `${name} — Tax Rates & Brackets 2025`;
+const description = `Combined federal and ${name} personal income tax rates, corporate rates, and integrated dividend rates for 2025 and 2024.`;
+const crumbs      = ["Home", "Rates & Brackets"];
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  <main id="main-content" class="page-main">
+    <div class="container">
+
+      <Breadcrumb crumbs={crumbs} currentTitle={`${name} Tax Rates`} />
+
+      <div class="grid-12">
+        <div class="col-full">
+          <h1 class="page-h1" transition:name="page-title">{name} Tax Rates</h1>
+          <ProvinceRatePageIsland
+            provinceName={name}
+            provinceCode={code}
+          />
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,27 @@
+{
+  "_comment": "Canadian corporate income tax rates for 2024. Source: TaxTips.ca. All rates are % of taxable income.",
+  "year": 2024,
+  "revised": "2024-12",
+  "source": "TaxTips.ca",
+  "federal": {
+    "generalRate": 15.0,
+    "smallBusinessRate": 9.0,
+    "smallBusinessLimit": 500000,
+    "investmentIncome": 38.67
+  },
+  "provinces": [
+    { "code": "AB", "name": "Alberta",                    "provincial": { "generalRate": 8.0,  "smallBusinessRate": 2.0,  "smallBusinessLimit": 500000 }, "combined": { "generalRate": 23.0, "smallBusinessRate": 11.0, "smallBusinessLimit": 500000 } },
+    { "code": "BC", "name": "British Columbia",           "provincial": { "generalRate": 12.0, "smallBusinessRate": 2.0,  "smallBusinessLimit": 500000 }, "combined": { "generalRate": 27.0, "smallBusinessRate": 11.0, "smallBusinessLimit": 500000 } },
+    { "code": "MB", "name": "Manitoba",                   "provincial": { "generalRate": 12.0, "smallBusinessRate": 0.0,  "smallBusinessLimit": 500000 }, "combined": { "generalRate": 27.0, "smallBusinessRate": 9.0,  "smallBusinessLimit": 500000 } },
+    { "code": "NB", "name": "New Brunswick",              "provincial": { "generalRate": 14.0, "smallBusinessRate": 2.5,  "smallBusinessLimit": 500000 }, "combined": { "generalRate": 29.0, "smallBusinessRate": 11.5, "smallBusinessLimit": 500000 } },
+    { "code": "NL", "name": "Newfoundland & Labrador",    "provincial": { "generalRate": 15.0, "smallBusinessRate": 2.5,  "smallBusinessLimit": 500000 }, "combined": { "generalRate": 30.0, "smallBusinessRate": 11.5, "smallBusinessLimit": 500000 } },
+    { "code": "NS", "name": "Nova Scotia",                "provincial": { "generalRate": 14.0, "smallBusinessRate": 2.5,  "smallBusinessLimit": 500000 }, "combined": { "generalRate": 29.0, "smallBusinessRate": 11.5, "smallBusinessLimit": 500000 } },
+    { "code": "NT", "name": "Northwest Territories",      "provincial": { "generalRate": 11.5, "smallBusinessRate": 2.0,  "smallBusinessLimit": 500000 }, "combined": { "generalRate": 26.5, "smallBusinessRate": 11.0, "smallBusinessLimit": 500000 } },
+    { "code": "NU", "name": "Nunavut",                   "provincial": { "generalRate": 12.0, "smallBusinessRate": 3.0,  "smallBusinessLimit": 500000 }, "combined": { "generalRate": 27.0, "smallBusinessRate": 12.0, "smallBusinessLimit": 500000 } },
+    { "code": "ON", "name": "Ontario",                   "provincial": { "generalRate": 11.5, "smallBusinessRate": 3.2,  "smallBusinessLimit": 500000 }, "combined": { "generalRate": 26.5, "smallBusinessRate": 12.2, "smallBusinessLimit": 500000 } },
+    { "code": "PE", "name": "Prince Edward Island",       "provincial": { "generalRate": 16.0, "smallBusinessRate": 1.0,  "smallBusinessLimit": 500000 }, "combined": { "generalRate": 31.0, "smallBusinessRate": 10.0, "smallBusinessLimit": 500000 } },
+    { "code": "QC", "name": "Quebec",                    "provincial": { "generalRate": 11.5, "smallBusinessRate": 3.2,  "smallBusinessLimit": 500000 }, "combined": { "generalRate": 26.5, "smallBusinessRate": 12.2, "smallBusinessLimit": 500000 } },
+    { "code": "SK", "name": "Saskatchewan",              "provincial": { "generalRate": 12.0, "smallBusinessRate": 1.0,  "smallBusinessLimit": 600000 }, "combined": { "generalRate": 27.0, "smallBusinessRate": 10.0, "smallBusinessLimit": 600000 } },
+    { "code": "YT", "name": "Yukon",                     "provincial": { "generalRate": 12.0, "smallBusinessRate": 0.0,  "smallBusinessLimit": 500000 }, "combined": { "generalRate": 27.0, "smallBusinessRate": 9.0,  "smallBusinessLimit": 500000 } }
+  ]
+}

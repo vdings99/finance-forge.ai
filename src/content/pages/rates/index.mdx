@@ -1,0 +1,58 @@
+---
+title: "Canadian Tax Rates & Brackets — 2025"
+description: "Combined federal and provincial personal income tax rates, corporate rates, and integrated rates for all 13 Canadian provinces and territories. Updated for 2025."
+breadcrumb: ["Home"]
+section: "rates"
+archetype: "hub"
+revised: "2026-05-30"
+toc: false
+---
+
+import Callout from '../../../components/Callout.astro'
+import CardGrid from '../../../components/CardGrid.astro'
+
+Canadian tax rates vary significantly by province and territory. This hub brings together 2025 personal income tax brackets, corporate tax rates, and integrated rates for all 13 provinces and territories, plus a federal-only view. Select any jurisdiction below to see the full rate tables and year-over-year comparisons.
+
+<CardGrid
+  groups={[
+    {
+      heading: "Federal & Provinces",
+      cards: [
+        { title: "Federal Only", href: "/rates/federal", description: "Top marginal rate: 33.00%", eyebrow: "Canada" },
+        { title: "Alberta", href: "/rates/ab", description: "Top marginal rate: 48.00%", eyebrow: "AB" },
+        { title: "British Columbia", href: "/rates/bc", description: "Top marginal rate: 53.50%", eyebrow: "BC" },
+        { title: "Manitoba", href: "/rates/mb", description: "Top marginal rate: 51.25%", eyebrow: "MB" },
+        { title: "New Brunswick", href: "/rates/nb", description: "Top marginal rate: 52.50%", eyebrow: "NB" },
+        { title: "Newfoundland & Labrador", href: "/rates/nl", description: "Top marginal rate: 54.80%", eyebrow: "NL" },
+        { title: "Nova Scotia", href: "/rates/ns", description: "Top marginal rate: 54.00%", eyebrow: "NS" },
+        { title: "Ontario", href: "/rates/on", description: "Top marginal rate: 53.53%", eyebrow: "ON" },
+        { title: "Prince Edward Island", href: "/rates/pe", description: "Top marginal rate: 52.00%", eyebrow: "PEI" },
+        { title: "Quebec", href: "/rates/qc", description: "Top marginal rate: 53.31%", eyebrow: "QC" },
+        { title: "Saskatchewan", href: "/rates/sk", description: "Top marginal rate: 47.50%", eyebrow: "SK" },
+      ],
+    },
+    {
+      heading: "Territories",
+      cards: [
+        { title: "Northwest Territories", href: "/rates/nt", description: "Top marginal rate: 47.05%", eyebrow: "NT" },
+        { title: "Nunavut", href: "/rates/nu", description: "Top marginal rate: 44.50%", eyebrow: "NU" },
+        { title: "Yukon", href: "/rates/yt", description: "Top marginal rate: 48.00%", eyebrow: "YT" },
+      ],
+    },
+  ]}
+/>
+
+## What you will find on each jurisdiction page
+
+Each province and territory page includes four rate tables for 2025:
+
+- **Personal income tax brackets** — the federal and provincial bracket thresholds and rates that apply to ordinary employment and investment income, stacked to show your combined marginal rate at each income level.
+- **Corporate tax rates** — the small business rate (on active business income up to the small business limit) and the general corporate rate, both federal and provincial.
+- **Integrated rates** — the combined effective rate on income earned through a corporation and distributed as eligible or non-eligible dividends, showing whether incorporation provides a tax deferral or acceleration versus earning income personally.
+- **Year picker** — switch between 2024 and 2025 to compare how rates changed, useful for planning purposes or reviewing a prior-year return.
+
+All rates reflect legislation and announcements as of the revised date shown on each page. Proposed but unenacted changes are noted where applicable.
+
+<Callout type="tip">
+  For a personalized estimate that combines your actual income mix, deductions, and province of residence, use the <a href="/calculators/income-tax">Detailed Income Tax Calculator</a>. It calculates federal and provincial tax, CPP, EI, and your marginal and average rates entirely in your browser — nothing is sent to a server.
+</Callout>

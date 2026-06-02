@@ -1652,6 +1652,108 @@ td.num, th.num { text-align: right; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
+   PROVINCE RATE PAGE component (ProvinceRatePage.tsx)
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Year picker tabs ────────────────────────────────────────────────────── */
+.prp__year-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: var(--hairline-dark);
+  margin-bottom: var(--space-8);
+}
+.prp__year-tab {
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-2);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  margin-bottom: -1px;
+}
+.prp__year-tab:hover { color: var(--ink); }
+.prp__year-tab--active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+.prp__year-tab--disabled {
+  color: var(--ink-3);
+  cursor: not-allowed;
+  font-style: italic;
+}
+
+/* ── Section headings ────────────────────────────────────────────────────── */
+.prp__section-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  letter-spacing: var(--track-display);
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: var(--hairline-dark);
+}
+.prp__section-title:first-of-type { margin-top: 0; }
+
+/* ── Rate cards (corporate summary) ──────────────────────────────────────── */
+.prp__rate-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+@media (max-width: 640px) {
+  .prp__rate-cards { grid-template-columns: 1fr; }
+}
+.prp__rate-card {
+  padding: var(--space-5) var(--space-6);
+  border: var(--hairline-dark);
+  background: var(--paper-2);
+}
+.prp__rate-card-label {
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: var(--space-2);
+}
+.prp__rate-card-value {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: 700;
+  letter-spacing: var(--track-display);
+  line-height: 1;
+  color: var(--ink);
+}
+.prp__rate-card-sub {
+  font-size: var(--fs-caption);
+  color: var(--ink-3);
+  margin-top: var(--space-2);
+}
+
+/* ── Integrated rates table ──────────────────────────────────────────────── */
+.prp__integrated-table { margin-bottom: var(--space-8); }
+.prp__diff--positive { color: var(--accent); font-weight: 600; }
+.prp__diff--negative { color: var(--mrt-elig, #2d7a4a); font-weight: 600; }
+.prp__diff--neutral  { color: var(--ink-3); }
+
+/* ── Legend note ─────────────────────────────────────────────────────────── */
+.prp__legend {
+  margin-top: var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  border-left: 2px solid var(--hairline);
+  font-size: var(--fs-caption);
+  color: var(--ink-2);
+  line-height: var(--lh-body);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════
    MARGINAL RATE TABLE COMPONENT (MarginalRateTable.tsx)
    Colour palette for 4 income types — desaturated to stay Swiss/neutral.
    Update these tokens to change column colours across all rate tables.
@@ -1833,4 +1935,208 @@ td.num, th.num { text-align: right; }
 @media (max-width: 640px) {
   .mrt__top-rates { gap: var(--space-3); }
   .mrt__top-strip { flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+}
+
+/* ── ProvinceRatePage (.prp-*) ───────────────────────────────────────────────
+   Interactive Preact component: year picker, personal brackets, corp rates,
+   integrated rate comparison. New classes prefixed .prp__ to avoid collisions.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* Year picker tabs */
+.prp__year-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: var(--space-8);
+}
+
+.prp__year-tab {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-data);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--ink-2);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;      /* overlap the container bottom border */
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+
+.prp__year-tab:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+.prp__year-tab--active {
+  color: var(--ink);
+  font-weight: 700;
+  border-bottom-color: var(--accent);
+}
+
+.prp__year-tab--coming-soon {
+  color: var(--ink-3);
+  cursor: not-allowed;
+  font-style: italic;
+}
+
+/* Page heading row */
+.prp__heading-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.prp__province-name {
+  margin: 0;
+}
+
+.prp__year-badge {
+  font-family: var(--font-data);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--ink-3);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+}
+
+/* Sections */
+.prp__section {
+  margin-top: var(--space-12);
+}
+
+.prp__section-heading {
+  /* Inherited from global h2 rules; no override needed — here for specificity clarity. */
+}
+
+/* Top-rates strip overrides for inline use */
+.prp__top-strip {
+  margin-bottom: var(--space-4);
+}
+
+/* Corporate rate cards */
+.prp__rate-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.prp__rate-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-6);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--paper-2);
+  box-shadow: var(--shadow-sm);
+}
+
+.prp__rate-card-label {
+  font-size: var(--fs-caption);
+  font-weight: 700;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.prp__rate-card-value {
+  font-family: var(--font-data);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.prp__rate-card-sub {
+  font-size: var(--fs-caption);
+  color: var(--ink-3);
+}
+
+/* Integrated table extras */
+.prp__integrated-intro {
+  max-width: var(--measure);
+  margin-bottom: var(--space-5);
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+}
+
+.prp__integrated-table {
+  /* inherits .data-table */
+}
+
+.prp__th--diff {
+  /* "vs. Salary" header — no extra colour, just right-aligned via .num */
+}
+
+.prp__route-label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-family: var(--font-sans);
+}
+
+.prp__route-sub {
+  font-size: var(--fs-caption);
+  color: var(--ink-3);
+  font-weight: 400;
+}
+
+/* Difference-vs-salary column colouring */
+.prp__cell--cheaper {
+  /* negative diff — corp route is cheaper */
+  color: var(--mrt-elig, #2d7a4a);
+  font-weight: 600;
+}
+
+.prp__cell--costlier {
+  /* positive diff — salary is cheaper */
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.prp__cell--neutral {
+  color: var(--ink-3);
+}
+
+/* No-data placeholder */
+.prp__no-data {
+  color: var(--ink-3);
+  font-style: italic;
+  font-size: var(--fs-small);
+  padding: var(--space-5) 0;
+}
+
+/* Notes section */
+.prp__notes {
+  margin-top: var(--space-10);
+}
+
+/* ── Responsive — ProvinceRatePage ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .prp__rate-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .prp__year-tab {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--fs-caption);
+  }
+}
+
+@media (max-width: 480px) {
+  .prp__rate-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .prp__heading-row {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
 }
